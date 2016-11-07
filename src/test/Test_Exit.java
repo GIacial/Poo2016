@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Game.Exit;
-import Game.Place;
 import Game.*;
+import exit.*;
+import place.*;
 
 public class Test_Exit {
 	private Exit e;
@@ -15,8 +15,8 @@ public class Test_Exit {
 
 	@Before
 	public void setUp() throws Exception {
-		//p= new ;	  //TODO metre un lieu non abstract
-		//e= new (p); //TODO metre ici une exit non abstract
+		p= new ClassicPlace("Néant");	  
+		e= new ClassicExit(p); 
 		
 	}
 
@@ -27,7 +27,7 @@ public class Test_Exit {
 	
 	@Test
 	public void haveNextPlace_2() {
-		//e= new (null);	//TODO Constructeur non abstract
+		e= new ClassicExit(null);
 		assertFalse(e.haveNextPlace());
 	}
 	
@@ -38,8 +38,8 @@ public class Test_Exit {
 	
 	@Test
 	public void crossing_2() {
-		//e= new (null);	//TODO Constructeur non abstract
-		assertSame(e.crossing(),p);
+		e= new ClassicExit(null);
+		assertNull(e.crossing());
 	}
 
 }

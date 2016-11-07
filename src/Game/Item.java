@@ -1,13 +1,11 @@
 package Game;
 
-import java.io.Serializable;
 import java.io.*;
 
 /**
  * A Item
  */
 public abstract class Item implements Serializable{
-
 	/**
 	 * serialVersionUID generated when implements Serializable
 	 */

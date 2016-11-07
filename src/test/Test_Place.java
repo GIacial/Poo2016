@@ -5,8 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Game.Place;
 import Game.*;
+import exit.*;
+import place.*;
 
 public class Test_Place {
 	private Place p;
@@ -15,8 +16,8 @@ public class Test_Place {
 	
 	@Before
 	public void setUp() throws Exception {
-		//p= new ;	//TODO Place non abstract
-		//nextPlace= new ;//TODO
+		p= new ClassicPlace("Néant") ;
+		nextPlace= new ClassicPlace("vide") ;
 		//p.setLink(EXIT_NAME, nextPlace, typeExit); //TODO
 	}
 

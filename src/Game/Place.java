@@ -2,7 +2,6 @@ package Game;
 
 import java.io.Serializable;
 import java.util.*;
-import java.io.*;
 
 public abstract class Place implements Serializable {
 
@@ -132,6 +131,7 @@ public abstract class Place implements Serializable {
 		for(Entity e:this.listEntity){
 			if(e instanceof Monster){
 				findMonster=true;
+				break;
 			}
 		}
 		return findMonster;
