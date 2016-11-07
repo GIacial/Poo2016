@@ -5,7 +5,10 @@ package Game;
  */
 public class Hero extends Entity {
 
-
+	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = -8480399582238471911L;
 
 	private EquipementSet equipement;
 	

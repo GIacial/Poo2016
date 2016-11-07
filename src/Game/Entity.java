@@ -1,10 +1,17 @@
 package Game;
 
+import java.io.Serializable;
+import java.io.*;
+
 /**
  * A Entity
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
+	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = -3785660433437786906L;
 	/**
 	 * The name of the entity
 	 */

@@ -9,6 +9,11 @@ import java.awt.*;
 public abstract class Monster extends Entity {
 
 	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = 1709613719917260899L;
+
+	/**
 	 * A builder of the monster class
 	 * @param name  the name of the new Monster
 	 * @param maxHeal  The maximum life of the Monster

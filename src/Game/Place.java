@@ -1,14 +1,20 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.*;
+import java.io.*;
 
-public abstract class Place {
+public abstract class Place implements Serializable {
 
+	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = -105354579675980999L;
 	private Map<String,Exit> exit;
 	private List<Entity> listEntity;
 	private List<Item> listItem;
 	/**
-	 * the name of the place
+	 * the place's name
 	 */
 	private String name;
 
@@ -17,24 +23,26 @@ public abstract class Place {
 	 * @param name  the name of the new Place
 	 */
 	public Place(String name) {
-		throw new UnsupportedOperationException();
+		this.name=name;
+		this.exit= new HashMap<String,Exit>();
+		this.listEntity= new ArrayList<Entity>();
+		this.listItem= new ArrayList<Item>();
 	}
 
 	/**
-	 * Create a exit for this place
+	 * Create a exit for this place TODO passer une Exit en param ?
 	 * @param name  the name of the new exit
-	 * @param nextPlace  the place where you go when you crossing the exit
-	 * @param typeExit  the name of the type of the new exit TODO (?) demande accord lucille
+	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
-	public void setLink(String name, Place nextPlace, String typeExit) {
+	public void setLink(String name, Place nextPlace) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @return  all the name of exit of this place
 	 */
-	public List<String> getNameExit() {
-		throw new UnsupportedOperationException();
+	public Set<String> getNameExit() {
+		return this.exit.keySet();
 	}
 
 	/**
@@ -42,7 +50,11 @@ public abstract class Place {
 	 * @return  the place where you go when you cross the exit
 	 */
 	public Place getNextPlace(String exitName) {
-		throw new UnsupportedOperationException();
+		Place next=null;
+		if(this.exit.containsKey(exitName)){
+			next=this.exit.get(exitName).crossing();
+		}
+		return next;
 	}
 
 	/**
@@ -57,7 +69,9 @@ public abstract class Place {
 	 * print the list of all item in this place
 	 */
 	public void listItem() {
-		throw new UnsupportedOperationException();
+		for(Item i:this.listItem){
+			System.out.println(i);
+		}
 	}
 
 	/**
@@ -72,7 +86,11 @@ public abstract class Place {
 	 * @return  all name of entities in this place
 	 */
 	public List<String> getNameEntites() {
-		throw new UnsupportedOperationException();
+		List<String> r= new ArrayList<String>();
+		for(Entity e:this.listEntity){
+			r.add(e.getName());
+		}
+		return r;
 	}
 
 	/**
@@ -80,7 +98,12 @@ public abstract class Place {
 	 * @param item  the item that you want put here
 	 */
 	public void addItem(Item item) {
-		throw new UnsupportedOperationException();
+		if(item!=null){
+			this.listItem.add(item);
+		}
+		else{
+			System.err.println("L'item vaut null");
+		}
 	}
 
 	/**
@@ -89,14 +112,29 @@ public abstract class Place {
 	 * @return  the item removed
 	 */
 	public Item removeItem(String itemName) {
-		throw new UnsupportedOperationException();
+		Item r=null;
+		Iterator<Item> i=this.listItem.iterator();
+		while(i.hasNext() && r==null){
+			Item item=i.next();
+			if(item.getName().equals(itemName)){
+				r=item;
+				i.remove();
+			}
+		}
+		return r;
 	}
 
 	/**
 	 * @return  Return true if this place contains a monster else false
 	 */
 	public boolean haveMonster() {
-		throw new UnsupportedOperationException();
+		boolean findMonster=false;
+		for(Entity e:this.listEntity){
+			if(e instanceof Monster){
+				findMonster=true;
+			}
+		}
+		return findMonster;
 	}
 
 	/**
@@ -109,7 +147,8 @@ public abstract class Place {
 	}
 
 	/**
-	 * TODO (?) demande accord lucille Add a entity in this place
+	 * TODO (?) demande accord lucille 
+	 * Add a entity in this place
 	 * @param entity  the entity add in this place
 	 */
 	public void addEntity(Entity entity) {
@@ -117,11 +156,21 @@ public abstract class Place {
 	}
 
 	/**
-	 * Remove a entity in this place TODO (?) demande accord lucille
+	 * Remove a entity in this place 
+	 * TODO (?) demande accord lucille
 	 * @param entityName  the entity's name
 	 * @return  the entity removed
 	 */
 	public Entity removeEntity(String entityName) {
 		throw new UnsupportedOperationException();
 	}
+	
+	/**
+	 * 
+	 */
+	public String getName(){
+		return this.name;
+	}
+	
+
 }

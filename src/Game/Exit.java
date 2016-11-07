@@ -1,7 +1,16 @@
 package Game;
 
-public abstract class Exit {
+import java.io.Serializable;
+import java.io.*;
 
+public abstract class Exit implements Serializable {
+
+
+	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = 2526207353620348544L;
+	
 	private Place nextPlace;
 
 	/**
@@ -9,20 +18,20 @@ public abstract class Exit {
 	 * @param nextPlace  the place where you are when you cross the exit
 	 */
 	public Exit(Place nextPlace) {
-		throw new UnsupportedOperationException();
+		this.nextPlace=nextPlace;
 	}
 
 	/**
 	 * @return  Return true if the nextPlace!=null else false
 	 */
 	public boolean haveNextPlace() {
-		throw new UnsupportedOperationException();
+		return this.nextPlace!=null;
 	}
 
 	/**
-	 * @return  the place where you go when you crossing the exit
+	 * @return  the place where you're going when you're exiting the room
 	 */
 	public Place crossing() {
-		throw new UnsupportedOperationException();
+		return this.nextPlace;
 	}
 }

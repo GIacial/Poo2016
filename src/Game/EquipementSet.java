@@ -1,9 +1,15 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.*;
+import java.io.*;
 
-public class EquipementSet {
+public class EquipementSet implements Serializable {
 
+	/**
+	 * serialVersionUID generated when implements Serializable
+	 */
+	private static final long serialVersionUID = -3005502569148491723L;
 	private Map<String,Equipement> listEquip;
 
 	/**
