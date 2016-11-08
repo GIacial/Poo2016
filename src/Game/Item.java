@@ -2,10 +2,12 @@ package Game;
 
 import java.io.*;
 
+import interfacePackage.HaveDescription;
+
 /**
  * A Item
  */
-public abstract class Item implements Serializable{
+public abstract class Item implements Serializable,HaveDescription{
 	/**
 	 * serialVersionUID generated when implements Serializable
 	 */

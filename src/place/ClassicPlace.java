@@ -14,5 +14,11 @@ public class ClassicPlace extends Place {
 		super(name);
 	}
 
+	@Override
+	public void description() {
+		System.out.println("Une description bidon");
+		
+	}
+
 
 }

@@ -3,7 +3,11 @@ package Game;
 import java.io.Serializable;
 import java.util.*;
 
-public abstract class Place implements Serializable {
+import interfacePackage.HaveDescription;
+
+import java.io.*;
+
+public abstract class Place implements Serializable,HaveDescription {
 
 	/**
 	 * serialVersionUID generated when implements Serializable
@@ -33,8 +37,9 @@ public abstract class Place implements Serializable {
 	 * @param name  the name of the new exit
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
-	public void setLink(String name, Place nextPlace) {
+	public void setLink(String name, Exit exit) {
 		throw new UnsupportedOperationException();
+		
 	}
 
 	/**
@@ -142,12 +147,11 @@ public abstract class Place implements Serializable {
 	 * @param hero  the hero
 	 * @param target  the target's name
 	 */
-	public void fight(Hero hero, String target) {
+	public void fight(Hero hero, String target,boolean actifHero) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * TODO (?) demande accord lucille 
 	 * Add a entity in this place
 	 * @param entity  the entity add in this place
 	 */
@@ -157,7 +161,6 @@ public abstract class Place implements Serializable {
 
 	/**
 	 * Remove a entity in this place 
-	 * TODO (?) demande accord lucille
 	 * @param entityName  the entity's name
 	 * @return  the entity removed
 	 */
@@ -165,11 +168,17 @@ public abstract class Place implements Serializable {
 		throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * 
-	 */
 	public String getName(){
 		return this.name;
+	}
+
+	/**
+	 * Hero attack a monster and all monster attack the hero
+	 * @param hero  the hero
+	 * @param target  the target's name
+	 */
+	public void fight(Hero hero, String target) {
+		throw new UnsupportedOperationException();
 	}
 	
 

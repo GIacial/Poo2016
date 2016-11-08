@@ -71,4 +71,10 @@ public class Hero extends Entity {
 	public void lookInventory(String typeItem) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public void description() {
+		// TODO Auto-generated method stub
+		
+	}
 }

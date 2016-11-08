@@ -2,7 +2,9 @@ package Game;
 
 import java.io.*;
 
-public abstract class Exit implements Serializable {
+import interfacePackage.HaveDescription;
+
+public abstract class Exit implements Serializable,HaveDescription {
 
 
 	/**
