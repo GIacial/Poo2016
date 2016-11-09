@@ -12,11 +12,13 @@ import place.*;
 public class Test_Exit {
 	private Exit e;
 	private Place p;
+	private LockedExit lockedExit;
 
 	@Before
 	public void setUp() throws Exception {
 		p= new ClassicPlace("Néant");	  
 		e= new ClassicExit(p); 
+		lockedExit = new LockedExit(p);
 		
 	}
 
@@ -42,4 +44,14 @@ public class Test_Exit {
 		assertNull(e.crossing());
 	}
 
+	@Test
+	public void crossing_3() {
+		assertNull(lockedExit.crossing());
+	}
+	
+	@Test
+	public void crossing_4() {
+		lockedExit.open(null);
+		assertSame(lockedExit.crossing(),p);
+	}
 }

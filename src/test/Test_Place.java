@@ -18,7 +18,7 @@ public class Test_Place {
 	public void setUp() throws Exception {
 		p= new ClassicPlace("Néant") ;
 		nextPlace= new ClassicPlace("vide") ;
-		//p.setLink(EXIT_NAME, nextPlace, typeExit); //TODO
+		p.setLink(EXIT_NAME, new ClassicExit(nextPlace));
 	}
 
 	@Test

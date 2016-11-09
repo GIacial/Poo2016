@@ -1,7 +1,11 @@
 package Game;
 
 import java.util.*;
+
+import Item.Equipement;
+
 import java.io.*;
+
 
 public class EquipementSet implements Serializable {
 
@@ -10,10 +14,14 @@ public class EquipementSet implements Serializable {
 	 */
 	private static final long serialVersionUID = -3005502569148491723L;
 	private Map<String,Equipement> listEquip;
+	
+	public EquipementSet(){
+		this.listEquip= new HashMap<String,Equipement>();
+	}
 
 	/**
 	 * Equip the equipement
-	 * @param equip  The equipement that you want equip
+	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
 	 */
 	public void equip(Equipement equip) {
 		throw new UnsupportedOperationException();
@@ -23,8 +31,13 @@ public class EquipementSet implements Serializable {
 	 * Unequip the equipement zone choosen
 	 * @param zone  The zone that you want unequip
 	 */
-	public Equipement unequip(int zone) {
-		throw new UnsupportedOperationException();
+	public Equipement unequip(String zone) {
+		Equipement r=null;
+		if(this.listEquip.containsKey(zone)){
+			r=this.listEquip.get(zone);
+			this.listEquip.put(zone, null);
+		}
+		return r;
 	}
 
 	/**

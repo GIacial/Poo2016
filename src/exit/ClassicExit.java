@@ -1,7 +1,6 @@
 package exit;
 
-import Game.Exit;
-import Game.Place;
+
 import Game.*;
 
 public class ClassicExit extends Exit{

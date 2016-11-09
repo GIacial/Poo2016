@@ -18,10 +18,9 @@ public abstract class Monster extends Entity {
 	 * @param maxHeal  The maximum life of the Monster
 	 * @param attack  TODO (?) the attack of the new Monster
 	 * @param defense  TODO (?) the defense of the new Monster
-	 * @param speed  TODO (?) the speed of the new Monster
 	 */
-	public Monster(String name, int maxHeal, int attack, int defense, int speed) {
-		super(name,maxHeal,attack,defense,speed);
+	public Monster(String name, int maxHeal, int attack, int defense) {
+		super(name,maxHeal,attack,defense);
 		throw new UnsupportedOperationException();
 	}
 

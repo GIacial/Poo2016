@@ -5,6 +5,8 @@ import java.io.*;
 
 import interfacePackage.HaveDescription;
 
+
+
 /**
  * A Entity
  */
@@ -27,17 +29,15 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 */
 	private int healMax;
 	/**
-	 * TODO (?) the base attack of the entity
+	 *  the base attack of the entity
 	 */
 	private int attack;
 	/**
-	 * TODO (?) the defense of the entity
+	 *  the defense of the entity
+	 *  int puis tranform en %
 	 */
 	private int defense;
-	/**
-	 * TODO (?) the speed of the entity
-	 */
-	private int speed;
+
 	/**
 	 * The current level of the entity
 	 */
@@ -54,9 +54,8 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param maxHeal  The maximun life of the new Entity
 	 * @param attack  TODO (?) The attack of the new Entity
 	 * @param defense  TODO (?) The defense of the new Entity
-	 * @param speed  TODO (?) the speed of the new Entity
 	 */
-	public Entity(String name, int maxHeal, int attack, int defense, int speed) {
+	public Entity(String name, int maxHeal, int attack, int defense) {
 		throw new UnsupportedOperationException();
 	}
 

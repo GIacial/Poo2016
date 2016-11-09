@@ -1,8 +1,8 @@
 package Game;
 
 import java.io.*;
-
 import interfacePackage.HaveDescription;
+
 
 /**
  * A Item
@@ -19,9 +19,10 @@ public abstract class Item implements Serializable,HaveDescription{
 
 	/**
 	 * A builder of Item class
+	 * @param itemName  The item's name
 	 */
-	public Item() {
-		throw new UnsupportedOperationException();
+	public Item(String itemName) {
+		this.name=itemName;
 	}
 	
 	public String getName(){

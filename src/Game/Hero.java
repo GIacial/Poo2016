@@ -19,7 +19,7 @@ public class Hero extends Entity {
 	 * @param name  The name of the new Hero
 	 */
 	public Hero(String name) {
-		super(name,0,0,0,0);	//TODO 
+		super(name,0,0,0);	//TODO 
 		throw new UnsupportedOperationException();
 	}
 

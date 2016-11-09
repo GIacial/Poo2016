@@ -1,10 +1,7 @@
 package Game;
 
-import java.io.Serializable;
 import java.util.*;
-
 import interfacePackage.HaveDescription;
-
 import java.io.*;
 
 public abstract class Place implements Serializable,HaveDescription {
@@ -38,7 +35,12 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
 	public void setLink(String name, Exit exit) {
-		throw new UnsupportedOperationException();
+		if(this.exit.containsKey(name) || this.exit.containsValue(exit)){
+			System.err.println(name+" ou "+ exit +" est deja affecté");
+		}
+		else{
+			this.exit.put(name, exit);
+		}
 		
 	}
 
@@ -66,7 +68,12 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param itemName  the name of the item that you want look
 	 */
 	public void getDescriptionItem(int itemName) {
-		throw new UnsupportedOperationException();
+		for(Item i : this.listItem){
+			if(i.getName().equals(itemName)){
+				i.description();
+				break;
+			}
+		}
 	}
 
 	/**
@@ -83,7 +90,9 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param exitName  the name of the exit
 	 */
 	public void exitDescription(String exitName) {
-		throw new UnsupportedOperationException();
+		if(this.exit.containsKey(exitName)){
+			this.exit.get(exitName).description();
+		}
 	}
 
 	/**
@@ -156,7 +165,9 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param entity  the entity add in this place
 	 */
 	public void addEntity(Entity entity) {
-		throw new UnsupportedOperationException();
+		if(!this.listEntity.contains(entity)){
+			this.listEntity.add(entity);
+		}
 	}
 
 	/**
@@ -165,21 +176,23 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  the entity removed
 	 */
 	public Entity removeEntity(String entityName) {
-		throw new UnsupportedOperationException();
+		Iterator<Entity> e = this.listEntity.iterator();
+		Entity r=null;
+		while(e.hasNext() && r==null){
+			Entity entity=e.next();
+			if(entity.getName().equals(entityName)){
+				r=entity;
+				e.remove();
+			}
+		}
+		return r;
 	}
 	
 	public String getName(){
 		return this.name;
 	}
 
-	/**
-	 * Hero attack a monster and all monster attack the hero
-	 * @param hero  the hero
-	 * @param target  the target's name
-	 */
-	public void fight(Hero hero, String target) {
-		throw new UnsupportedOperationException();
-	}
+
 	
 
 }
