@@ -94,8 +94,15 @@ public abstract class Entity implements Serializable,HaveDescription {
 		double protCap=0.8;
 		int a=50;
 		double protection=protCap*(1-Math.exp(-(double)def/a));
-		double dmg=(1-protection)*(this.attack);
+		double dmg=(1-protection)*this.getAttack();
 		return (int)Math.round(dmg);
+	}
+	/**
+	 * 
+	 * @return the damage without target's defense
+	 */
+	public int getAttack(){
+		return this.attack;
 	}
 
 	/**

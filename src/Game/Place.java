@@ -167,7 +167,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param entity  the entity add in this place
 	 */
 	public void addEntity(Entity entity) {
-		if(!this.listEntity.contains(entity)){
+		if(!this.listEntity.contains(entity) && entity!=null){
 			this.listEntity.add(entity);
 		}
 	}

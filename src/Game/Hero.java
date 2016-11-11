@@ -77,4 +77,11 @@ public class Hero extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getAttack() {
+		return super.getAttack()+this.equipement.getDmgWeapon();
+	}
+	
+	
 }

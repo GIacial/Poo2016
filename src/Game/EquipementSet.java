@@ -1,8 +1,7 @@
 package Game;
 
 import java.util.*;
-
-import Item.Equipement;
+import Item.*;
 
 import java.io.*;
 
@@ -17,6 +16,12 @@ public class EquipementSet implements Serializable {
 	
 	public EquipementSet(){
 		this.listEquip= new HashMap<String,Equipement>();
+		this.listEquip.put("Weapon", null);
+		this.listEquip.put("Boots", null);
+		this.listEquip.put("Chest", null);
+		this.listEquip.put("Glove", null);
+		this.listEquip.put("Head", null);
+		this.listEquip.put("Trouser", null);
 	}
 
 	/**
@@ -46,5 +51,15 @@ public class EquipementSet implements Serializable {
 	 */
 	public void showStat(String zone) {
 		throw new UnsupportedOperationException();
+	}
+	
+	public int getDmgWeapon(){
+		int dmg=0;
+		Weapon w =(Weapon)this.listEquip.get("Weapon");
+		if(w!=null){
+			dmg=(int) (Math.random()*(w.getAtkMax()-w.getAtkMin()));
+			dmg+=w.getAtkMin();
+		}
+		return dmg;
 	}
 }
