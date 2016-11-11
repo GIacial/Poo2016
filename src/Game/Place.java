@@ -2,6 +2,8 @@ package Game;
 
 import java.util.*;
 import interfacePackage.HaveDescription;
+import interfacePackage.Recoverable;
+
 import java.io.*;
 
 public abstract class Place implements Serializable,HaveDescription {
@@ -192,7 +194,52 @@ public abstract class Place implements Serializable,HaveDescription {
 		return this.name;
 	}
 
+	@Override
+	public void description() {
+		if(this.getNbItem()>0){
+			System.out.println("Ce lieu contient de nombreux object");
+		}
+		if(this.getNbEntity()>0){
+			System.out.println("Vous voyez des ombres bouger");
+		}
+		if(this.getNbExit()>0){
+			System.out.println("Il y a "+this.getNbExit()+" sortie");
+		}
 
+	}
+	
+	public int getNbItem(){
+		return this.listItem.size();
+	}
+	
+	public int getNbEntity(){
+		return this.listEntity.size();
+	}
+	
+	public int getNbExit(){
+		return this.exit.size();
+	}
+
+	/**
+	 * @param name  the object's name
+	 * @return  the item that you have take
+	 */
+	public Item takeSomething(String name){
+		Item i=this.removeItem(name);
+		if(i==null){
+			Entity e=this.removeEntity(name);
+			if(e!=null){
+				if(e instanceof Recoverable){
+					i=((Recoverable)e).take();
+				}
+				else{
+					this.addEntity(e);//on remets l'entity qui ne correspond pas
+				}
+			}
+
+		}
+		return i;
+	}
 	
 
 }

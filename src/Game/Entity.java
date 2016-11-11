@@ -56,7 +56,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param defense  TODO (?) The defense of the new Entity
 	 */
 	public Entity(String name, int maxHeal, int attack, int defense) {
-		throw new UnsupportedOperationException();
+		this.name=name;
+		this.healMax=maxHeal;
+		this.heal=maxHeal;
+		this.attack=attack;
+		this.defense=defense;
 	}
 
 	/**
@@ -87,7 +91,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @return  the amount of damage that the entity will do if the target have a defense value equals to def
 	 */
 	private int calcDmg(int def) {
-		throw new UnsupportedOperationException();
+		double protCap=0.8;
+		int a=50;
+		double protection=protCap*(1-Math.exp(-(double)def/a));
+		double dmg=(1-protection)*(this.attack);
+		return (int)Math.round(dmg);
 	}
 
 	/**
@@ -134,5 +142,10 @@ public abstract class Entity implements Serializable,HaveDescription {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public String toString() {
+		return this.name + "(nv " + this.level+")" ;
+	}
 
+	
 }

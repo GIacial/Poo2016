@@ -2,6 +2,7 @@ package exit;
 
 import Game.Exit;
 import Game.Place;
+import Item.Item_Key;
 import Item.UseableItem;
 
 
@@ -27,9 +28,13 @@ public class LockedExit extends Exit {
 		}
 	}
 	
-	public void open(UseableItem i){
-		this.isLocked=false;
-		// TODO Verifier que c'est une clé pour ouvrir la porte
+	public boolean open(UseableItem i){
+		boolean use=false;
+		if(i instanceof Item_Key){
+			this.isLocked=false;
+			use=true;
+		}
+		return use;
 	}
 
 	@Override

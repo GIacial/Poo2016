@@ -6,24 +6,32 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Game.*;
+import Item.*;
 import exit.*;
+import npc.Entity_Cat;
 import place.*;
 
 public class Test_Place {
 	private Place p;
 	public final String EXIT_NAME="exit";
 	private Place nextPlace;
+	private Item_Key key;
+	private Entity_Cat cat;
 	
 	@Before
 	public void setUp() throws Exception {
 		p= new ClassicPlace("Néant") ;
 		nextPlace= new ClassicPlace("vide") ;
 		p.setLink(EXIT_NAME, new ClassicExit(nextPlace));
+		key=new Item_Key();
+		p.addItem(key);
+		cat= new Entity_Cat();
+		p.addEntity(cat);
 	}
 
 	@Test
 	public void setLink() {
-		assertSame(p.getNameExit().size(),1);
+		assertSame(p.getNbExit(),1);
 	}
 	
 	@Test
@@ -34,6 +42,42 @@ public class Test_Place {
 	@Test
 	public void getNextPlace_2() {
 		assertNull(p.getNextPlace("Pas une sortie"));
+	}
+	
+	@Test
+	public void addItem() {
+		assertSame(p.getNbItem(),1);
+	}
+	
+	@Test
+	public void removeItem() {	
+		Item i=p.removeItem(key.getName());
+		assertSame(p.getNbItem(),0);
+		assertSame(i,key);
+	}
+	
+	@Test
+	public void addEntity() {
+		assertSame(p.getNbEntity(),1);
+	}
+	
+	@Test
+	public void removeEntity() {	
+		Entity e=p.removeEntity(cat.getName());
+		assertSame(p.getNbEntity(),0);
+		assertSame(e,cat);
+	}
+	
+	@Test
+	public void takeSomething() {	
+		Item catItem=p.takeSomething(cat.getName());
+		
+		assertSame(p.getNbEntity(),0);
+		assertNotNull(catItem);
+		
+		Item keyItem=p.takeSomething(key.getName());
+		assertSame(p.getNbItem(),0);
+		assertSame(keyItem,key);
 	}
 	
 

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Game.*;
+import Item.*;
 import exit.*;
 import place.*;
 
@@ -52,6 +53,19 @@ public class Test_Exit {
 	@Test
 	public void crossing_4() {
 		lockedExit.open(null);
+		assertNull(lockedExit.crossing());
+	}
+	
+	@Test
+	public void crossing_5() {
+		lockedExit.open(new Item_Key());
+		assertSame(lockedExit.crossing(),p);
+	}
+	
+	@Test
+	public void useKey() {
+		Item_Key key=new Item_Key();
+		key.use(lockedExit);
 		assertSame(lockedExit.crossing(),p);
 	}
 }

@@ -20,7 +20,5 @@ public abstract class UseableItem  extends Item{
 	 * A method which use an item
 	 * @return  T if the object was used, else F
 	 */
-	public boolean use(Object target) {
-		throw new UnsupportedOperationException();
-	}
+	abstract public boolean use(Object target);
 }
