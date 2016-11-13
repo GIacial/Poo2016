@@ -16,7 +16,7 @@ public class ClassicExit extends Exit{
 
 	@Override
 	public void description() {
-		System.out.println("Une description de sortie");
+		System.out.println("Une sortie classique");
 		
 	}
 

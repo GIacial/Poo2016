@@ -68,33 +68,64 @@ public abstract class Place implements Serializable,HaveDescription {
 	/**
 	 * print the description of the item
 	 * @param itemName  the name of the item that you want look
+	 * @return T if target is find else F
 	 */
-	public void getDescriptionItem(int itemName) {
+	public boolean getDescriptionItem(String itemName) {
+		boolean r=false;
 		for(Item i : this.listItem){
 			if(i.getName().equals(itemName)){
 				i.description();
+				r=true;
 				break;
 			}
 		}
+		return r;
+	}
+	
+	public boolean getDescriptionEntity(String entityName,boolean analyse){
+		boolean r=false;
+		for(Entity e : this.listEntity){
+			if(e.getName().equals(entityName)){
+				r=true;
+				if(analyse){
+					e.entityDescription();
+				}
+				else{
+					e.description();
+				}
+				break;
+			}
+		}
+		return r;
 	}
 
 	/**
 	 * print the list of all item in this place
 	 */
 	public void listItem() {
-		for(Item i:this.listItem){
-			System.out.println(i);
+		if(this.listItem.isEmpty()){
+			System.out.println("Le lieu est vide");
 		}
+		else{
+			for(Item i:this.listItem){
+				System.out.println(i);
+			}
+		}
+		
 	}
 
 	/**
 	 * print the description of the exit
 	 * @param exitName  the name of the exit
+	 * @return T if target is find else F
 	 */
-	public void exitDescription(String exitName) {
+	public boolean exitDescription(String exitName) {
+		boolean r=false;
 		if(this.exit.containsKey(exitName)){
 			this.exit.get(exitName).description();
+			r=true;
 		}
+		return r;
 	}
 
 	/**
@@ -207,6 +238,7 @@ public abstract class Place implements Serializable,HaveDescription {
 		}
 
 	}
+	
 	
 	public int getNbItem(){
 		return this.listItem.size();

@@ -1,6 +1,6 @@
 package Item;
 
-public class Item_Cat extends Furniture {
+public class Item_Cat extends RecoverableItem {
 
 	/**
 	 * 

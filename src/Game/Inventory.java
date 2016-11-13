@@ -25,7 +25,7 @@ public class Inventory implements Serializable{
 	 * @param object  The item that you want add in the Inventory
 	 */
 	public void add(Item object) {
-		if(!this.itemList.contains(object)){
+		if(!this.itemList.contains(object) && object!=null){
 			this.itemList.add(object);
 		}
 	}

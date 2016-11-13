@@ -2,6 +2,11 @@ package place;
 
 import Game.*;
 
+/**
+ * 
+ * A test class for a place
+ *
+ */
 public class ClassicPlace extends Place {
 	
 
@@ -16,7 +21,7 @@ public class ClassicPlace extends Place {
 
 	@Override
 	public void description() {
-		System.out.println("Une description d'un lieu bidon");
+		System.out.println("Une description d'un lieu bidon :"+this.getName());
 		super.description();
 		
 	}

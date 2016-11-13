@@ -1,5 +1,8 @@
 package Game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A Hero
  */
@@ -19,8 +22,9 @@ public class Hero extends Entity {
 	 * @param name  The name of the new Hero
 	 */
 	public Hero(String name) {
-		super(name,0,0,0);	//TODO 
-		throw new UnsupportedOperationException();
+		super(name,30,5,5);	
+		this.equipement= new EquipementSet();
+		this.inventory= new Inventory();
 	}
 
 	/**
@@ -36,7 +40,7 @@ public class Hero extends Entity {
 	 * @param item  The item that the hero want add to his inventory
 	 */
 	public void takeItem(Item item) {
-		throw new UnsupportedOperationException();
+		this.inventory.add(item);
 	}
 
 	/**
@@ -69,12 +73,22 @@ public class Hero extends Entity {
 	 * @param typeItem  the item's type that you want print on the screen
 	 */
 	public void lookInventory(String typeItem) {
-		throw new UnsupportedOperationException();
+		List<Item> l= new ArrayList<Item>();
+		switch(typeItem.toLowerCase()){
+			case "equipement":l.addAll(this.inventory.getListEquipement());
+				break;
+			default:l=this.inventory.getListItem();
+				break;
+		}
+		for(Item i: l){
+			System.out.println(i.getName());
+		}
 	}
 
 	@Override
 	public void description() {
-		// TODO Auto-generated method stub
+		System.out.println("C'est moi");
+		//this.entityDescription();
 		
 	}
 

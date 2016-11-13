@@ -1,11 +1,9 @@
 package Item;
 
-import Game.Item;
-
 /**
  * An item which is useable
  */
-public abstract class UseableItem  extends Item{
+public abstract class UseableItem  extends RecoverableItem{
 
 	/**
 	 * 
