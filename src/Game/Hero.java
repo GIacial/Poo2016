@@ -23,7 +23,7 @@ public class Hero extends Entity {
 	 */
 	public Hero(String name) {
 		super(name,30,5,5);	
-		this.equipement= new EquipementSet();
+		this.equipement= new EquipementSet(this);
 		this.inventory= new Inventory();
 	}
 
@@ -79,6 +79,9 @@ public class Hero extends Entity {
 				break;
 			default:l=this.inventory.getListItem();
 				break;
+		}
+		if(l.isEmpty()){
+			System.out.println("Votre sac ne contient pas "+typeItem);
 		}
 		for(Item i: l){
 			System.out.println(i.getName());

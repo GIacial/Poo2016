@@ -15,11 +15,11 @@ public class CommandReader {
 	}
 	
 	public void interpretation(){
-		Scanner sCommand= new Scanner(this.s.nextLine());//permet de savoir si il y a qqch apres
-		if(sCommand.hasNext()){
-			String command=sCommand.next();
+		String[] sCommand= this.s.nextLine().split(" ");
+		if(sCommand.length>0 && !sCommand[0].equals("")){
+			
 			try{
-				Command t=Command.valueOf(command.toLowerCase());//lower cas pour que Bonjour=bonjour
+				Command t=Command.valueOf(sCommand[0].toLowerCase());//lower cas pour que Bonjour=bonjour
 				
 				switch(t){
 					case look:this.look(sCommand);
@@ -46,10 +46,9 @@ public class CommandReader {
 					System.err.println(e);
 					throw e;
 				}
-				System.out.println(command + " n'est pas une commande");
+				System.out.println(sCommand[0] + " n'est pas une commande");
 			}
 		}
-		sCommand.close();
 		
 	}
 
@@ -57,27 +56,27 @@ public class CommandReader {
 		return this.actif;
 	}
 	
-	private void go(Scanner sCommand){
-		if(sCommand.hasNext()){
-			game.go(sCommand.next());
+	private void go(String[] sCommand){
+		if(sCommand.length>=2){
+			game.go(sCommand[1]);
 		}
 		else{
 			Command.go.description();
 		}
 	}
 	
-	private void look(Scanner sCommand){
-		if(sCommand.hasNext()){
-			this.game.look(sCommand.next());
+	private void look(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.look(sCommand[1]);
 		}
 		else{
 			this.game.look();
 		}
 	}
 	
-	private void help(Scanner sCommand){
-		if(sCommand.hasNext()){
-			Command.description(sCommand.next());
+	private void help(String[] sCommand){
+		if(sCommand.length>=2){
+			Command.description(sCommand[1]);
 		}
 		else{
 			Command listCommand[]=Command.values();
@@ -94,9 +93,9 @@ public class CommandReader {
 		s.close();								//fin du scanner principal
 	}
 	
-	private void take(Scanner sCommand){
-		if(sCommand.hasNext()){
-			this.game.take(sCommand.next());
+	private void take(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.take(sCommand[1]);
 		}
 		else{
 			Command.take.description();

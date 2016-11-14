@@ -13,8 +13,9 @@ public class EquipementSet implements Serializable {
 	 */
 	private static final long serialVersionUID = -3005502569148491723L;
 	private Map<String,Equipement> listEquip;
+	private Hero hero;
 	
-	public EquipementSet(){
+	public EquipementSet(Hero hero){
 		this.listEquip= new HashMap<String,Equipement>();
 		this.listEquip.put("Weapon", null);
 		this.listEquip.put("Boots", null);
@@ -22,6 +23,7 @@ public class EquipementSet implements Serializable {
 		this.listEquip.put("Glove", null);
 		this.listEquip.put("Head", null);
 		this.listEquip.put("Trouser", null);
+		this.hero=hero;
 	}
 
 	/**

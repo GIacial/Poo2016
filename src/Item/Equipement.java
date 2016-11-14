@@ -1,9 +1,8 @@
 package Item;
 
-import Game.Item;
 
 
-public abstract class Equipement extends Item {
+public abstract class Equipement extends RecoverableItem {
 
 	/**
 	 * serialVersionUID generated when implements Serializable

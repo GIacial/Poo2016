@@ -37,8 +37,8 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
 	public void setLink(String name, Exit exit) {
-		if(this.exit.containsKey(name) || this.exit.containsValue(exit)){
-			System.err.println(name+" ou "+ exit +" est deja affecté");
+		if(this.exit.containsKey(name) || this.exit.containsValue(exit) || exit==null){
+			System.err.println(name+" ou "+ exit +" est deja affecté ou exit vaut null");
 		}
 		else{
 			this.exit.put(name, exit);

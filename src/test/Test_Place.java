@@ -80,7 +80,15 @@ public class Test_Place {
 		assertSame(keyItem,key);
 	}
 	
-
+	@Test
+	public void add() {
+		p.addEntity(null);
+		p.addItem(null);
+		p.setLink("blabla", null);
+		assertSame(p.getNbEntity(),1);
+		assertSame(p.getNbItem(),1);
+		assertSame(p.getNbExit(),1);
+	}
 
 	
 	

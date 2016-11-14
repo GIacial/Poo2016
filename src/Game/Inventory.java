@@ -11,7 +11,7 @@ public class Inventory implements Serializable{
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -3815028807156314828L;
-	private List<Item> itemList;
+	private List<Item> itemList;	//faire list Recoverable
 	
 	/**
 	 * A builder of Inventory Class

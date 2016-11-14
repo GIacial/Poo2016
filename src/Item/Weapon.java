@@ -2,6 +2,9 @@ package Item;
 
 public abstract class Weapon extends Equipement {
 
+
+	private int atkMax;
+	private int atkMin;
 	/**
 	 * 
 	 */
@@ -13,8 +16,6 @@ public abstract class Weapon extends Equipement {
 		this.atkMin=minAtk;
 	}
 
-	private int atkMax;
-	private int atkMin;
 
 	public int getAtkMax() {
 		return this.atkMax;

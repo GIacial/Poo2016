@@ -48,6 +48,7 @@ public enum Command implements HaveDescription{
 	}
 	
 	public static void description(String command){
+		// [Prof]:String moche
 		try{
 			Command c=Command.valueOf(command);
 			c.description();

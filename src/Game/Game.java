@@ -56,7 +56,7 @@ public class Game {
 		switch(target.toLowerCase()){
 		case "exit":Set<String>exitName=this.currentPlace.getNameExit();
 					if(exitName.isEmpty()){
-						System.out.println("Il y a auncune sortie");
+						System.out.println("Il n'y a auncune sortie");
 					}
 					else{
 						for(String name : exitName){
@@ -68,7 +68,7 @@ public class Game {
 			break;
 		case "entity":List<String> entityName=this.currentPlace.getNameEntites();
 						if(entityName.isEmpty()){
-							System.out.println("Il y a aucun signe de vie");
+							System.out.println("Il n'y a aucun signe de vie");
 						}
 						else{
 							for(String name : entityName){
@@ -79,7 +79,7 @@ public class Game {
 			break;
 		case "me":this.hero.description();
 			break;
-		case "pocket":this.hero.lookInventory("Item");;
+		case "inventory":this.hero.lookInventory("Item");;
 		break;
 		default:
 				if(!this.currentPlace.exitDescription(target)){
