@@ -160,7 +160,10 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param xpEarn  The amount of xp that the Entity wins
 	 */
 	public void increaseXp(int xpEarn) {
-		throw new UnsupportedOperationException();
+		this.xp+=xpEarn;
+		if(this.xp>this.calcXpLevelUp()){
+			this.levelUp();
+		}
 	}
 
 	@Override
@@ -180,6 +183,16 @@ public abstract class Entity implements Serializable,HaveDescription {
 	public void addDef(int bonus){
 		this.defense+=bonus;
 	}
+
+	public int getHealMax() {
+		return this.healMax;
+	}
+
+	public int getDefense() {
+		return this.defense;
+	}
+	
+	
 
 	
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import Game.EquipementSet;
 import Game.Hero;
 import Item.Equipement;
+import Item.Weapon;
 import weapon.Weapon_BasicSword;
 
 public class Test_EquipementSet {
@@ -23,8 +24,31 @@ public class Test_EquipementSet {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void getNbEquip() {
+		assertSame(this.set.getNbEquipement(),0);
+	}
+	
+	@Test
+	public void equip() {
+		this.set.equip(sword);
+		assertSame(this.set.getNbEquipement(),1);
+	}
+
+	
+	@Test
+	public void unequip() {
+		this.set.equip(sword);
+		Equipement s=this.set.unequip(sword.getTypeName());
+		assertSame(this.set.getNbEquipement(),0);
+		assertSame(this.sword,s);
+	}
+	
+	@Test
+	public void getDmgWeapon() {
+		this.set.equip(sword);
+		int dmg=this.set.getDmgWeapon();
+		Weapon swords=(Weapon)this.sword;
+		assertTrue(dmg>=swords.getAtkMin() && dmg<=swords.getAtkMax());
 	}
 
 }

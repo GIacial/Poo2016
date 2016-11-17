@@ -21,7 +21,6 @@ public abstract class Monster extends Entity {
 	 */
 	public Monster(String name, int maxHeal, int attack, int defense) {
 		super(name,maxHeal,attack,defense);
-		throw new UnsupportedOperationException();
 	}
 
 	/**
