@@ -75,7 +75,18 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param Dmg  The amount of damage inflict to the entity
 	 */
 	public void takeDmg(int Dmg) {
-		throw new UnsupportedOperationException();
+		//Le calcul des dmg qu'on prend on le met ici ducoup ou on met directement le bon dmg en parametre ? 
+		this.heal-=Dmg;
+		if(!this.isAlive()){
+			System.out.println("Dommage reçu : " + Dmg);
+			if(this instanceof Monster){
+				System.out.println("Vous avez tué" + this.name);
+				//supprimer le monstre de la pièce ? 
+			}else{
+				System.out.println("Vous êtes mort. Game over");
+				// Si c'est le héro on a perdu 
+			}			
+		}
 	}
 
 	/**
@@ -83,7 +94,10 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param nbHeal  The amount of heal that the Entity recovers
 	 */
 	public void takeHeal(int nbHeal) {
-		throw new UnsupportedOperationException();
+		this.heal+=nbHeal;
+		if(this.heal>this.healMax){
+			this.heal=this.healMax;
+		}
 	}
 
 	/**
@@ -110,7 +124,12 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param target  The target of the attack
 	 */
 	public void attack(Entity target) {
-		throw new UnsupportedOperationException();
+		if (target instanceof Monster){
+			target.takeDmg(this.calcDmg(target.defense));
+		}else{
+			System.out.println("Tu ne peux pas attaquer cette cible");
+		}
+		
 	}
 
 	/**
