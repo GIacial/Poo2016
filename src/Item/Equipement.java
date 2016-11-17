@@ -22,6 +22,16 @@ public abstract class Equipement extends RecoverableItem {
 		this.attackBonus=atkB;
 		this.defenseBonus=defB;
 		this.healthBonus=healB;
+		if(this.attackBonus<0){
+			this.attackBonus=0;
+		}
+		if(this.defenseBonus<0){
+			this.defenseBonus=0;
+		}
+		if(this.healthBonus<0){
+			this.healthBonus=0;
+		}
+		
 	}
 
 	public int getDefenseBonus() {
@@ -37,4 +47,11 @@ public abstract class Equipement extends RecoverableItem {
 	}
 	
 	public abstract String getTypeName();
+	
+	public void EquipementDescription(){
+		System.out.println(this.getTypeName()+" : "+this.getName());
+		System.out.println("Atk : "+this.attackBonus);
+		System.out.println("Def : "+this.defenseBonus);
+		System.out.println("VieMax : "+this.healthBonus);
+	}
 }

@@ -31,7 +31,22 @@ public class EquipementSet implements Serializable {
 	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
 	 */
 	public void equip(Equipement equip) {
-		throw new UnsupportedOperationException();
+		if(this.listEquip.containsKey(equip.getTypeName())){
+			Equipement target=this.listEquip.get(equip.getTypeName());
+			if(target==null){
+				this.listEquip.put(equip.getTypeName(), equip);
+	
+				this.hero.addAtk(equip.getAttackBonus());
+				this.hero.addDef(equip.getDefenseBonus());
+				this.hero.addHp(equip.getHealthBonus());
+			}
+			else{
+				System.out.println("Vous avez déjà un "+equip.getTypeName());
+			}
+		}
+		else{
+			System.err.println(equip.getTypeName()+" n'est pas reconnu");
+		}
 	}
 
 	/**
@@ -42,6 +57,9 @@ public class EquipementSet implements Serializable {
 		Equipement r=null;
 		if(this.listEquip.containsKey(zone)){
 			r=this.listEquip.get(zone);
+			this.hero.addAtk(-r.getAttackBonus());
+			this.hero.addDef(-r.getDefenseBonus());
+			this.hero.addHp(-r.getHealthBonus());
 			this.listEquip.put(zone, null);
 		}
 		return r;
@@ -52,7 +70,16 @@ public class EquipementSet implements Serializable {
 	 * @param zone  the equipement's zone that you want show the stat
 	 */
 	public void showStat(String zone) {
-		throw new UnsupportedOperationException();
+		if(this.listEquip.containsKey(zone)){
+			Equipement r=this.listEquip.get(zone);
+			if(r!=null){
+				r.EquipementDescription();
+				
+			}
+			else{
+				System.out.println("Vous n'avez pas de "+zone);
+			}
+		}
 	}
 	
 	public int getDmgWeapon(){
@@ -63,5 +90,17 @@ public class EquipementSet implements Serializable {
 			dmg+=w.getAtkMin();
 		}
 		return dmg;
+	}
+	
+	public int getNbEquipement(){
+		int nb=0;
+		for(String type:this.listEquip.keySet()){
+			Equipement e= this.listEquip.get(type);
+			if(e!=null){
+				nb++;
+			}
+			
+		}
+		return nb;
 	}
 }

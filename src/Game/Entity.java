@@ -167,6 +167,19 @@ public abstract class Entity implements Serializable,HaveDescription {
 	public String toString() {
 		return this.name + "(nv " + this.level+")" ;
 	}
+	
+	public void addHp(int bonus){
+		this.healMax+=bonus;
+	}
+	
+	public void addAtk(int bonus){
+		this.attack+=bonus;
+
+	}
+	
+	public void addDef(int bonus){
+		this.defense+=bonus;
+	}
 
 	
 }

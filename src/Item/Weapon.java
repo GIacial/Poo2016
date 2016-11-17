@@ -14,6 +14,12 @@ public abstract class Weapon extends Equipement {
 		super(name, defB, atkB, healB);
 		this.atkMax=maxAtk;
 		this.atkMin=minAtk;
+		if(this.atkMin<0){
+			this.atkMin=0;
+		}
+		if(this.atkMax<this.atkMin){
+			this.atkMax=this.atkMin;
+		}
 	}
 
 
@@ -29,4 +35,13 @@ public abstract class Weapon extends Equipement {
 	public String getTypeName() {
 		return "Weapon";
 	}
+
+
+	@Override
+	public void EquipementDescription() {
+		super.EquipementDescription();
+		System.out.println("Atk range : "+this.atkMin+"-"+this.atkMax);
+	}
+	
+	
 }
