@@ -9,6 +9,7 @@ import exit.*;
 import interfacePackage.Recoverable;
 import npc.*;
 import place.*;
+import weapon.Weapon_BasicSword;
 
 public class Game {
 
@@ -34,6 +35,7 @@ public class Game {
 		//parti à enlever
 		this.map.get(1).addItem(new Item_Key());
 		this.map.get(0).addEntity(new Entity_Cat());
+		this.map.get(0).addItem(new Weapon_BasicSword());
 		this.map.get(2).addEntity(new Entity_Cat());
 	}
 	
@@ -128,5 +130,6 @@ public class Game {
 			System.out.println("Impossible de ramasser "+target);
 		}
 	}
-
+	
+	
 }

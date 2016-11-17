@@ -183,16 +183,5 @@ public abstract class Entity implements Serializable,HaveDescription {
 	public void addDef(int bonus){
 		this.defense+=bonus;
 	}
-
-	public int getHealMax() {
-		return this.healMax;
-	}
-
-	public int getDefense() {
-		return this.defense;
-	}
-	
-	
-
 	
 }
