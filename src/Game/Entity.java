@@ -145,7 +145,8 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @return  the amount of xp that the Entity need to level up
 	 */
 	private int calcXpLevelUp() {
-		throw new UnsupportedOperationException();
+		double xpNeed= 0.75*(this.level*this.level)+this.level+12;
+		return (int) Math.round(xpNeed);
 	}
 
 	/**
