@@ -95,7 +95,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 		int a=50;
 		double protection=protCap*(1-Math.exp(-(double)def/a));
 		double dmg=(1-protection)*this.getAttack();
-		return (int)Math.round(dmg);
+		return (int)Math.round(dmg);//arrondis au 0.5 au dessus 
 	}
 	/**
 	 * 
@@ -117,14 +117,18 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @return  true if the entity is alive Else false
 	 */
 	public boolean isAlive() {
-		throw new UnsupportedOperationException();
+		return this.heal>0;
 	}
 
 	/**
 	 * Print the stat of the Entity on the standard exit
 	 */
 	public void entityDescription() {
-		throw new UnsupportedOperationException();
+		System.out.println("Vie : "+ this.heal);
+		System.out.println("Attack : " + this.attack);
+		System.out.println("Defense : " + this.defense);
+		System.out.println("Level : " + this.level);
+		System.out.println("Nom : " + this.name);
 	}
 
 	/**

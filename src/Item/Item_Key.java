@@ -15,7 +15,7 @@ public class Item_Key extends UseableItem {
 
 	@Override
 	public void description() {
-		System.out.println("Ceci est une clé , elle sert surement à ouvrir quelquechose");
+		System.out.println("Ceci est une clé , elle sert surement à ouvrir quelque-chose");
 
 	}
 
@@ -25,8 +25,7 @@ public class Item_Key extends UseableItem {
 		if(target instanceof LockedExit){
 			LockedExit door= (LockedExit)target;
 			door.open(this);
-			use=true;
-			
+			use=true;		
 		}
 		return use;
 	}

@@ -2,6 +2,8 @@ package Game;
 
 import java.util.*;
 import Item.Equipement;
+import Item.UseableItem;
+
 import java.io.*;
 
 
@@ -55,7 +57,24 @@ public class Inventory implements Serializable{
 	 * 
 	 */
 	public void use(String itemName,Object target) {
-		throw new UnsupportedOperationException();
+		Iterator<Item> i = this.itemList.iterator();
+		Item r=null;
+		while(i.hasNext() && r==null){ //Tant qu'il y a un suivant dans la liste et que je n'ai pas trouvé l'objet
+			//Je passe à l'objet suivant 
+			Item item = i.next();
+			//Si je trouve l'item
+			if(item.getName().equals(itemName)){
+				//Si c'est un objet utilisable
+				if(i instanceof UseableItem){
+					r=item; //J'ai trouvé l'objet
+					((UseableItem) i).use(target);
+					this.remove(item.getName());//je supprime l'item
+				}else{
+					System.out.println("Tu ne peux pas utiliser cet objet");
+				}
+				
+			}
+		}
 	}
 
 	/**
