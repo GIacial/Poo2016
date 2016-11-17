@@ -41,4 +41,16 @@ public abstract class Monster extends Entity {
 	public void chooseAttack(Hero target) {
 		throw new UnsupportedOperationException();
 	}
+	
+	@Override
+	public void takeDmg(int Dmg) {
+		super.takeDmg(Dmg);
+		System.out.println("Dommages infligés : " + Dmg);
+		if(!this.isAlive()){
+			System.out.println("Dommage reçu : " + Dmg);
+			System.out.println("Vous avez tué" + this.getName());
+			//supprimer le monstre de la pièce ? 
+		
+		}
+	}
 }

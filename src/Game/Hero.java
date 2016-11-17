@@ -113,5 +113,15 @@ public class Hero extends Entity {
 		return super.getAttack()+this.equipement.getDmgWeapon();
 	}
 	
+	@Override
+	public void takeDmg(int Dmg) {
+		super.takeDmg(Dmg);
+		System.out.println("Dommages reçus : " + Dmg);
+		if(!this.isAlive()){
+			System.out.println("Vous êtes mort. Game over");
+			// Si c'est le héro on a perdu 
+		}			
+		
+	}
 	
 }

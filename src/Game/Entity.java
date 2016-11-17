@@ -76,17 +76,8 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 */
 	public void takeDmg(int Dmg) {
 		//Le calcul des dmg qu'on prend on le met ici ducoup ou on met directement le bon dmg en parametre ? 
-		this.heal-=Dmg;
-		if(!this.isAlive()){
-			System.out.println("Dommage reçu : " + Dmg);
-			if(this instanceof Monster){
-				System.out.println("Vous avez tué" + this.name);
-				//supprimer le monstre de la pièce ? 
-			}else{
-				System.out.println("Vous êtes mort. Game over");
-				// Si c'est le héro on a perdu 
-			}			
-		}
+		this.heal-=Dmg;			
+		
 	}
 
 	/**
