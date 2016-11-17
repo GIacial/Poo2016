@@ -1,8 +1,6 @@
 package npc;
 
 import Game.Entity;
-import Game.Item;
-import Item.Item_Cat;
 import interfacePackage.Recoverable;
 
 public class Entity_Cat extends Entity implements Recoverable {
@@ -23,8 +21,10 @@ public class Entity_Cat extends Entity implements Recoverable {
 	}
 
 	@Override
-	public Item take() {
-		return new Item_Cat();
+	public Recoverable take() {
+		return this;
 	}
+
+
 
 }

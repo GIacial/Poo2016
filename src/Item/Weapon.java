@@ -24,4 +24,9 @@ public abstract class Weapon extends Equipement {
 	public int getAtkMin() {
 		return this.atkMin;
 	}
+	
+	@Override
+	public String getTypeName() {
+		return "Weapon";
+	}
 }

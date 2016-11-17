@@ -35,4 +35,6 @@ public abstract class Equipement extends RecoverableItem {
 	public int getHealthBonus() {
 		return this.healthBonus;
 	}
+	
+	public abstract String getTypeName();
 }

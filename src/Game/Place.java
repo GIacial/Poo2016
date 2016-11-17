@@ -256,11 +256,12 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param name  the object's name
 	 * @return  the item that you have take
 	 */
-	public Item takeSomething(String name){
-		Item i=this.removeItem(name);
-		if(i==null){
+	public Recoverable takeSomething(String name){
+		Recoverable i=null;
+		Item item=this.removeItem(name);
+		if(item==null){
 			Entity e=this.removeEntity(name);
-			if(e!=null){
+			if(e!=null){//verif entite
 				if(e instanceof Recoverable){
 					i=((Recoverable)e).take();
 				}
@@ -268,8 +269,20 @@ public abstract class Place implements Serializable,HaveDescription {
 					this.addEntity(e);//on remets l'entity qui ne correspond pas
 				}
 			}
-
 		}
+		else{//verif item
+			if(item instanceof Recoverable){
+				i=((Recoverable)item).take();
+			}
+			else{
+				this.addItem(item);//on remets l'item qui ne correspond pas
+				
+			}
+		}
+		if(i==null){
+			System.out.println(name+" n'est pas rammasable");
+		}
+		
 		return i;
 	}
 	

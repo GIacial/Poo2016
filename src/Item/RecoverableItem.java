@@ -17,7 +17,7 @@ public  abstract class RecoverableItem extends Item implements Recoverable {
 
 
 	@Override
-	public Item take() {
+	public Recoverable take() {
 		return this;
 	}
 }

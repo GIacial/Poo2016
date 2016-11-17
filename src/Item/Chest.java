@@ -14,4 +14,9 @@ public abstract class Chest extends Equipement {
 		super(name, defB, atkB, healB);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String getTypeName() {
+		return "Chest";
+	}
 }

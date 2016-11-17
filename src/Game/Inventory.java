@@ -3,6 +3,7 @@ package Game;
 import java.util.*;
 import Item.Equipement;
 import Item.UseableItem;
+import interfacePackage.Recoverable;
 
 import java.io.*;
 
@@ -13,20 +14,20 @@ public class Inventory implements Serializable{
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -3815028807156314828L;
-	private List<Item> itemList;	//faire list Recoverable
+	private List<Recoverable> itemList;	//faire list Recoverable
 	
 	/**
 	 * A builder of Inventory Class
 	 */
 	public Inventory() {
-		this.itemList= new ArrayList<Item>();
+		this.itemList= new ArrayList<Recoverable>();
 	}
 
 	/**
 	 * Add object in the Inventory
 	 * @param object  The item that you want add in the Inventory
 	 */
-	public void add(Item object) {
+	public void add(Recoverable object) {
 		if(!this.itemList.contains(object) && object!=null){
 			this.itemList.add(object);
 		}
@@ -37,12 +38,25 @@ public class Inventory implements Serializable{
 	 * @param itemName  The name of the item that you want remove
 	 * @return  The removed Item
 	 */
-	public Item remove(String itemName) {
-		Iterator<Item> i = this.itemList.iterator();
-		Item r=null;
+	public Recoverable remove(String itemName) {
+		Iterator<Recoverable> i = this.itemList.iterator();
+		Recoverable r=null;
 		while(i.hasNext() && r==null){
-			Item item= i.next();
-			if(item.getName().equals(itemName)){
+			Recoverable item= i.next();
+			String name="";
+			
+			if(item instanceof Item){
+				name=((Item)item).getName();
+			}
+			else{if(item instanceof Entity ){
+				name=((Entity)item).getName();
+				}
+				else{
+					System.err.println("Impossible de recup le nom du recuperable");
+				}
+			}
+			
+			if(name.equals(itemName)){
 				r=item;
 				i.remove();
 			}
@@ -57,30 +71,24 @@ public class Inventory implements Serializable{
 	 * 
 	 */
 	public void use(String itemName,Object target) {
-		Iterator<Item> i = this.itemList.iterator();
-		Item r=null;
-		while(i.hasNext() && r==null){ //Tant qu'il y a un suivant dans la liste et que je n'ai pas trouvé l'objet
-			//Je passe à l'objet suivant 
-			Item item = i.next();
-			//Si je trouve l'item
-			if(item.getName().equals(itemName)){
-				//Si c'est un objet utilisable
-				if(i instanceof UseableItem){
-					r=item; //J'ai trouvé l'objet
-					((UseableItem) i).use(target);
-					this.remove(item.getName());//je supprime l'item
-				}else{
-					System.out.println("Tu ne peux pas utiliser cet objet");
-				}
-				
+		Recoverable item = this.remove(itemName);
+		if(item!=null){
+			if(item instanceof UseableItem){
+				((UseableItem)item).use(target);
 			}
+			else{
+				System.out.println(itemName+" n'est pas utilisable");
+			}
+		}
+		else{
+			System.out.println(itemName+" ne se trouve pas dans votre sac");
 		}
 	}
 
 	/**
 	 * @return  The list of all item in the inventory
 	 */
-	public List<Item> getListItem() {
+	public List<Recoverable> getListItem() {
 		return this.itemList;
 	}
 
@@ -91,7 +99,7 @@ public class Inventory implements Serializable{
 	 */
 	public List<Equipement> getListEquipement() {
 		List<Equipement> r= new ArrayList<Equipement>();
-		for(Item i:this.itemList){
+		for(Recoverable i:this.itemList){
 			if(i instanceof Equipement){
 				r.add((Equipement)i);
 			}

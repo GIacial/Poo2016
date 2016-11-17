@@ -3,6 +3,8 @@ package Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import interfacePackage.Recoverable;
+
 /**
  * A Hero
  */
@@ -39,7 +41,7 @@ public class Hero extends Entity {
 	 * Add the item to the hero's inventory
 	 * @param item  The item that the hero want add to his inventory
 	 */
-	public void takeItem(Item item) {
+	public void takeItem(Recoverable item) {
 		this.inventory.add(item);
 	}
 
@@ -48,7 +50,7 @@ public class Hero extends Entity {
 	 * @param nameItem  The name of the item that you want throw
 	 * @return  the item that you throw
 	 */
-	public Item throwItem(String nameItem) {
+	public Recoverable throwItem(String nameItem) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -73,7 +75,7 @@ public class Hero extends Entity {
 	 * @param typeItem  the item's type that you want print on the screen
 	 */
 	public void lookInventory(String typeItem) {
-		List<Item> l= new ArrayList<Item>();
+		List<Recoverable> l= new ArrayList<Recoverable>();
 		switch(typeItem.toLowerCase()){
 			case "equipement":l.addAll(this.inventory.getListEquipement());
 				break;
@@ -83,8 +85,19 @@ public class Hero extends Entity {
 		if(l.isEmpty()){
 			System.out.println("Votre sac ne contient pas "+typeItem);
 		}
-		for(Item i: l){
-			System.out.println(i.getName());
+		for(Recoverable i: l){
+			String name="";
+			if(i instanceof Item){
+				name=((Item)i).getName();
+			}
+			else{if(i instanceof Entity ){
+				name=((Entity)i).getName();
+				}
+				else{
+					System.err.println("Impossible de recup le nom du recuperable");
+				}
+			}
+			System.out.println(name);
 		}
 	}
 

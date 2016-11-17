@@ -6,16 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Game.Inventory;
-import Game.Item;
 import Item.*;
 import exit.LockedExit;
+import interfacePackage.Recoverable;
 import place.ClassicPlace;
 import weapon.Weapon_BasicSword;
 
 public class Test_Inventory {
 	private Inventory inventory;
 	private LockedExit door;
-	private Item key;
+	private RecoverableItem key;
 	private Equipement sword;
 	
 	@Before
@@ -35,7 +35,7 @@ public class Test_Inventory {
 	
 	@Test
 	public void remove() {
-		Item k=this.inventory.remove(key.getName());
+		Recoverable k=this.inventory.remove(key.getName());
 		assertSame(k,this.key);
 		assertSame(this.inventory.getListItem().size(),1);
 	}

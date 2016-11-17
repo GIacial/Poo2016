@@ -8,6 +8,7 @@ import org.junit.Test;
 import Game.*;
 import Item.*;
 import exit.*;
+import interfacePackage.Recoverable;
 import npc.Entity_Cat;
 import place.*;
 
@@ -70,12 +71,12 @@ public class Test_Place {
 	
 	@Test
 	public void takeSomething() {	
-		Item catItem=p.takeSomething(cat.getName());
+		Recoverable catItem=p.takeSomething(cat.getName());
 		
 		assertSame(p.getNbEntity(),0);
 		assertNotNull(catItem);
 		
-		Item keyItem=p.takeSomething(key.getName());
+		Recoverable keyItem=p.takeSomething(key.getName());
 		assertSame(p.getNbItem(),0);
 		assertSame(keyItem,key);
 	}
