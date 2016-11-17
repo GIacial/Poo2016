@@ -35,14 +35,14 @@ public class Test_Inventory {
 	
 	@Test
 	public void remove() {
-		Item k=this.inventory.remove("Clé");
+		Item k=this.inventory.remove(key.getName());
 		assertSame(k,this.key);
 		assertSame(this.inventory.getListItem().size(),1);
 	}
 	
 	@Test
 	public void use() {
-		this.inventory.use("Clé",door);
+		this.inventory.use(key.getName(),door);
 		assertNotNull(door.crossing());
 		assertSame(this.inventory.getListItem().size(),1);
 	}
