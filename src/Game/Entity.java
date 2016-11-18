@@ -115,12 +115,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param target  The target of the attack
 	 */
 	public void attack(Entity target) {
-		if (target instanceof Monster){
 			target.takeDmg(this.calcDmg(target.defense));
-		}else{
-			System.out.println("Tu ne peux pas attaquer cette cible");
-		}
-		
 	}
 
 	/**
