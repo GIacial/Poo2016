@@ -1,9 +1,8 @@
 package npc;
 
-import Game.Entity;
 import interfacePackage.Recoverable;
 
-public class Entity_Cat extends Entity implements Recoverable {
+public class Entity_Cat extends Npc implements Recoverable {
 
 	/**
 	 * 

@@ -3,6 +3,7 @@ package Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import Item.Equipement;
 import interfacePackage.Recoverable;
 
 /**
@@ -34,7 +35,22 @@ public class Hero extends Entity {
 	 * @param nameEquip  The name of the equipement that you want equip
 	 */
 	public void equip(String nameEquip) {
-		throw new UnsupportedOperationException();
+		Recoverable e=this.inventory.remove(nameEquip);
+		if(e!=null){
+			if(e instanceof Equipement){
+				Equipement equip=(Equipement)e;
+				boolean ok=this.equipement.equip(equip);
+				if(!ok){
+					this.inventory.add(e);
+				}
+			}
+			else{
+				System.out.println(nameEquip+" n'est pas un equipement");
+			}
+		}
+		else{
+			System.out.println("Vous ne possedez pas "+nameEquip);
+		}
 	}
 
 	/**
@@ -51,7 +67,7 @@ public class Hero extends Entity {
 	 * @return  the item that you throw
 	 */
 	public Recoverable throwItem(String nameItem) {
-		throw new UnsupportedOperationException();
+		return this.inventory.remove(nameItem);
 	}
 
 	/**
@@ -59,15 +75,16 @@ public class Hero extends Entity {
 	 * @param name  the name of the equipement'zone that you want unequip
 	 */
 	public void unequip(String name) {
-		throw new UnsupportedOperationException();
+		Equipement e=this.equipement.unequip(name);
+		this.inventory.add(e);
 	}
 
 	/**
 	 * Use a item from your inventory
 	 * @param nameItem  the name of the item that you want use
 	 */
-	public void useItem(String nameItem) {
-		throw new UnsupportedOperationException();
+	public void useItem(String nameItem,Object target) {
+		this.inventory.use(nameItem, target);
 	}
 
 	/**
@@ -103,8 +120,7 @@ public class Hero extends Entity {
 
 	@Override
 	public void description() {
-		System.out.println("C'est moi");
-		//this.entityDescription();
+		this.entityDescription();
 		
 	}
 

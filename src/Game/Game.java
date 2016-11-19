@@ -7,6 +7,7 @@ import java.util.Set;
 import Item.Item_Key;	//a enlever plus tard
 import exit.*;
 import interfacePackage.Recoverable;
+import monster.Monster_Kankrelat;
 import npc.*;
 import place.*;
 import weapon.Weapon_BasicSword;
@@ -34,20 +35,27 @@ public class Game {
 		
 		//parti à enlever
 		this.map.get(1).addItem(new Item_Key());
+		this.map.get(1).addEntity(new Monster_Kankrelat());
 		this.map.get(0).addEntity(new Entity_Cat());
 		this.map.get(0).addItem(new Weapon_BasicSword());
 		this.map.get(2).addEntity(new Entity_Cat());
 	}
 	
 	public void go (String exitName){
-		Place nextPlace= this.currentPlace.getNextPlace(exitName);
-		if(nextPlace!=null){
-			this.currentPlace=nextPlace;
-			System.out.println("Vous franchissez "+exitName);
+		if(this.currentPlace.haveMonster()){
+			System.out.println("Des monstres vous bloque le chemin");
 		}
 		else{
-			System.out.println("Impossible de franchir "+exitName);
+			Place nextPlace= this.currentPlace.getNextPlace(exitName);
+			if(nextPlace!=null){
+				this.currentPlace=nextPlace;
+				System.out.println("Vous franchissez "+exitName);
+			}
+			else{
+				System.out.println("Impossible de franchir "+exitName);
+			}	
 		}
+		
 	}
 	
 	public void look (){
@@ -129,6 +137,34 @@ public class Game {
 		else{
 			System.out.println("Impossible de ramasser "+target);
 		}
+	}
+	
+	public void use (String objectName ,String targetName){
+		Object target=null;
+		if(targetName.equals("me")){
+			target=this.hero;
+		}
+		else{
+			target=this.currentPlace.getExit(targetName);
+			if(target==null){
+				target=this.currentPlace.removeEntity(targetName);
+				if(target==null){
+					System.out.println(targetName+" n'a pas été trouvé");
+				}
+				else{
+					this.currentPlace.addEntity((Entity)target);
+				}
+			}
+		}
+		
+		if(target!=null){
+			this.hero.useItem(objectName, target);
+		}
+		
+	}
+	
+	public void attack (String target){
+		this.currentPlace.fight(this.hero, target, true);
 	}
 	
 	

@@ -190,7 +190,42 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param target  the target's name
 	 */
 	public void fight(Hero hero, String target,boolean actifHero) {
-		throw new UnsupportedOperationException();
+		boolean attackOk=false;
+		if(actifHero){
+			Entity targetEntity=this.removeEntity(target);
+			if(targetEntity!=null){
+				hero.attack(targetEntity);
+				attackOk=true;
+				if(targetEntity.isAlive()){
+					this.addEntity(targetEntity);
+				}
+				else{
+					if(targetEntity instanceof Monster){
+						List<Item> loot=((Monster)targetEntity).lootList();
+						for(Item i:loot){
+							this.addItem(i);
+						}
+						hero.increaseXp(((Monster)targetEntity).lootXp());
+						
+					}
+					
+				}
+			}
+			else{
+				System.out.println(target+" n'a pas été trouvé");
+			}
+		}
+		
+		if((actifHero && attackOk)|| !actifHero){//si le hero n'attaque pas ou qu'il attaque une cible correct
+
+			for(Entity entity:this.listEntity){
+				if(entity instanceof Monster){
+					Monster monster=(Monster)entity;
+
+					monster.chooseAttack(hero);
+				}
+			}
+		}
 	}
 
 	/**
@@ -284,6 +319,14 @@ public abstract class Place implements Serializable,HaveDescription {
 		}
 		
 		return i;
+	}
+	
+	public Exit getExit(String exitName){
+		Exit e=null;
+		if(this.exit.containsKey(exitName)){
+			e=this.exit.get(exitName);
+		}
+		return e;
 	}
 	
 

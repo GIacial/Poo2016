@@ -61,6 +61,8 @@ public abstract class Entity implements Serializable,HaveDescription {
 		this.heal=maxHeal;
 		this.attack=attack;
 		this.defense=defense;
+		this.level=1;
+		this.xp=0;
 	}
 
 	/**
@@ -76,7 +78,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 */
 	public void takeDmg(int Dmg) {
 		//Le calcul des dmg qu'on prend on le met ici ducoup ou on met directement le bon dmg en parametre ? 
-		this.heal-=Dmg;			
+		this.heal-=Dmg;	
 		
 	}
 
@@ -129,7 +131,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * Print the stat of the Entity on the standard exit
 	 */
 	public void entityDescription() {
-		System.out.println("Vie : "+ this.heal);
+		System.out.println("Vie : "+ this.heal + "/"+this.healMax);
 		System.out.println("Attack : " + this.attack);
 		System.out.println("Defense : " + this.defense);
 		System.out.println("Level : " + this.level);
@@ -148,7 +150,12 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * Increase the level of the Entity Increase the stat of the Entity to
 	 */
 	private void levelUp() {
-		throw new UnsupportedOperationException();
+		this.level++;
+		this.xp=0;
+		this.attack+=((this.level%3+1)*10);
+		this.defense+=(((this.level+1)%3+1)*10);
+		this.healMax+=(((this.level+2)%3+1)*10);
+		//Peut etre que xp et tout sera utile que pour le hero ?
 	}
 
 	/**

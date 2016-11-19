@@ -36,6 +36,10 @@ public class CommandReader {
 						
 					case take:this.take(sCommand);
 						break;
+					case use : this.use(sCommand);
+						break;
+					case attack:this.attack(sCommand);
+						break;
 						
 					default:System.err.println("Pas encore fait");
 							break;
@@ -99,6 +103,24 @@ public class CommandReader {
 		}
 		else{
 			Command.take.description();
+		}
+	}
+	
+	private void use(String[] sCommand){
+		if(sCommand.length>=3){
+			this.game.use(sCommand[1], sCommand[2]);
+		}
+		else{
+			Command.use.description();
+		}
+	}
+	
+	private void attack(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.attack(sCommand[1]);
+		}
+		else{
+			Command.attack.description();
 		}
 	}
 

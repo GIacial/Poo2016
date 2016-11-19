@@ -24,8 +24,7 @@ public class Item_Key extends UseableItem {
 		boolean use=false;
 		if(target instanceof LockedExit){
 			LockedExit door= (LockedExit)target;
-			door.open(this);
-			use=true;		
+			use=door.open(this);		
 		}
 		return use;
 	}

@@ -30,10 +30,12 @@ public class EquipementSet implements Serializable {
 	 * Equip the equipement
 	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
 	 */
-	public void equip(Equipement equip) {
+	public boolean equip(Equipement equip) {
+		boolean ok=false;
 		if(this.listEquip.containsKey(equip.getTypeName())){
 			Equipement target=this.listEquip.get(equip.getTypeName());
 			if(target==null){
+				ok=true;
 				this.listEquip.put(equip.getTypeName(), equip);
 	
 				this.hero.addAtk(equip.getAttackBonus());
@@ -47,6 +49,7 @@ public class EquipementSet implements Serializable {
 		else{
 			System.err.println(equip.getTypeName()+" n'est pas reconnu");
 		}
+		return ok;
 	}
 
 	/**
@@ -57,9 +60,11 @@ public class EquipementSet implements Serializable {
 		Equipement r=null;
 		if(this.listEquip.containsKey(zone)){
 			r=this.listEquip.get(zone);
-			this.hero.addAtk(-r.getAttackBonus());
-			this.hero.addDef(-r.getDefenseBonus());
-			this.hero.addHp(-r.getHealthBonus());
+			if(r!=null){
+				this.hero.addAtk(-r.getAttackBonus());
+				this.hero.addDef(-r.getDefenseBonus());
+				this.hero.addHp(-r.getHealthBonus());
+			}
 			this.listEquip.put(zone, null);
 		}
 		return r;

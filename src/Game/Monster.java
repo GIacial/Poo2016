@@ -1,6 +1,7 @@
 package Game;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Monster
@@ -26,7 +27,9 @@ public abstract class Monster extends Entity {
 	/**
 	 * @return  The list of all item drops by the monster
 	 */
-	public abstract List lootList();
+	public List<Item> lootList(){
+		return new ArrayList<Item>();
+	}
 
 	/**
 	 * @return  the amount of xp earn when the monster was defeat
@@ -38,18 +41,18 @@ public abstract class Monster extends Entity {
 	 * @param target  The possible target of the reaction
 	 */
 	public void chooseAttack(Hero target) {
-		throw new UnsupportedOperationException();
+		this.attack(target);
 	}
 	
 	@Override
 	public void takeDmg(int Dmg) {
 		super.takeDmg(Dmg);
-		System.out.println("Dommages infligés : " + Dmg);
+		System.out.println(this.getName()+" recoit " + Dmg + " dommages");
 		if(!this.isAlive()){
-			System.out.println("Dommage reçu : " + Dmg);
 			System.out.println("Vous avez tué" + this.getName());
-			//supprimer le monstre de la pièce ? 
 		
 		}
 	}
+	
+	
 }

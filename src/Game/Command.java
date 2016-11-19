@@ -38,7 +38,7 @@ public enum Command implements HaveDescription{
 		case equip:System.out.println("[Help]: equip equipement");
 				   System.out.println("[Help]: equipe l'equipement");
 			break;
-		case unequip:System.out.println("[Help]: unequip equipement");
+		case unequip:System.out.println("[Help]: unequip zoneEquipement");
 					 System.out.println("[Help]: desequipe l'equipement");
 			break;
 			default:System.err.println("[Help]:Command non trouvé ");

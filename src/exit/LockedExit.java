@@ -33,6 +33,7 @@ public class LockedExit extends Exit {
 		if(i instanceof Item_Key){
 			this.isLocked=false;
 			use=true;
+			System.out.println("La clé ouvre la porte");
 		}
 		return use;
 	}

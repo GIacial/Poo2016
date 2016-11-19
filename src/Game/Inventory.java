@@ -78,6 +78,7 @@ public class Inventory implements Serializable{
 			}
 			else{
 				System.out.println(itemName+" n'est pas utilisable");
+				this.add(item);
 			}
 		}
 		else{
