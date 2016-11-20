@@ -108,4 +108,21 @@ public class EquipementSet implements Serializable {
 		}
 		return nb;
 	}
+
+	@Override
+	public String toString() {
+		String r="";
+		for(String s:this.listEquip.keySet()){
+			Equipement e= this.listEquip.get(s);
+			if(e!=null){
+				r+=(s+" : "+e.getName()+"\n");
+			}
+		}
+		if(r.equals("")){
+			r="Vous ne portez rien";
+		}
+		return r;
+	}
+	
+	
 }

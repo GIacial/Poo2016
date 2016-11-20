@@ -21,7 +21,7 @@ public class Monster_Kankrelat extends Monster {
 
 	@Override
 	public int lootXp() {
-		return 5;
+		return 5+this.getLevel();
 	}
 
 }

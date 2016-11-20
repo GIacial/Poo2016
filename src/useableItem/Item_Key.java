@@ -1,5 +1,6 @@
-package Item;
+package useableItem;
 
+import Item.UseableItem;
 import exit.LockedExit;
 
 public class Item_Key extends UseableItem {
@@ -25,6 +26,9 @@ public class Item_Key extends UseableItem {
 		if(target instanceof LockedExit){
 			LockedExit door= (LockedExit)target;
 			use=door.open(this);		
+		}
+		else{
+			System.out.println("Impossible d'utiliser la clé sur cette cible");
 		}
 		return use;
 	}

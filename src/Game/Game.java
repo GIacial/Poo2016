@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import Item.Item_Key;	//a enlever plus tard
+import boots.*;
+import chest.*;
 import exit.*;
+import furniture.*;
+import glove.*;
+import head.*;
 import interfacePackage.Recoverable;
-import monster.Monster_Kankrelat;
+import monster.*;
 import npc.*;
 import place.*;
-import weapon.Weapon_BasicSword;
+import trouser.*;
+import useableItem.*;
+import weapon.*;
 
 public class Game {
 
@@ -23,22 +29,43 @@ public class Game {
 		this.map = new ArrayList<Place>();
 		
 		//creation map
-		this.currentPlace=new ClassicPlace("Début");
+		this.currentPlace=new ClassicPlace("Début du test");//0
 		this.map.add(this.currentPlace);
 		
-		this.map.add(new ClassicPlace("Salle 1"));
+		this.map.add(new ClassicPlace("Salle 1"));//1
 		this.currentPlace.setLink("Porte", new ClassicExit(this.map.get(1)));
-		
-		this.map.add(new ClassicPlace("fin"));
 		this.map.get(1).setLink("Porte", new ClassicExit(this.currentPlace));
+		
+		
+		this.map.add(new ClassicPlace("Boss"));//2
 		this.map.get(1).setLink("Sortie", new LockedExit(this.map.get(2)));
 		
-		//parti à enlever
-		this.map.get(1).addItem(new Item_Key());
+		this.map.add(new ClassicPlace("Salle 2"));//3
+		this.map.get(1).setLink("Couloir", new ClassicExit(this.map.get(3)));
+		this.map.get(3).setLink("Couloir", new ClassicExit(this.map.get(1)));
+		
+		//parti à enlever car sera fait dans les constructeur des lieux
 		this.map.get(1).addEntity(new Monster_Kankrelat());
+		this.map.get(1).addItem(new Trouser_LeatherTrouser());
+		this.map.get(1).addItem(new Glove_LeatherGlove());
+		this.map.get(1).addItem(new Head_LeatherHead());
+		
 		this.map.get(0).addEntity(new Entity_Cat());
 		this.map.get(0).addItem(new Weapon_BasicSword());
+		this.map.get(0).addItem(new Furniture_Fridge());
+		this.map.get(0).addItem(new Boots_LeatherBoots());
+		this.map.get(0).addItem(new Item_Potion());
+		
 		this.map.get(2).addEntity(new Entity_Cat());
+		this.map.get(2).addEntity(new Monster_Krabe());
+		this.map.get(2).addItem(new Item_Potion());
+		
+
+		this.map.get(3).addItem(new Weapon_IronSword());
+		this.map.get(3).addItem(new Chest_LeatherChest());
+		this.map.get(3).addItem(new Item_Key());
+		this.map.get(3).addItem(new Item_Potion());
+		this.map.get(3).addEntity(new Monster_Kankrelat());
 	}
 	
 	public void go (String exitName){
@@ -89,6 +116,10 @@ public class Game {
 			break;
 		case "me":this.hero.description();
 			break;
+		case "equipement":this.hero.lookInventory("Equipement");;
+		break;
+		case "set":this.hero.lookSet();
+			break;
 		case "inventory":this.hero.lookInventory("Item");;
 		break;
 		default:
@@ -133,6 +164,7 @@ public class Game {
 		}
 		if(taked){
 			System.out.println("Vous avez rammasé "+target);
+			this.currentPlace.fight(this.hero, null, false);//les monstre attaque
 		}
 		else{
 			System.out.println("Impossible de ramasser "+target);
@@ -159,6 +191,7 @@ public class Game {
 		
 		if(target!=null){
 			this.hero.useItem(objectName, target);
+			this.currentPlace.fight(this.hero, null, false);//les monstre t'attaque
 		}
 		
 	}
@@ -173,6 +206,50 @@ public class Game {
 	
 	public void unequip(String name){
 		this.hero.unequip(name);
+	}
+	
+	public void discard(String name){
+		Recoverable r=this.hero.throwItem(name);
+		if(r!=null){
+			if(r instanceof Item){
+				this.currentPlace.addItem((Item)r);
+				System.out.println("Vous posez "+name);
+			}
+			else{
+				if(r instanceof Entity){
+					this.currentPlace.addEntity((Entity)r);
+					System.out.println(name+" reste là à vous regarder tristement");
+				}
+				else{
+					System.err.println("Impossible de savoir le type de "+r);
+				}
+			}
+		}
+		else{
+			System.out.println("Vous ne possedez pas "+name);
+		}
+	}
+	
+	public void analyse(String target){
+		if(!this.currentPlace.getDescriptionEntity(target, true)){
+			System.out.println("Impossible de trouver la cible");
+		}
+	}
+	
+	public void speak(String target){
+		Entity e=this.currentPlace.removeEntity(target);
+		if(e!=null){
+			if(e instanceof Npc){
+				((Npc)e).speak();
+			}
+			else{
+				System.out.println(target+" n'a pas l'air amicale");
+			}
+			this.currentPlace.addEntity(e);
+		}
+		else{
+			System.out.println(target+" n'existe que dans votre tête");
+		}
 	}
 	
 	

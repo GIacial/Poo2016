@@ -30,6 +30,8 @@ public abstract class Npc extends Entity {
 		System.out.println(this.getName()+" recoit " + nbHeal + " Hp");
 	}
 	
+	public abstract void speak();
+	
 	
 
 }

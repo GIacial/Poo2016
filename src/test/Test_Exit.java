@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Game.*;
-import Item.*;
 import exit.*;
 import place.*;
+import useableItem.Item_Key;
 
 public class Test_Exit {
 	private Exit e;

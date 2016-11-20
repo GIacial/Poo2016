@@ -161,4 +161,19 @@ public class Hero extends Entity {
 		
 	}
 	
+	public void lookSet(){
+		System.out.println(this.equipement);
+	}
+
+	@Override
+	public void increaseXp(int xpEarn) {
+		int lv=this.getLevel();
+		super.increaseXp(xpEarn);
+		if(this.getLevel()!=lv){
+			System.out.println("Vous passez au lv"+this.getLevel());
+		}
+	}
+	
+	
+	
 }

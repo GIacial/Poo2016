@@ -74,7 +74,9 @@ public class Inventory implements Serializable{
 		Recoverable item = this.remove(itemName);
 		if(item!=null){
 			if(item instanceof UseableItem){
-				((UseableItem)item).use(target);
+				if(!((UseableItem)item).use(target)){
+					this.add(item);
+				}
 			}
 			else{
 				System.out.println(itemName+" n'est pas utilisable");

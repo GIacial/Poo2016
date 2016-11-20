@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Game.*;
-import Item.*;
 import exit.*;
 import interfacePackage.Recoverable;
 import npc.Entity_Cat;
 import place.*;
+import useableItem.Item_Key;
 
 public class Test_Place {
 	private Place p;

@@ -3,7 +3,7 @@ package Game;
 import interfacePackage.HaveDescription;
 
 public enum Command implements HaveDescription{
-	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip;
+	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip,speak;
 
 	@Override
 	public void description() {
@@ -16,6 +16,13 @@ public enum Command implements HaveDescription{
 			break;
 		case look:System.out.println("[Help]: look [target]");
 				  System.out.println("[Help]: permet de regarder quelquechose");
+				  System.out.println("[Help]: exit pour regarder toutes les sortie");
+				  System.out.println("[Help]: object pour tous les item");
+				  System.out.println("[Help]: entity pour tous ce qui est en vie");
+				  System.out.println("[Help]: me pour voir vos stat");
+				  System.out.println("[Help]: equipement pour voir les equipement dans votre inventaire");
+				  System.out.println("[Help]: set pour les equipement equipé");
+				  System.out.println("[Help]: inventory pour votre inventaire");
 			break;
 		case take:System.out.println("[Help]: take target");
 				  System.out.println("[Help]: permet de rammaser quelquechose");
@@ -25,6 +32,7 @@ public enum Command implements HaveDescription{
 			break;
 		case use:System.out.println("[Help]: use object [target]");
 				 System.out.println("[Help]: utilise un objet");
+				 System.out.println("[Help]: me pour vous cibler vous même");
 			break;
 		case attack:System.out.println("[Help]: attack entity");
 					System.out.println("[Help]: attaque la cible");
@@ -40,7 +48,11 @@ public enum Command implements HaveDescription{
 			break;
 		case unequip:System.out.println("[Help]: unequip zoneEquipement");
 					 System.out.println("[Help]: desequipe l'equipement");
+					 System.out.println("[Help]: les zones sont Weapon Trouser Glove Boots Chest Head");
 			break;
+		case speak:System.out.println("[Help]: speak target");
+		 			 System.out.println("[Help]: parle au NPC");
+		 	break;
 			default:System.err.println("[Help]:Command non trouvé ");
 				break;
 		}

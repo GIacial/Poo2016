@@ -41,6 +41,7 @@ public abstract class Monster extends Entity {
 	 * @param target  The possible target of the reaction
 	 */
 	public void chooseAttack(Hero target) {
+		System.out.println(this.getName()+" vous attaque");
 		this.attack(target);
 	}
 	
@@ -53,6 +54,14 @@ public abstract class Monster extends Entity {
 		
 		}
 	}
+
+	@Override
+	public void entityDescription() {
+		super.entityDescription();
+		System.out.println("Il est certain que c'est un monstre");
+	}
+	
+	
 	
 	
 }

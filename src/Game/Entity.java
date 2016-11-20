@@ -152,10 +152,10 @@ public abstract class Entity implements Serializable,HaveDescription {
 	private void levelUp() {
 		this.level++;
 		this.xp=0;
-		this.attack+=((this.level%3+1)*10);
+		this.healMax+=((this.level%3+1)*10);
+		this.heal=this.healMax;
 		this.defense+=((this.level+1)%3+1);
-		this.healMax+=((this.level+2)%3+1);
-		//Peut etre que xp et tout sera utile que pour le hero ?
+		this.attack+=((this.level+2)%3+1);
 	}
 
 	/**
@@ -189,5 +189,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 	public void addDef(int bonus){
 		this.defense+=bonus;
 	}
+
+	public int getLevel() {
+		return this.level;
+	}
+	
+	
 	
 }

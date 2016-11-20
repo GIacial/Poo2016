@@ -44,6 +44,12 @@ public class CommandReader {
 						break;
 					case unequip:this.unequip(sCommand);
 						break;
+					case discard:this.discard(sCommand);
+						break;
+					case analyse:this.analyse(sCommand);
+						break;
+					case speak: this.speak(sCommand);
+						break;
 						
 					default:System.err.println("Pas encore fait");
 							break;
@@ -143,6 +149,33 @@ public class CommandReader {
 		}
 		else{
 			Command.unequip.description();
+		}
+	}
+	
+	private void discard(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.discard(sCommand[1]);
+		}
+		else{
+			Command.discard.description();
+		}
+	}
+	
+	private void analyse(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.analyse(sCommand[1]);
+		}
+		else{
+			Command.analyse.description();
+		}
+	}
+	
+	private void speak(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.speak(sCommand[1]);
+		}
+		else{
+			Command.speak.description();
 		}
 	}
 	

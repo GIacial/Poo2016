@@ -10,6 +10,7 @@ import Item.*;
 import exit.LockedExit;
 import interfacePackage.Recoverable;
 import place.ClassicPlace;
+import useableItem.Item_Key;
 import weapon.Weapon_BasicSword;
 
 public class Test_Inventory {

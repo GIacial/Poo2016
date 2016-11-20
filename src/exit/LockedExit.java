@@ -2,8 +2,8 @@ package exit;
 
 import Game.Exit;
 import Game.Place;
-import Item.Item_Key;
 import Item.UseableItem;
+import useableItem.Item_Key;
 
 
 public class LockedExit extends Exit {
