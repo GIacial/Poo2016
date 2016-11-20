@@ -40,6 +40,10 @@ public class CommandReader {
 						break;
 					case attack:this.attack(sCommand);
 						break;
+					case equip:this.equip(sCommand);
+						break;
+					case unequip:this.unequip(sCommand);
+						break;
 						
 					default:System.err.println("Pas encore fait");
 							break;
@@ -123,5 +127,25 @@ public class CommandReader {
 			Command.attack.description();
 		}
 	}
+	
+	private void equip(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.equip(sCommand[1]);
+		}
+		else{
+			Command.equip.description();
+		}
+	}
+	
+	private void unequip(String[] sCommand){
+		if(sCommand.length>=2){
+			this.game.unequip(sCommand[1]);
+		}
+		else{
+			Command.unequip.description();
+		}
+	}
+	
+	
 
 }

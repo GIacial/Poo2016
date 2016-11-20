@@ -10,7 +10,7 @@ public class Monster_Kankrelat extends Monster {
 	private static final long serialVersionUID = -5474551312292110115L;
 
 	public Monster_Kankrelat() {
-		super("Kankrelat", 50, 3, 4);
+		super("Kankrelat", 25, 3, 4);
 	}
 
 	@Override

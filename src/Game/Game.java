@@ -167,5 +167,13 @@ public class Game {
 		this.currentPlace.fight(this.hero, target, true);
 	}
 	
+	public void equip(String name){
+		this.hero.equip(name);
+	}
+	
+	public void unequip(String name){
+		this.hero.unequip(name);
+	}
+	
 	
 }

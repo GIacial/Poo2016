@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Item.Equipement;
+import Item.Weapon;
 import interfacePackage.Recoverable;
 
 /**
@@ -43,9 +44,20 @@ public class Hero extends Entity {
 				if(!ok){
 					this.inventory.add(e);
 				}
+				else{
+					System.out.println("Vous vous équipez de "+equip.getName());
+					System.out.println("Attack +"+equip.getAttackBonus());
+					System.out.println("Defence +"+equip.getDefenseBonus());
+					System.out.println("Hp +"+equip.getHealthBonus());
+					if(equip instanceof Weapon){
+						Weapon w=(Weapon)equip;
+						System.out.println("attack range:"+w.getAtkMin()+"-"+w.getAtkMax());
+					}
+				}
 			}
 			else{
 				System.out.println(nameEquip+" n'est pas un equipement");
+				this.inventory.add(e);
 			}
 		}
 		else{
@@ -76,7 +88,16 @@ public class Hero extends Entity {
 	 */
 	public void unequip(String name) {
 		Equipement e=this.equipement.unequip(name);
-		this.inventory.add(e);
+		if(e!=null){
+			this.inventory.add(e);
+			System.out.println("Vous enlevez votre "+e.getName());
+			System.out.println("Attack -"+e.getAttackBonus());
+			System.out.println("Defence -"+e.getDefenseBonus());
+			System.out.println("Hp -"+e.getHealthBonus());
+		}
+		else{
+			System.out.println("Vous n'avez pas de "+name+" équipé");
+		}
 	}
 
 	/**

@@ -49,7 +49,7 @@ public abstract class Monster extends Entity {
 		super.takeDmg(Dmg);
 		System.out.println(this.getName()+" recoit " + Dmg + " dommages");
 		if(!this.isAlive()){
-			System.out.println("Vous avez tué" + this.getName());
+			System.out.println("Vous avez tué " + this.getName());
 		
 		}
 	}
