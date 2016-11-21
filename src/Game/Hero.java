@@ -5,6 +5,7 @@ import java.util.List;
 
 import Item.Equipement;
 import Item.Weapon;
+import exception.GameException_GameOver;
 import interfacePackage.Recoverable;
 
 /**
@@ -22,6 +23,16 @@ public class Hero extends Entity {
 	private Inventory inventory;
 
 	/**
+	 * The current level of the entity
+	 */
+	private int level;
+
+	/**
+	 * the amount of xp that the entity have
+	 */
+	private int xp;
+
+	/**
 	 * A builder of Hero Class
 	 * @param name  The name of the new Hero
 	 */
@@ -29,6 +40,8 @@ public class Hero extends Entity {
 		super(name,30,5,5);	
 		this.equipement= new EquipementSet(this);
 		this.inventory= new Inventory();
+		this.level=1;
+		this.xp=0;
 	}
 
 	/**
@@ -151,12 +164,14 @@ public class Hero extends Entity {
 	}
 	
 	@Override
-	public void takeDmg(int Dmg) {
+	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
 		System.out.println("Dommages reçus : " + Dmg);
 		if(!this.isAlive()){
 			System.out.println("Vous êtes mort. Game over");
 			// Si c'est le héro on a perdu 
+
+			throw new GameException_GameOver("Vous êtes mort");
 		}			
 		
 	}
@@ -165,14 +180,51 @@ public class Hero extends Entity {
 		System.out.println(this.equipement);
 	}
 
-	@Override
+	/**
+	 * @return  the amount of xp that the Entity need to level up
+	 */
+	private int calcXpLevelUp() {
+		double xpNeed= 0.75*(this.level*this.level)+this.level+12;
+		return (int) Math.round(xpNeed);
+	}
+
+	/**
+	 * Increase the level of the Entity Increase the stat of the Entity to
+	 */
+	private void levelUp() {
+		this.level++;
+		this.xp=0;
+		int earnHp=(this.level%3+1)*10;
+		int earnDef=(this.level+1)%3+1;
+		int earnAtk=(this.level+2)%3+1;
+		this.addHp(earnHp);
+		this.addDef(earnDef);
+		this.addAtk(earnAtk);
+		System.out.println("Vous gagnez un niveau");
+		System.out.println("Hp +"+earnHp);
+		System.out.println("Defence +"+earnDef);
+		System.out.println("Atk +"+earnAtk);
+	}
+
+	/**
+	 * Add xpEarn to Entity's xp
+	 * @param xpEarn  The amount of xp that the Entity wins
+	 */
 	public void increaseXp(int xpEarn) {
-		int lv=this.getLevel();
-		super.increaseXp(xpEarn);
-		if(this.getLevel()!=lv){
-			System.out.println("Vous passez au lv"+this.getLevel());
+		this.xp+=xpEarn;
+		if(this.xp>this.calcXpLevelUp()){
+			this.levelUp();
 		}
 	}
+
+	@Override
+	public void entityDescription() {
+		System.out.println("Niveau "+this.level);
+		super.entityDescription();
+	}
+
+
+	
 	
 	
 	

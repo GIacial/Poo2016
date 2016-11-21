@@ -1,6 +1,8 @@
 package Game;
 
 import java.util.*;
+
+import exception.GameException_GameOver;
 import interfacePackage.HaveDescription;
 import interfacePackage.Recoverable;
 
@@ -32,7 +34,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	}
 
 	/**
-	 * Create a exit for this place TODO passer une Exit en param ?
+	 * Create a exit for this place 
 	 * @param name  the name of the new exit
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
@@ -188,8 +190,9 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * Hero attack a monster and all monster attack the hero
 	 * @param hero  the hero
 	 * @param target  the target's name
+	 * @throws GameException_GameOver if the hero died
 	 */
-	public void fight(Hero hero, String target,boolean actifHero) {
+	public void fight(Hero hero, String target,boolean actifHero) throws GameException_GameOver {
 		boolean attackOk=false;
 		if(actifHero){
 			Entity targetEntity=this.removeEntity(target);

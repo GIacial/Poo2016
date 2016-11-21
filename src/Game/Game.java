@@ -1,11 +1,13 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import boots.*;
 import chest.*;
+import exception.GameException_GameOver;
 import exit.*;
 import furniture.*;
 import glove.*;
@@ -18,8 +20,12 @@ import trouser.*;
 import useableItem.*;
 import weapon.*;
 
-public class Game {
+public class Game implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8950895708116794889L;
 	private Hero hero;
 	private List<Place> map;
 	private Place currentPlace;
@@ -66,6 +72,9 @@ public class Game {
 		this.map.get(3).addItem(new Item_Key());
 		this.map.get(3).addItem(new Item_Potion());
 		this.map.get(3).addEntity(new Monster_Kankrelat());
+		
+		//texte de bienvenue
+		System.out.println("[La Déesse] Bienvenue Aventurier dans le monde de test");
 	}
 	
 	public void go (String exitName){
@@ -136,7 +145,7 @@ public class Game {
 		
 	}
 	
-	public void take(String target){
+	public void take(String target) throws GameException_GameOver{
 		Item i=this.currentPlace.removeItem(target);
 		boolean taked=false;
 		if(i!=null){
@@ -171,7 +180,7 @@ public class Game {
 		}
 	}
 	
-	public void use (String objectName ,String targetName){
+	public void use (String objectName ,String targetName) throws GameException_GameOver{
 		Object target=null;
 		if(targetName.equals("me")){
 			target=this.hero;
@@ -196,7 +205,7 @@ public class Game {
 		
 	}
 	
-	public void attack (String target){
+	public void attack (String target) throws GameException_GameOver{
 		this.currentPlace.fight(this.hero, target, true);
 	}
 	

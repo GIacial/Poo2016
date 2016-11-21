@@ -3,6 +3,7 @@ package Game;
 
 import java.io.*;
 
+import exception.GameException_GameOver;
 import interfacePackage.HaveDescription;
 
 
@@ -39,21 +40,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 	private int defense;
 
 	/**
-	 * The current level of the entity
-	 */
-	private int level;
-	/**
-	 * the amount of xp that the entity have
-	 */
-	private int xp;
-	
-	
-	/**
 	 * A builder of the Entity Class
 	 * @param name  The name of the new Entity
 	 * @param maxHeal  The maximun life of the new Entity
-	 * @param attack  TODO (?) The attack of the new Entity
-	 * @param defense  TODO (?) The defense of the new Entity
+	 * @param attack   The attack of the new Entity
+	 * @param defense   The defense of the new Entity
 	 */
 	public Entity(String name, int maxHeal, int attack, int defense) {
 		this.name=name;
@@ -61,8 +52,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 		this.heal=maxHeal;
 		this.attack=attack;
 		this.defense=defense;
-		this.level=1;
-		this.xp=0;
+		
 	}
 
 	/**
@@ -75,8 +65,9 @@ public abstract class Entity implements Serializable,HaveDescription {
 	/**
 	 * Inflict the Dmg damage to a alive entity
 	 * @param Dmg  The amount of damage inflict to the entity
+	 * @throws GameException_GameOver 
 	 */
-	public void takeDmg(int Dmg) {
+	public void takeDmg(int Dmg) throws GameException_GameOver {
 		//Le calcul des dmg qu'on prend on le met ici ducoup ou on met directement le bon dmg en parametre ? 
 		this.heal-=Dmg;	
 		
@@ -115,8 +106,9 @@ public abstract class Entity implements Serializable,HaveDescription {
 	/**
 	 * The Entity attacks the target
 	 * @param target  The target of the attack
+	 * @throws GameException_GameOver 
 	 */
-	public void attack(Entity target) {
+	public void attack(Entity target) throws GameException_GameOver {
 			target.takeDmg(this.calcDmg(target.defense));
 	}
 
@@ -134,44 +126,12 @@ public abstract class Entity implements Serializable,HaveDescription {
 		System.out.println("Vie : "+ this.heal + "/"+this.healMax);
 		System.out.println("Attack : " + this.attack);
 		System.out.println("Defense : " + this.defense);
-		System.out.println("Level : " + this.level);
 		System.out.println("Nom : " + this.name);
-	}
-
-	/**
-	 * @return  the amount of xp that the Entity need to level up
-	 */
-	private int calcXpLevelUp() {
-		double xpNeed= 0.75*(this.level*this.level)+this.level+12;
-		return (int) Math.round(xpNeed);
-	}
-
-	/**
-	 * Increase the level of the Entity Increase the stat of the Entity to
-	 */
-	private void levelUp() {
-		this.level++;
-		this.xp=0;
-		this.healMax+=((this.level%3+1)*10);
-		this.heal=this.healMax;
-		this.defense+=((this.level+1)%3+1);
-		this.attack+=((this.level+2)%3+1);
-	}
-
-	/**
-	 * Add xpEarn to Entity's xp
-	 * @param xpEarn  The amount of xp that the Entity wins
-	 */
-	public void increaseXp(int xpEarn) {
-		this.xp+=xpEarn;
-		if(this.xp>this.calcXpLevelUp()){
-			this.levelUp();
-		}
 	}
 
 	@Override
 	public String toString() {
-		return this.name + "(nv " + this.level+")" ;
+		return this.name  ;
 	}
 	
 	public void addHp(int bonus){
@@ -188,10 +148,6 @@ public abstract class Entity implements Serializable,HaveDescription {
 	
 	public void addDef(int bonus){
 		this.defense+=bonus;
-	}
-
-	public int getLevel() {
-		return this.level;
 	}
 	
 	

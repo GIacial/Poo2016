@@ -1,11 +1,10 @@
 package Game;
 
+
 public class Main {
 
-	public static void main(String[] args) {
-		Game game= new Game();
-		System.out.println("Bienvenue Aventurier");
-		CommandReader cr= new CommandReader(game);
+	public static void main(String[] args){
+		CommandReader cr= new CommandReader();
 		while(cr.isActif()){
 			cr.interpretation();
 		}

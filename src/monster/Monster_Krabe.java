@@ -29,7 +29,7 @@ public class Monster_Krabe extends Monster {
 
 	@Override
 	public int lootXp() {
-		return 12+this.getLevel();
+		return 12;
 	}
 	
 	@Override

@@ -1,19 +1,77 @@
 package Game;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
+import exception.GameException_GameOver;
 
 
 public class CommandReader {
 	private Scanner s;
 	private boolean actif;
 	private Game game;
+	private String fichier;
+	private static final String CHECKPOINT="Save/checkpoint.sav";
+	private boolean checkpointCreate;
 
-	public CommandReader(Game game) {
+	public CommandReader() {
 		this.s=new Scanner(System.in);
 		this.actif=true;
-		this.game=game;
+		this.checkpointCreate=false;
+		
+		//chargement ou création du jeu
+		System.out.println("Donnez le nom de votre sauvegarde");
+		this.fichier="Save/".concat(this.s.next().concat(".sav"));
+		this.s.nextLine();//fin la ligne
+		
+		boolean newGame=true;
+		if(new File(this.fichier).exists()){
+			System.out.println("Voulez vous continuer ?");
+			if(this.s.next().toLowerCase().equals("oui")){
+				this.loadGame(this.fichier);
+				newGame=false;
+			}
+		}
+		if(newGame){
+			this.game=new Game();
+		}
 	}
 	
+	private void loadGame(String file) {
+		try{
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			this.game=(Game)ois.readObject();
+			ois.close();
+			System.out.println("Chargement effectué");
+		}
+		catch(Exception e){
+			System.out.println("Impossible de charger");
+			this.game =new Game();
+			System.err.println(e);
+		}
+		
+	}
+	
+	private boolean saveGame(String file) {
+		boolean ok=true;
+		try{
+			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(this.game);
+			oos.close();
+		}
+		catch(Exception e){
+			System.out.println("La sauvegarde a echoué");
+			System.err.println(e);
+			ok=false;
+		}
+		return ok;
+		
+	}
+
 	public void interpretation(){
 		String[] sCommand= this.s.nextLine().split(" ");
 		if(sCommand.length>0 && !sCommand[0].equals("")){
@@ -72,6 +130,7 @@ public class CommandReader {
 	
 	private void go(String[] sCommand){
 		if(sCommand.length>=2){
+			this.createCheckpoint();
 			game.go(sCommand[1]);
 		}
 		else{
@@ -102,14 +161,18 @@ public class CommandReader {
 	
 	private void quit(){
 		System.out.println("Au revoir");
-		//insere sauvegarde ici
+		this.saveGame(this.fichier);
 		this.actif=false;
 		s.close();								//fin du scanner principal
 	}
 	
 	private void take(String[] sCommand){
 		if(sCommand.length>=2){
-			this.game.take(sCommand[1]);
+			try {
+				this.game.take(sCommand[1]);
+			} catch (GameException_GameOver e) {
+				this.GameOver();
+			}
 		}
 		else{
 			Command.take.description();
@@ -118,7 +181,11 @@ public class CommandReader {
 	
 	private void use(String[] sCommand){
 		if(sCommand.length>=3){
-			this.game.use(sCommand[1], sCommand[2]);
+			try {
+				this.game.use(sCommand[1], sCommand[2]);
+			} catch (GameException_GameOver e) {
+				this.GameOver();
+			}
 		}
 		else{
 			Command.use.description();
@@ -127,7 +194,11 @@ public class CommandReader {
 	
 	private void attack(String[] sCommand){
 		if(sCommand.length>=2){
-			this.game.attack(sCommand[1]);
+			try {
+				this.game.attack(sCommand[1]);
+			} catch (GameException_GameOver e) {
+				this.GameOver();
+			}
 		}
 		else{
 			Command.attack.description();
@@ -179,6 +250,27 @@ public class CommandReader {
 		}
 	}
 	
+	private void GameOver(){
+		System.out.println("\n[La Déesse] Cherchons dans le temps, le dernier point d'ancrage");
+		if(this.checkpointCreate){
+			System.out.println("Retour au checkpoint");
+			this.loadGame(CommandReader.CHECKPOINT);
+		}
+		else{
+			if(new File(this.fichier).exists()){
+				System.out.println("Retour au début de ta session");
+				this.loadGame(this.fichier);
+			}
+			else{
+				System.out.println("\n[La Déesse] je suis désolée tu es trop discret mon enfant , le temps ne se souvient pas de toi");
+				this.game= new Game();
+			}
+		}
+	}
+	
+	private void createCheckpoint(){
+		this.checkpointCreate=this.checkpointCreate || this.saveGame(CommandReader.CHECKPOINT);
+	}
 	
 
 }
