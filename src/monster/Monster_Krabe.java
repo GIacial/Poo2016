@@ -8,12 +8,7 @@ import useableItem.Item_Potion;
 
 public class Monster_Krabe extends Monster {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5653403462339012651L;
-
-
 
 
 	public Monster_Krabe() {
@@ -34,10 +29,10 @@ public class Monster_Krabe extends Monster {
 	
 	@Override
 	public List<Item> lootList() {
-		List<Item> r=super.lootList();
-		if(Math.random()<0.50){
+		List<Item> r = super.lootList();
+		if(Math.random() < 0.50){
 			r.add(new Item_Potion());
-			System.out.println(this.getName()+" laisse une Potion");
+			System.out.println(this.getName() + " laisse une Potion");
 		}
 		return r;
 	}

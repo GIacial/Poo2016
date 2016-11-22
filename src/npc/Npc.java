@@ -18,7 +18,7 @@ public abstract class Npc extends Entity {
 	@Override
 	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
-		System.out.println(this.getName()+" recoit " + Dmg + " dommages");
+		System.out.println(this.getName() + " recoit " + Dmg + " dommages");
 		if(!this.isAlive()){
 			System.out.println("Vous avez tué " + this.getName());
 		
@@ -29,7 +29,7 @@ public abstract class Npc extends Entity {
 	@Override
 	public void takeHeal(int nbHeal) {
 		super.takeHeal(nbHeal);
-		System.out.println(this.getName()+" recoit " + nbHeal + " Hp");
+		System.out.println(this.getName() + " recoit " + nbHeal + " Hp");
 	}
 	
 	public abstract void speak();

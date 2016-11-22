@@ -4,9 +4,6 @@ import Item.Glove;
 
 public class Glove_LeatherGlove extends Glove {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -14623349668282085L;
 
 	public Glove_LeatherGlove() {

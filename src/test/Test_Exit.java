@@ -11,38 +11,38 @@ import place.*;
 import useableItem.Item_Key;
 
 public class Test_Exit {
-	private Exit e;
-	private Place p;
-	private LockedExit lockedExit;
+	private Exit 		exit;
+	private Place 		place;
+	private LockedExit 	lockedExit;
 
 	@Before
 	public void setUp() throws Exception {
-		p= new ClassicPlace("Néant");	  
-		e= new ClassicExit(p); 
-		lockedExit = new LockedExit(p);
+		place = new ClassicPlace("Néant");	  
+		exit = new ClassicExit(place); 
+		lockedExit = new LockedExit(place);
 		
 	}
 
 	@Test
 	public void haveNextPlace_1() {	
-		assertTrue(e.haveNextPlace());
+		assertTrue(exit.haveNextPlace());
 	}
 	
 	@Test
 	public void haveNextPlace_2() {
-		e= new ClassicExit(null);
-		assertFalse(e.haveNextPlace());
+		exit = new ClassicExit(null);
+		assertFalse(exit.haveNextPlace());
 	}
 	
 	@Test
 	public void crossing_1() {
-		assertSame(e.crossing(),p);
+		assertSame(exit.crossing(), place);
 	}
 	
 	@Test
 	public void crossing_2() {
-		e= new ClassicExit(null);
-		assertNull(e.crossing());
+		exit = new ClassicExit(null);
+		assertNull(exit.crossing());
 	}
 
 	@Test
@@ -59,13 +59,13 @@ public class Test_Exit {
 	@Test
 	public void crossing_5() {
 		lockedExit.open(new Item_Key());
-		assertSame(lockedExit.crossing(),p);
+		assertSame(lockedExit.crossing(), place);
 	}
 	
 	@Test
 	public void useKey() {
-		Item_Key key=new Item_Key();
+		Item_Key key = new Item_Key();
 		key.use(lockedExit);
-		assertSame(lockedExit.crossing(),p);
+		assertSame(lockedExit.crossing(), place);
 	}
 }

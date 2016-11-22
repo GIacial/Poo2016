@@ -37,8 +37,8 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
 	public void setLink(String name, Exit exit) {
-		if(this.exit.containsKey(name) || this.exit.containsValue(exit) || exit==null){
-			System.err.println(name+" ou "+ exit +" est deja affecté ou exit vaut null");
+		if(this.exit.containsKey(name) || this.exit.containsValue(exit) || exit == null){
+			System.err.println(name + " ou " + exit + " est deja affecté ou exit vaut null");
 		}
 		else{
 			this.exit.put(name, exit);
@@ -60,7 +60,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	public Place getNextPlace(String exitName) {
 		Place next = null;
 		if(this.exit.containsKey(exitName)){
-			next=this.exit.get(exitName).crossing();
+			next = this.exit.get(exitName).crossing();
 		}
 		return next;
 	}
@@ -83,10 +83,10 @@ public abstract class Place implements Serializable,HaveDescription {
 	}
 	
 	public boolean getDescriptionEntity(String entityName,boolean analyse){
-		boolean r=false;
+		boolean r = false;
 		for(Entity e : this.listEntity){
 			if(e.getName().equals(entityName)){
-				r=true;
+				r = true;
 				if(analyse){
 					e.entityDescription();
 				}
@@ -107,7 +107,7 @@ public abstract class Place implements Serializable,HaveDescription {
 			System.out.println("Le lieu est vide");
 		}
 		else{
-			for(Item i:this.listItem){
+			for(Item i : this.listItem){
 				System.out.println(i);
 			}
 		}
@@ -133,7 +133,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 */
 	public List<String> getNameEntites() {
 		List<String> r = new ArrayList<String>();
-		for(Entity e:this.listEntity){
+		for(Entity e : this.listEntity){
 			r.add(e.getName());
 		}
 		return r;
@@ -160,7 +160,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	public Item removeItem(String itemName) {
 		Item r = null;
 		Iterator<Item> i = this.listItem.iterator();
-		while(i.hasNext() && r==null){
+		while(i.hasNext() && r == null){
 			Item item = i.next();
 			if(item.getName().equals(itemName)){
 				r = item;
@@ -175,7 +175,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 */
 	public boolean haveMonster() {
 		boolean findMonster = false;
-		for(Entity e:this.listEntity){
+		for(Entity e : this.listEntity){
 			if(e instanceof Monster){
 				findMonster = true;
 				break;
@@ -213,13 +213,13 @@ public abstract class Place implements Serializable,HaveDescription {
 				}
 			}
 			else{
-				System.out.println(target+" n'a pas été trouvé");
+				System.out.println(target + " n'a pas été trouvé");
 			}
 		}
 		
 		if((actifHero && attackOk) || !actifHero){//si le hero n'attaque pas ou qu'il attaque une cible correct
 
-			for(Entity entity:this.listEntity){
+			for(Entity entity : this.listEntity){
 				if(entity instanceof Monster){
 					Monster monster = (Monster)entity;
 
@@ -234,7 +234,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param entity  the entity add in this place
 	 */
 	public void addEntity(Entity entity) {
-		if(!this.listEntity.contains(entity) && entity!=null){
+		if(!this.listEntity.contains(entity) && entity != null){
 			this.listEntity.add(entity);
 		}
 	}
@@ -247,7 +247,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	public Entity removeEntity(String entityName) {
 		Iterator<Entity> e = this.listEntity.iterator();
 		Entity r = null;
-		while(e.hasNext() && r==null){
+		while(e.hasNext() && r == null){
 			Entity entity = e.next();
 			if(entity.getName().equals(entityName)){
 				r = entity;
@@ -263,14 +263,14 @@ public abstract class Place implements Serializable,HaveDescription {
 
 	@Override
 	public void description() {
-		if(this.getNbItem()>0){
+		if(this.getNbItem() > 0){
 			System.out.println("Ce lieu contient de nombreux object");
 		}
-		if(this.getNbEntity()>0){
+		if(this.getNbEntity() > 0){
 			System.out.println("Vous voyez des ombres bouger");
 		}
-		if(this.getNbExit()>0){
-			System.out.println("Il y a "+this.getNbExit()+" sortie");
+		if(this.getNbExit() > 0){
+			System.out.println("Il y a " + this.getNbExit() + " sortie");
 		}
 
 	}
@@ -316,7 +316,7 @@ public abstract class Place implements Serializable,HaveDescription {
 			}
 		}
 		if(i == null){
-			System.out.println(name+" n'est pas rammasable");
+			System.out.println(name + " n'est pas rammasable");
 		}
 		
 		return i;

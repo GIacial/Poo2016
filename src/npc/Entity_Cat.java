@@ -26,7 +26,7 @@ public class Entity_Cat extends Npc implements Recoverable {
 
 	@Override
 	public void speak() {
-		System.out.println("["+this.getName()+"] "+"Miaou!!");
+		System.out.println("[" + this.getName() + "] " + "Miaou!!");
 		
 	}
 

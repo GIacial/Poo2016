@@ -3,7 +3,7 @@ package Item;
 /**
  * Trouser Item
  */
-public abstract class Trouser extends Equipement {
+public abstract class Trouser extends Equipment {
 
 	/**
 	 * 
@@ -12,7 +12,6 @@ public abstract class Trouser extends Equipement {
 
 	public Trouser(String name, int defB, int atkB, int healB) {
 		super(name, defB, atkB, healB);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

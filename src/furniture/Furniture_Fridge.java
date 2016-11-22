@@ -4,9 +4,6 @@ import Item.Furniture;
 
 public class Furniture_Fridge extends Furniture {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7493017566262090385L;
 
 	public Furniture_Fridge() {

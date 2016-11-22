@@ -6,17 +6,17 @@ import Item.*;
 import java.io.*;
 
 
-public class EquipementSet implements Serializable {
+public class EquipmentSet implements Serializable {
 
 	/**
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -3005502569148491723L;
-	private Map<String,Equipement> listEquip;
+	private Map<String,Equipment> listEquip;
 	private Hero hero;
 	
-	public EquipementSet(Hero hero){
-		this.listEquip= new HashMap<String,Equipement>();
+	public EquipmentSet(Hero hero){
+		this.listEquip= new HashMap<String,Equipment>();
 		this.listEquip.put("Weapon", null);
 		this.listEquip.put("Boots", null);
 		this.listEquip.put("Chest", null);
@@ -30,10 +30,10 @@ public class EquipementSet implements Serializable {
 	 * Equip the equipement
 	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
 	 */
-	public boolean equip(Equipement equip) {
+	public boolean equip(Equipment equip) {
 		boolean ok=false;
 		if(this.listEquip.containsKey(equip.getTypeName())){
-			Equipement target=this.listEquip.get(equip.getTypeName());
+			Equipment target=this.listEquip.get(equip.getTypeName());
 			if(target==null){
 				ok=true;
 				this.listEquip.put(equip.getTypeName(), equip);
@@ -56,8 +56,8 @@ public class EquipementSet implements Serializable {
 	 * Unequip the equipement zone choosen
 	 * @param zone  The zone that you want unequip
 	 */
-	public Equipement unequip(String zone) {
-		Equipement r=null;
+	public Equipment unequip(String zone) {
+		Equipment r=null;
 		if(this.listEquip.containsKey(zone)){
 			r=this.listEquip.get(zone);
 			if(r!=null){
@@ -76,7 +76,7 @@ public class EquipementSet implements Serializable {
 	 */
 	public void showStat(String zone) {
 		if(this.listEquip.containsKey(zone)){
-			Equipement r=this.listEquip.get(zone);
+			Equipment r=this.listEquip.get(zone);
 			if(r!=null){
 				r.EquipementDescription();
 				
@@ -100,7 +100,7 @@ public class EquipementSet implements Serializable {
 	public int getNbEquipement(){
 		int nb=0;
 		for(String type:this.listEquip.keySet()){
-			Equipement e= this.listEquip.get(type);
+			Equipment e= this.listEquip.get(type);
 			if(e!=null){
 				nb++;
 			}
@@ -113,7 +113,7 @@ public class EquipementSet implements Serializable {
 	public String toString() {
 		String r="";
 		for(String s:this.listEquip.keySet()){
-			Equipement e= this.listEquip.get(s);
+			Equipment e= this.listEquip.get(s);
 			if(e!=null){
 				r+=(s+" : "+e.getName()+"\n");
 			}

@@ -15,7 +15,7 @@ public abstract class ImmortalNPC extends Npc {
 
 	@Override
 	public void takeDmg(int Dmg) {
-		System.out.println(this.getName()+" est immortel");
+		System.out.println(this.getName() + " est immortel");
 	}
 
 }

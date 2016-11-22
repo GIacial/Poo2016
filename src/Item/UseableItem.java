@@ -5,9 +5,6 @@ package Item;
  */
 public abstract class UseableItem  extends RecoverableItem{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -360109109349746245L;
 
 	public UseableItem(String itemName) {

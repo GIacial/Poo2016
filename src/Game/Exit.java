@@ -14,21 +14,21 @@ public abstract class Exit implements Serializable,HaveDescription {
 	 */
 	private static final long serialVersionUID = 2526207353620348544L;
 	
-	private Place nextPlace;
+	private Place 		nextPlace;
 
 	/**
 	 * A builder of Exit
 	 * @param nextPlace  the place where you are when you cross the exit
 	 */
 	public Exit(Place nextPlace) {
-		this.nextPlace=nextPlace;
+		this.nextPlace = nextPlace;
 	}
 
 	/**
 	 * @return  Return true if the nextPlace!=null else false
 	 */
 	public boolean haveNextPlace() {
-		return this.nextPlace!=null;
+		return this.nextPlace != null;
 	}
 
 	/**

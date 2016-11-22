@@ -3,7 +3,7 @@ package Item;
 /**
  * Boots Item
  */
-public abstract class Boots extends Equipement {
+public abstract class Boots extends Equipment {
 
 	/**
 	 * 

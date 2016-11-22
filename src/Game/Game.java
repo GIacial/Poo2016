@@ -26,16 +26,16 @@ public class Game implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -8950895708116794889L;
-	private Hero hero;
-	private List<Place> map;
-	private Place currentPlace;
+	private Hero 			hero;
+	private List<Place> 	map;
+	private Place 			currentPlace;
 	
 	public Game() {
-		this.hero= new Hero("Hero");
+		this.hero = new Hero("Hero");
 		this.map = new ArrayList<Place>();
 		
 		//creation map
-		this.currentPlace=new ClassicPlace("Début du test");//0
+		this.currentPlace = new ClassicPlace("Début du test");//0
 		this.map.add(this.currentPlace);
 		
 		this.map.add(new ClassicPlace("Salle 1"));//1
@@ -84,11 +84,11 @@ public class Game implements Serializable{
 		else{
 			Place nextPlace= this.currentPlace.getNextPlace(exitName);
 			if(nextPlace!=null){
-				this.currentPlace=nextPlace;
-				System.out.println("Vous franchissez "+exitName);
+				this.currentPlace = nextPlace;
+				System.out.println("Vous franchissez " + exitName);
 			}
 			else{
-				System.out.println("Impossible de franchir "+exitName);
+				System.out.println("Impossible de franchir " + exitName);
 			}	
 		}
 		
@@ -100,7 +100,7 @@ public class Game implements Serializable{
 	
 	public void look(String target){
 		switch(target.toLowerCase()){
-		case "exit":Set<String>exitName=this.currentPlace.getNameExit();
+		case "exit" : Set<String>exitName = this.currentPlace.getNameExit();
 					if(exitName.isEmpty()){
 						System.out.println("Il n'y a auncune sortie");
 					}
@@ -110,9 +110,9 @@ public class Game implements Serializable{
 						}
 					}	
 			break;
-		case "object":this.currentPlace.listItem();
+		case "object" : this.currentPlace.listItem();
 			break;
-		case "entity":List<String> entityName=this.currentPlace.getNameEntites();
+		case "entity" : List<String> entityName = this.currentPlace.getNameEntites();
 						if(entityName.isEmpty()){
 							System.out.println("Il n'y a aucun signe de vie");
 						}
@@ -120,18 +120,17 @@ public class Game implements Serializable{
 							for(String name : entityName){
 								System.out.println(name);
 							}
-						}
-						
+						}	
 			break;
-		case "me":this.hero.description();
+		case "me" : this.hero.description();
 			break;
-		case "equipement":this.hero.lookInventory("Equipement");;
-		break;
-		case "set":this.hero.lookSet();
+		case "equipement" : this.hero.lookInventory("Equipement");;
 			break;
-		case "inventory":this.hero.lookInventory("Item");;
-		break;
-		default:
+		case "set" : this.hero.lookSet();
+			break;
+		case "inventory" : this.hero.lookInventory("Item");;
+			break;
+		default :
 				if(!this.currentPlace.exitDescription(target)){
 					if(!this.currentPlace.getDescriptionEntity(target, false)){
 						if(!this.currentPlace.getDescriptionItem(target)){
@@ -146,51 +145,51 @@ public class Game implements Serializable{
 	}
 	
 	public void take(String target) throws GameException_GameOver{
-		Item i=this.currentPlace.removeItem(target);
-		boolean taked=false;
-		if(i!=null){
+		Item i = this.currentPlace.removeItem(target);
+		boolean taked = false;
+		if(i != null){
 			if(i instanceof Recoverable){
 				this.hero.takeItem(((Recoverable) i).take());//on prend
-				taked=true;
+				taked = true;
 			}
 			else{
-				this.currentPlace.addItem(i);//on laisee
+				this.currentPlace.addItem(i);	//on laisee
 			}
 		}
 		else{
-			Entity e= this.currentPlace.removeEntity(target);
-			if(e!=null){
+			Entity e = this.currentPlace.removeEntity(target);
+			if(e != null){
 				if(e instanceof Recoverable){
-					this.hero.takeItem(((Recoverable) e).take());//on prend
-					taked=true;
+					this.hero.takeItem(((Recoverable) e).take());	//on prend
+					taked = true;
 				}
 				else{
-					this.currentPlace.addEntity(e);//on laisee
+					this.currentPlace.addEntity(e);		//on laisee
 				}
 			}
 						
 			
 		}
 		if(taked){
-			System.out.println("Vous avez rammasé "+target);
-			this.currentPlace.fight(this.hero, null, false);//les monstre attaque
+			System.out.println("Vous avez rammasé " + target);
+			this.currentPlace.fight(this.hero, null, false);	//les monstre attaque
 		}
 		else{
-			System.out.println("Impossible de ramasser "+target);
+			System.out.println("Impossible de ramasser " + target);
 		}
 	}
 	
-	public void use (String objectName ,String targetName) throws GameException_GameOver{
-		Object target=null;
+	public void use (String objectName, String targetName) throws GameException_GameOver{
+		Object target = null;
 		if(targetName.equals("me")){
-			target=this.hero;
+			target = this.hero;
 		}
 		else{
-			target=this.currentPlace.getExit(targetName);
-			if(target==null){
-				target=this.currentPlace.removeEntity(targetName);
-				if(target==null){
-					System.out.println(targetName+" n'a pas été trouvé");
+			target = this.currentPlace.getExit(targetName);
+			if(target == null){
+				target = this.currentPlace.removeEntity(targetName);
+				if(target == null){
+					System.out.println(targetName + " n'a pas été trouvé");
 				}
 				else{
 					this.currentPlace.addEntity((Entity)target);
@@ -198,7 +197,7 @@ public class Game implements Serializable{
 			}
 		}
 		
-		if(target!=null){
+		if(target != null){
 			this.hero.useItem(objectName, target);
 			this.currentPlace.fight(this.hero, null, false);//les monstre t'attaque
 		}
@@ -218,24 +217,24 @@ public class Game implements Serializable{
 	}
 	
 	public void discard(String name){
-		Recoverable r=this.hero.throwItem(name);
-		if(r!=null){
+		Recoverable r = this.hero.throwItem(name);
+		if(r != null){
 			if(r instanceof Item){
 				this.currentPlace.addItem((Item)r);
-				System.out.println("Vous posez "+name);
+				System.out.println("Vous posez " + name);
 			}
 			else{
 				if(r instanceof Entity){
 					this.currentPlace.addEntity((Entity)r);
-					System.out.println(name+" reste là à vous regarder tristement");
+					System.out.println(name + " reste là à vous regarder tristement");
 				}
 				else{
-					System.err.println("Impossible de savoir le type de "+r);
+					System.err.println("Impossible de savoir le type de " + r);
 				}
 			}
 		}
 		else{
-			System.out.println("Vous ne possedez pas "+name);
+			System.out.println("Vous ne possedez pas " + name);
 		}
 	}
 	
@@ -246,18 +245,18 @@ public class Game implements Serializable{
 	}
 	
 	public void speak(String target){
-		Entity e=this.currentPlace.removeEntity(target);
-		if(e!=null){
+		Entity e = this.currentPlace.removeEntity(target);
+		if(e != null){
 			if(e instanceof Npc){
 				((Npc)e).speak();
 			}
 			else{
-				System.out.println(target+" n'a pas l'air amicale");
+				System.out.println(target + " n'a pas l'air amicale");
 			}
 			this.currentPlace.addEntity(e);
 		}
 		else{
-			System.out.println(target+" n'existe que dans votre tête");
+			System.out.println(target + " n'existe que dans votre tête");
 		}
 	}
 	
