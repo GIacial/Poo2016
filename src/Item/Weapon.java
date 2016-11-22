@@ -8,6 +8,10 @@ public abstract class Weapon extends Equipment {
 	private int 	atkMin;
 
 	
+	
+	
+	
+	
 	public Weapon(String name, int defB, int atkB, int healB, int minAtk, int maxAtk) {
 		super(name, defB, atkB, healB);
 		this.atkMax = maxAtk;
@@ -38,7 +42,7 @@ public abstract class Weapon extends Equipment {
 	@Override
 	public void EquipementDescription() {
 		super.EquipementDescription();
-		System.out.println("Atk range : "+this.atkMin+"-"+this.atkMax);
+		System.out.println("Atk range : " + this.atkMin + "-" + this.atkMax);
 	}
 	
 	

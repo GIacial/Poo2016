@@ -11,7 +11,9 @@ import exception.GameException_GameOver;
 
 
 public class CommandReader {
-	private static final String CHECKPOINT="Save/checkpoint.sav";
+	
+	private static final String CHECKPOINT = "Save/checkpoint.sav";
+	
 	private boolean 	checkpointCreate;
 	private Scanner 	s;
 	private boolean 	actif;
@@ -19,6 +21,11 @@ public class CommandReader {
 	private String 		fichier;
 
 
+	
+	
+	
+	
+	
 	public CommandReader() {
 		this.s = new Scanner(System.in);
 		this.actif = true;
@@ -78,7 +85,8 @@ public class CommandReader {
 		if(sCommand.length > 0 && !sCommand[0].equals("")){
 			
 			try{
-				Command t = Command.valueOf(sCommand[0].toLowerCase());//lower cas pour que Bonjour=bonjour
+				Command t = Command.valueOf(sCommand[0].toLowerCase());
+				//lower cas pour que Bonjour=bonjour
 				
 				switch(t){
 					case look :	this.look(sCommand);

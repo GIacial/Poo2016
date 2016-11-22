@@ -12,18 +12,19 @@ public class EquipmentSet implements Serializable {
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -3005502569148491723L;
-	private Map<String,Equipment> listEquip;
-	private Hero hero;
+	
+	private Map<String,Equipment> 	listEquip;
+	private Hero 					hero;
 	
 	public EquipmentSet(Hero hero){
-		this.listEquip= new HashMap<String,Equipment>();
+		this.listEquip = new HashMap<String,Equipment>();
 		this.listEquip.put("Weapon", null);
 		this.listEquip.put("Boots", null);
 		this.listEquip.put("Chest", null);
 		this.listEquip.put("Glove", null);
 		this.listEquip.put("Head", null);
 		this.listEquip.put("Trouser", null);
-		this.hero=hero;
+		this.hero = hero;
 	}
 
 	/**
@@ -31,11 +32,11 @@ public class EquipmentSet implements Serializable {
 	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
 	 */
 	public boolean equip(Equipment equip) {
-		boolean ok=false;
+		boolean ok = false;
 		if(this.listEquip.containsKey(equip.getTypeName())){
-			Equipment target=this.listEquip.get(equip.getTypeName());
-			if(target==null){
-				ok=true;
+			Equipment target = this.listEquip.get(equip.getTypeName());
+			if(target == null){
+				ok = true;
 				this.listEquip.put(equip.getTypeName(), equip);
 	
 				this.hero.addAtk(equip.getAttackBonus());
@@ -43,11 +44,11 @@ public class EquipmentSet implements Serializable {
 				this.hero.addHp(equip.getHealthBonus());
 			}
 			else{
-				System.out.println("Vous avez déjà un "+equip.getTypeName());
+				System.out.println("Vous avez déjà un " + equip.getTypeName());
 			}
 		}
 		else{
-			System.err.println(equip.getTypeName()+" n'est pas reconnu");
+			System.err.println(equip.getTypeName() + " n'est pas reconnu");
 		}
 		return ok;
 	}
@@ -57,10 +58,10 @@ public class EquipmentSet implements Serializable {
 	 * @param zone  The zone that you want unequip
 	 */
 	public Equipment unequip(String zone) {
-		Equipment r=null;
+		Equipment r = null;
 		if(this.listEquip.containsKey(zone)){
-			r=this.listEquip.get(zone);
-			if(r!=null){
+			r = this.listEquip.get(zone);
+			if(r != null){
 				this.hero.addAtk(-r.getAttackBonus());
 				this.hero.addDef(-r.getDefenseBonus());
 				this.hero.addHp(-r.getHealthBonus());
@@ -76,32 +77,32 @@ public class EquipmentSet implements Serializable {
 	 */
 	public void showStat(String zone) {
 		if(this.listEquip.containsKey(zone)){
-			Equipment r=this.listEquip.get(zone);
-			if(r!=null){
+			Equipment r = this.listEquip.get(zone);
+			if(r != null){
 				r.EquipementDescription();
 				
 			}
 			else{
-				System.out.println("Vous n'avez pas de "+zone);
+				System.out.println("Vous n'avez pas de " + zone);
 			}
 		}
 	}
 	
 	public int getDmgWeapon(){
-		int dmg=0;
-		Weapon w =(Weapon)this.listEquip.get("Weapon");
-		if(w!=null){
-			dmg=(int) (Math.random()*(w.getAtkMax()-w.getAtkMin()));
-			dmg+=w.getAtkMin();
+		int dmg = 0;
+		Weapon w = (Weapon)this.listEquip.get("Weapon");
+		if(w != null){
+			dmg = (int) (Math.random() * (w.getAtkMax()-w.getAtkMin()));
+			dmg += w.getAtkMin();
 		}
 		return dmg;
 	}
 	
 	public int getNbEquipement(){
-		int nb=0;
-		for(String type:this.listEquip.keySet()){
-			Equipment e= this.listEquip.get(type);
-			if(e!=null){
+		int nb = 0;
+		for(String type : this.listEquip.keySet()){
+			Equipment e = this.listEquip.get(type);
+			if(e != null){
 				nb++;
 			}
 			
@@ -111,15 +112,15 @@ public class EquipmentSet implements Serializable {
 
 	@Override
 	public String toString() {
-		String r="";
-		for(String s:this.listEquip.keySet()){
-			Equipment e= this.listEquip.get(s);
-			if(e!=null){
-				r+=(s+" : "+e.getName()+"\n");
+		String r = "";
+		for(String s : this.listEquip.keySet()){
+			Equipment e = this.listEquip.get(s);
+			if(e != null){
+				r += (s + " : " + e.getName() + "\n");
 			}
 		}
 		if(r.equals("")){
-			r="Vous ne portez rien";
+			r = "Vous ne portez rien";
 		}
 		return r;
 	}

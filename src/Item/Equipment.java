@@ -4,15 +4,15 @@ package Item;
 
 public abstract class Equipment extends RecoverableItem {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
 	private static final long serialVersionUID = 2631997706440494533L;
 
 	private int 	defenseBonus;
 	private int 	attackBonus;
 	private int 	healthBonus;
 
+	
+	
+	
 	/**
 	 * A builder of Equipement class
 	 * @param name  The name of the Equipement

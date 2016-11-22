@@ -3,8 +3,11 @@ package Game;
 import interfacePackage.HaveDescription;
 
 public enum Command implements HaveDescription{
+	
 	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip,speak;
 
+	
+	
 	@Override
 	public void description() {
 		switch(this){

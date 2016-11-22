@@ -13,32 +13,20 @@ import interfacePackage.HaveDescription;
  */
 public abstract class Entity implements Serializable,HaveDescription {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
 	private static final long serialVersionUID = -3785660433437786906L;
-	/**
-	 * The name of the entity
-	 */
-	private String 		name;
-	/**
-	 * The current life of the entity
-	 */
-	private int 		heal;
-	/**
-	 * the maximum value of the heal
-	 */
-	private int 		healMax;
-	/**
-	 *  the base attack of the entity
-	 */
-	private int 		attack;
-	/**
-	 *  the defense of the entity
-	 *  int puis tranform en %
-	 */
-	private int 		defense;
 
+	private String 		name; 		//Entity's name
+	private int 		heal; 		//Entity's current life
+	private int 		healMax; 	//Heal maximum value
+	private int 		attack; 	//Entity bases attack
+	private int 		defense; 	//Entity's defense (transformé en % par la suite)
+
+	
+	
+	
+	
+	
+	
 	/**
 	 * A builder of the Entity Class
 	 * @param name  The name of the new Entity

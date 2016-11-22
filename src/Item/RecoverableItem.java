@@ -7,6 +7,9 @@ public  abstract class RecoverableItem extends Item implements Recoverable {
 
 	private static final long serialVersionUID = 8846902233653983026L;
 
+	
+	
+	
 
 	public RecoverableItem(String itemName) {
 		super(itemName);
