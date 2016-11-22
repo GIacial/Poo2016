@@ -4,9 +4,6 @@ import Item.Boots;
 
 public class Boots_LeatherBoots extends Boots {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8047518059769414935L;
 
 	public Boots_LeatherBoots() {

@@ -1,7 +1,7 @@
 package Game;
 
 import java.util.*;
-import Item.Equipement;
+import Item.Equipment;
 import Item.UseableItem;
 import interfacePackage.Recoverable;
 
@@ -14,13 +14,13 @@ public class Inventory implements Serializable{
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -3815028807156314828L;
-	private List<Recoverable> itemList;	//faire list Recoverable
+	private List<Recoverable> 		itemList;
 	
 	/**
 	 * A builder of Inventory Class
 	 */
 	public Inventory() {
-		this.itemList= new ArrayList<Recoverable>();
+		this.itemList = new ArrayList<Recoverable>();
 	}
 
 	/**
@@ -40,16 +40,16 @@ public class Inventory implements Serializable{
 	 */
 	public Recoverable remove(String itemName) {
 		Iterator<Recoverable> i = this.itemList.iterator();
-		Recoverable r=null;
+		Recoverable r = null;
 		while(i.hasNext() && r==null){
-			Recoverable item= i.next();
-			String name="";
+			Recoverable item = i.next();
+			String name = "";
 			
 			if(item instanceof Item){
-				name=((Item)item).getName();
+				name = ((Item)item).getName();
 			}
 			else{if(item instanceof Entity ){
-				name=((Entity)item).getName();
+				name = ((Entity)item).getName();
 				}
 				else{
 					System.err.println("Impossible de recup le nom du recuperable");
@@ -57,7 +57,7 @@ public class Inventory implements Serializable{
 			}
 			
 			if(name.equals(itemName)){
-				r=item;
+				r = item;
 				i.remove();
 			}
 		}
@@ -100,11 +100,11 @@ public class Inventory implements Serializable{
 	/**
 	 * @return  all the equipement in your inventory
 	 */
-	public List<Equipement> getListEquipement() {
-		List<Equipement> r= new ArrayList<Equipement>();
-		for(Recoverable i:this.itemList){
-			if(i instanceof Equipement){
-				r.add((Equipement)i);
+	public List<Equipment> getListEquipement() {
+		List<Equipment> r = new ArrayList<Equipment>();
+		for(Recoverable i : this.itemList){
+			if(i instanceof Equipment){
+				r.add((Equipment)i);
 			}
 		}
 		return r;

@@ -5,9 +5,6 @@ import exit.LockedExit;
 
 public class Item_Key extends UseableItem {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6435067717372497868L;
 
 	public Item_Key() {
@@ -22,10 +19,10 @@ public class Item_Key extends UseableItem {
 
 	@Override
 	public boolean use(Object target) {
-		boolean use=false;
+		boolean use = false;
 		if(target instanceof LockedExit){
-			LockedExit door= (LockedExit)target;
-			use=door.open(this);		
+			LockedExit door = (LockedExit)target;
+			use = door.open(this);		
 		}
 		else{
 			System.out.println("Impossible d'utiliser la clé sur cette cible");

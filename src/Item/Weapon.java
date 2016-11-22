@@ -1,6 +1,6 @@
 package Item;
 
-public abstract class Weapon extends Equipement {
+public abstract class Weapon extends Equipment {
 
 
 	private int atkMax;

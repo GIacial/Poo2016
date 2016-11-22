@@ -4,9 +4,6 @@ import Item.Weapon;
 
 public class Weapon_IronSword extends Weapon {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1071729453900525663L;
 
 	public Weapon_IronSword() {

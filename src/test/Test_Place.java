@@ -13,31 +13,33 @@ import place.*;
 import useableItem.Item_Key;
 
 public class Test_Place {
-	private Place p;
-	public final String EXIT_NAME="exit";
-	private Place nextPlace;
-	private Item_Key key;
-	private Entity_Cat cat;
+	
+	public final String	EXIT_NAME = "exit";
+	
+	private Place 		p;
+	private Place 		nextPlace;
+	private Item_Key 	key;
+	private Entity_Cat 	cat;
 	
 	@Before
 	public void setUp() throws Exception {
-		p= new ClassicPlace("Néant") ;
-		nextPlace= new ClassicPlace("vide") ;
+		p = new ClassicPlace("Néant") ;
+		nextPlace = new ClassicPlace("vide") ;
 		p.setLink(EXIT_NAME, new ClassicExit(nextPlace));
-		key=new Item_Key();
+		key = new Item_Key();
 		p.addItem(key);
-		cat= new Entity_Cat();
+		cat = new Entity_Cat();
 		p.addEntity(cat);
 	}
 
 	@Test
 	public void setLink() {
-		assertSame(p.getNbExit(),1);
+		assertSame(p.getNbExit(), 1);
 	}
 	
 	@Test
 	public void getNextPlace_1() {
-		assertSame(p.getNextPlace(EXIT_NAME),nextPlace);
+		assertSame(p.getNextPlace(EXIT_NAME), nextPlace);
 	}
 	
 	@Test
@@ -47,38 +49,38 @@ public class Test_Place {
 	
 	@Test
 	public void addItem() {
-		assertSame(p.getNbItem(),1);
+		assertSame(p.getNbItem(), 1);
 	}
 	
 	@Test
 	public void removeItem() {	
-		Item i=p.removeItem(key.getName());
-		assertSame(p.getNbItem(),0);
-		assertSame(i,key);
+		Item i = p.removeItem(key.getName());
+		assertSame(p.getNbItem(), 0);
+		assertSame(i, key);
 	}
 	
 	@Test
 	public void addEntity() {
-		assertSame(p.getNbEntity(),1);
+		assertSame(p.getNbEntity(), 1);
 	}
 	
 	@Test
 	public void removeEntity() {	
-		Entity e=p.removeEntity(cat.getName());
-		assertSame(p.getNbEntity(),0);
-		assertSame(e,cat);
+		Entity e = p.removeEntity(cat.getName());
+		assertSame(p.getNbEntity(), 0);
+		assertSame(e, cat);
 	}
 	
 	@Test
 	public void takeSomething() {	
-		Recoverable catItem=p.takeSomething(cat.getName());
+		Recoverable catItem = p.takeSomething(cat.getName());
 		
 		assertSame(p.getNbEntity(),0);
 		assertNotNull(catItem);
 		
-		Recoverable keyItem=p.takeSomething(key.getName());
+		Recoverable keyItem = p.takeSomething(key.getName());
 		assertSame(p.getNbItem(),0);
-		assertSame(keyItem,key);
+		assertSame(keyItem, key);
 	}
 	
 	@Test
@@ -86,9 +88,9 @@ public class Test_Place {
 		p.addEntity(null);
 		p.addItem(null);
 		p.setLink("blabla", null);
-		assertSame(p.getNbEntity(),1);
-		assertSame(p.getNbItem(),1);
-		assertSame(p.getNbExit(),1);
+		assertSame(p.getNbEntity(), 1);
+		assertSame(p.getNbItem(), 1);
+		assertSame(p.getNbExit(), 1);
 	}
 
 	

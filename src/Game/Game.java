@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import Item.Equipement;
+import Item.Equipment;
 import boots.*;
 import chest.*;
 import exception.GameException_GameOver;
@@ -314,8 +314,8 @@ public class Game implements Serializable{
 			default : if(!this.currentPlace.getDescriptionEntity(target, true)){
 						Item item = this.currentPlace.removeItem(target);
 						if(item != null){
-							if(item instanceof Equipement){
-								((Equipement)item).EquipementDescription();
+							if(item instanceof Equipment){
+								((Equipment)item).EquipementDescription();
 							}
 							else{
 								System.out.println(target+" n'est pas analysable");
@@ -325,8 +325,8 @@ public class Game implements Serializable{
 						else{
 							Recoverable r = this.hero.throwItem(target);
 							if(r != null){
-								if(r instanceof Equipement){
-									((Equipement)r).EquipementDescription();
+								if(r instanceof Equipment){
+									((Equipment)r).EquipementDescription();
 								}
 								else{
 									System.out.println(target+" n'est pas analysable");

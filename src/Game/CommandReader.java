@@ -16,39 +16,43 @@ import exception.GameException_GameOver;
  * Elle charge un Game à partir d'un fichier ou avec le constructeur par défault.
  */
 public class CommandReader {
-	private Scanner s;
-	private boolean actif;
-	private Game game;
-	private String fichier;
-	private static final String CHECKPOINT="Save/checkpoint.sav";
-	private boolean checkpointCreate;
+	
+	private static final String CHECKPOINT = "Save/checkpoint.sav";
+	
+	private boolean 	checkpointCreate;
+	private Scanner 	s;
+	private boolean 	actif;
+	private Game 		game;
+	private String 		fichier;
 
+
+	
 	/**
 	 * Un constructeur de CommandReader
 	 * Elle a besoin qu'on entre sur stdin le nom de la sauvegarde
 	 * et si la sauvegarde existe si on veux la charger ou non.
 	 */
 	public CommandReader() {
-		this.s=new Scanner(System.in);
-		this.actif=true;
-		this.checkpointCreate=false;
+		this.s = new Scanner(System.in);
+		this.actif = true;
+		this.checkpointCreate = false;
 		
 		//chargement ou création du jeu
 		System.out.println("Donnez le nom de votre sauvegarde");
-		this.fichier="Save/".concat(this.s.next().concat(".sav"));
-		this.s.nextLine();//fin la ligne
+		this.fichier = "Save/".concat(this.s.next().concat(".sav"));
+		this.s.nextLine();	//fin la ligne
 		
-		boolean newGame=true;
+		boolean newGame = true;
 		if(new File(this.fichier).exists()){
 			System.out.println("Voulez vous continuer ?");
 			if(this.s.next().toLowerCase().equals("oui")){
 				this.s.nextLine();//fin la ligne
 				this.loadGame(this.fichier);
-				newGame=false;
+				newGame = false;
 			}
 		}
 		if(newGame){
-			this.game=new Game();
+			this.game = new Game();
 		}
 	}
 	
@@ -59,13 +63,13 @@ public class CommandReader {
 	private void loadGame(String file) {
 		try{
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-			this.game=(Game)ois.readObject();
+			this.game = (Game)ois.readObject();
 			ois.close();
 			System.out.println("Chargement effectué");
 		}
 		catch(Exception e){
 			System.out.println("Impossible de charger");
-			this.game =new Game();
+			this.game = new Game();
 			System.err.println(e);
 		}
 		
@@ -77,16 +81,16 @@ public class CommandReader {
 	 * @return true si la sauvegarde a réussi sinon false
 	 */
 	private boolean saveGame(String file) {
-		boolean ok=true;
+		boolean ok = true;
 		try{
-			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(file));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(this.game);
 			oos.close();
 		}
 		catch(Exception e){
 			System.out.println("La sauvegarde a echoué");
 			System.err.println(e);
-			ok=false;
+			ok = false;
 		}
 		return ok;
 		
@@ -96,51 +100,44 @@ public class CommandReader {
 	 * Lis la prochaine commande présente sur stdin et applique l'effect sur le Game
 	 */
 	public void interpretation(){
-		String[] sCommand= this.s.nextLine().split(" ");
-		if(sCommand.length>0 && !sCommand[0].equals("")){
+		String[] sCommand = this.s.nextLine().split(" ");
+		if(sCommand.length > 0 && !sCommand[0].equals("")){
 			
 			try{
-				Command t=Command.valueOf(sCommand[0].toLowerCase());//lower cas pour que Bonjour=bonjour
+				Command t = Command.valueOf(sCommand[0].toLowerCase());
+				//lower cas pour que Bonjour=bonjour
 				
 				switch(t){
-					case look:this.look(sCommand);
+					case look :	this.look(sCommand);
+						break;						
+					case quit :	this.quit();
+						break;
+					case go :	this.go(sCommand);
+						break;
+					case help :	this.help(sCommand);
+						break;
+					case take :	this.take(sCommand);
+						break;
+					case use : 	this.use(sCommand);
+						break;
+					case attack :	this.attack(sCommand);
+						break;
+					case equip :	this.equip(sCommand);
+						break;
+					case unequip :	this.unequip(sCommand);
+						break;
+					case discard :	this.discard(sCommand);
+						break;
+					case analyse :	this.analyse(sCommand);
+						break;
+					case speak :	this.speak(sCommand);
 						break;
 						
-					case quit:this.quit();
-						break;
-						
-					case go:this.go(sCommand);
-						break;
-						
-					case help:this.help(sCommand);
-						break;
-						
-					case take:this.take(sCommand);
-						break;
-					case use : this.use(sCommand);
-						break;
-					case attack:this.attack(sCommand);
-						break;
-					case equip:this.equip(sCommand);
-						break;
-					case unequip:this.unequip(sCommand);
-						break;
-					case discard:this.discard(sCommand);
-						break;
-					case analyse:this.analyse(sCommand);
-						break;
-					case speak: this.speak(sCommand);
-						break;
-						
-					default:System.err.println("Pas encore fait");
+					default : System.err.println("Pas encore fait");
 							break;
 				}
 			}
-			catch(Exception e){
-				if(!(e instanceof IllegalArgumentException)){
-					System.err.println(e);
-					throw e;
-				}
+			catch(IllegalArgumentException e){
 				System.out.println(sCommand[0] + " n'est pas une commande");
 			}
 		}
@@ -162,7 +159,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void go(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.createCheckpoint();
 			game.go(sCommand[1]);
 		}
@@ -176,7 +173,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void look(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.look(sCommand[1]);
 		}
 		else{
@@ -189,12 +186,12 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void help(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			Command.description(sCommand[1]);
 		}
 		else{
-			Command listCommand[]=Command.values();
-			for(int i=0; i<listCommand.length;i++){
+			Command listCommand[] = Command.values();
+			for(int i=0 ; i<listCommand.length ; i++){
 				System.out.println(listCommand[i]);
 			}
 		}
@@ -207,7 +204,7 @@ public class CommandReader {
 	private void quit(){
 		System.out.println("Au revoir");
 		this.saveGame(this.fichier);
-		this.actif=false;
+		this.actif = false;
 		s.close();								//fin du scanner principal
 	}
 	
@@ -216,7 +213,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void take(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			try {
 				this.game.take(sCommand[1]);
 			} catch (GameException_GameOver e) {
@@ -234,6 +231,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void use(String[] sCommand){
+
 		if(sCommand.length >= 2){
 			try{
 				if(sCommand.length == 2){
@@ -244,6 +242,7 @@ public class CommandReader {
 				}
 			}
 			catch (GameException_GameOver e) {
+
 				this.GameOver();
 			}
 		}
@@ -259,7 +258,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void attack(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			try {
 				this.game.attack(sCommand[1]);
 			} catch (GameException_GameOver e) {
@@ -276,7 +275,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void equip(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.equip(sCommand[1]);
 		}
 		else{
@@ -289,7 +288,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void unequip(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.unequip(sCommand[1]);
 		}
 		else{
@@ -302,7 +301,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void discard(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.discard(sCommand[1]);
 		}
 		else{
@@ -315,7 +314,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void analyse(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.analyse(sCommand[1]);
 		}
 		else{
@@ -328,7 +327,7 @@ public class CommandReader {
 	 * @param La commande avec tous ses parametres
 	 */
 	private void speak(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.speak(sCommand[1]);
 		}
 		else{
@@ -352,7 +351,7 @@ public class CommandReader {
 			}
 			else{
 				System.out.println("\n[La Déesse] je suis désolée tu es trop discret mon enfant , le temps ne se souvient pas de toi");
-				this.game= new Game();
+				this.game = new Game();
 			}
 		}
 	}

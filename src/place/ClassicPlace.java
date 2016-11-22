@@ -21,7 +21,7 @@ public class ClassicPlace extends Place {
 
 	@Override
 	public void description() {
-		System.out.println("Une description d'un lieu bidon :"+this.getName());
+		System.out.println("Une description d'un lieu bidon :" + this.getName());
 		super.description();
 		
 	}

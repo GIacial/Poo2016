@@ -23,7 +23,7 @@ public abstract class Monster extends Entity {
 	 * @param defense   the defense of the new Monster
 	 */
 	public Monster(String name, int maxHeal, int attack, int defense) {
-		super(name,maxHeal,attack,defense);
+		super(name, maxHeal, attack, defense);
 	}
 
 	/**
@@ -44,14 +44,14 @@ public abstract class Monster extends Entity {
 	 * @throws GameException_GameOver if the hero died
 	 */
 	public void chooseAttack(Hero target) throws GameException_GameOver {
-		System.out.println(this.getName()+" vous attaque");
+		System.out.println(this.getName() + " vous attaque");
 		this.attack(target);
 	}
 	
 	@Override
 	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
-		System.out.println(this.getName()+" recoit " + Dmg + " dommages");
+		System.out.println(this.getName() + " recoit " + Dmg + " dommages");
 		if(!this.isAlive()){
 			System.out.println("Vous avez tué " + this.getName());
 		

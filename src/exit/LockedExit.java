@@ -8,11 +8,9 @@ import useableItem.Item_Key;
 
 public class LockedExit extends Exit {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1902235641184575453L;
-	private boolean isLocked;
+	
+	private boolean 	isLocked;
 	
 	public LockedExit(Place nextPlace) {
 		super(nextPlace);
@@ -29,10 +27,10 @@ public class LockedExit extends Exit {
 	}
 	
 	public boolean open(UseableItem i){
-		boolean use=false;
+		boolean use = false;
 		if(i instanceof Item_Key){
-			this.isLocked=false;
-			use=true;
+			this.isLocked = false;
+			use = true;
 			System.out.println("La clé ouvre la porte");
 		}
 		return use;
@@ -45,7 +43,7 @@ public class LockedExit extends Exit {
 			System.out.println("Ahah tu t'es pris la porte mdr");
 		}
 		else{
-			p=super.crossing();
+			p = super.crossing();
 		}
 		return p;
 	}

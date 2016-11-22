@@ -13,32 +13,20 @@ import interfacePackage.HaveDescription;
  */
 public abstract class Entity implements Serializable,HaveDescription {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
 	private static final long serialVersionUID = -3785660433437786906L;
-	/**
-	 * The name of the entity
-	 */
-	private String name;
-	/**
-	 * The current life of the entity
-	 */
-	private int heal;
-	/**
-	 * the maximum value of the heal
-	 */
-	private int healMax;
-	/**
-	 *  the base attack of the entity
-	 */
-	private int attack;
-	/**
-	 *  the defense of the entity
-	 *  int puis tranform en %
-	 */
-	private int defense;
 
+	private String 		name; 		//Entity's name
+	private int 		heal; 		//Entity's current life
+	private int 		healMax; 	//Heal maximum value
+	private int 		attack; 	//Entity bases attack
+	private int 		defense; 	//Entity's defense (transformé en % par la suite)
+
+	
+	
+	
+	
+	
+	
 	/**
 	 * A builder of the Entity Class
 	 * @param name  The name of the new Entity
@@ -47,11 +35,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param defense   The defense of the new Entity
 	 */
 	public Entity(String name, int maxHeal, int attack, int defense) {
-		this.name=name;
-		this.healMax=maxHeal;
-		this.heal=maxHeal;
-		this.attack=attack;
-		this.defense=defense;
+		this.name = name;
+		this.healMax = maxHeal;
+		this.heal = maxHeal;
+		this.attack = attack;
+		this.defense = defense;
 		
 	}
 
@@ -68,8 +56,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @throws GameException_GameOver 
 	 */
 	public void takeDmg(int Dmg) throws GameException_GameOver {
-		//Le calcul des dmg qu'on prend on le met ici ducoup ou on met directement le bon dmg en parametre ? 
-		this.heal-=Dmg;	
+		this.heal -= Dmg;	
 		
 	}
 
@@ -78,9 +65,9 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @param nbHeal  The amount of heal that the Entity recovers
 	 */
 	public void takeHeal(int nbHeal) {
-		this.heal+=nbHeal;
-		if(this.heal>this.healMax){
-			this.heal=this.healMax;
+		this.heal += nbHeal;
+		if(this.heal > this.healMax){
+			this.heal = this.healMax;
 		}
 	}
 
@@ -89,10 +76,10 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @return  the amount of damage that the entity will do if the target have a defense value equals to def
 	 */
 	private int calcDmg(int def) {
-		double protCap=0.8;
-		int a=50;
-		double protection=protCap*(1-Math.exp(-(double)def/a));
-		double dmg=(1-protection)*this.getAttack();
+		double protCap = 0.8;
+		int a = 50;
+		double protection = protCap * (1 - Math.exp(-(double)def/a));
+		double dmg = (1 - protection) * this.getAttack();
 		return (int)Math.round(dmg);//arrondis au 0.5 au dessus 
 	}
 	/**
@@ -116,14 +103,14 @@ public abstract class Entity implements Serializable,HaveDescription {
 	 * @return  true if the entity is alive Else false
 	 */
 	public boolean isAlive() {
-		return this.heal>0;
+		return this.heal > 0;
 	}
 
 	/**
 	 * Print the stat of the Entity on the standard exit
 	 */
 	public void entityDescription() {
-		System.out.println("Vie : "+ this.heal + "/"+this.healMax);
+		System.out.println("Vie : " + this.heal + "/"+this.healMax);
 		System.out.println("Attack : " + this.attack);
 		System.out.println("Defense : " + this.defense);
 		System.out.println("Nom : " + this.name);
@@ -135,19 +122,19 @@ public abstract class Entity implements Serializable,HaveDescription {
 	}
 	
 	public void addHp(int bonus){
-		this.healMax+=bonus;
-		if(this.heal>this.healMax){
-			this.heal=this.healMax;
+		this.healMax += bonus;
+		if(this.heal > this.healMax){
+			this.heal = this.healMax;
 		}
 	}
 	
 	public void addAtk(int bonus){
-		this.attack+=bonus;
+		this.attack += bonus;
 
 	}
 	
 	public void addDef(int bonus){
-		this.defense+=bonus;
+		this.defense += bonus;
 	}
 	
 	

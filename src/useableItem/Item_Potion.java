@@ -22,11 +22,11 @@ public class Item_Potion extends UseableItem {
 
 	@Override
 	public boolean use(Object target) {
-		boolean use=false;
+		boolean use = false;
 		if(target instanceof Entity){
-			Entity e=(Entity)target;
+			Entity e = (Entity)target;
 			e.takeHeal(50);
-			use=true;
+			use = true;
 			System.out.println("La potion soigne "+e.getName());
 		}
 		else{

@@ -4,9 +4,6 @@ import Item.Trouser;
 
 public class Trouser_LeatherTrouser extends Trouser {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4837141162037086395L;
 
 	public Trouser_LeatherTrouser() {

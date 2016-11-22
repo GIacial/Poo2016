@@ -3,7 +3,7 @@ package Game;
 import java.util.ArrayList;
 import java.util.List;
 
-import Item.Equipement;
+import Item.Equipment;
 import exception.GameException_GameOver;
 import interfacePackage.Recoverable;
 
@@ -17,7 +17,7 @@ public class Hero extends Entity {
 	 */
 	private static final long serialVersionUID = -8480399582238471911L;
 
-	private EquipementSet equipement;
+	private EquipmentSet equipment;
 	
 	private Inventory inventory;
 
@@ -37,7 +37,7 @@ public class Hero extends Entity {
 	 */
 	public Hero(String name) {
 		super(name,30,5,5);	
-		this.equipement= new EquipementSet(this);
+		this.equipment= new EquipmentSet(this);
 		this.inventory= new Inventory();
 		this.level=1;
 		this.xp=0;
@@ -50,9 +50,9 @@ public class Hero extends Entity {
 	public void equip(String nameEquip) {
 		Recoverable e=this.inventory.remove(nameEquip);
 		if(e!=null){
-			if(e instanceof Equipement){
-				Equipement equip=(Equipement)e;
-				boolean ok=this.equipement.equip(equip);
+			if(e instanceof Equipment){
+				Equipment equip=(Equipment)e;
+				boolean ok=this.equipment.equip(equip);
 				if(!ok){
 					this.inventory.add(e);
 				}
@@ -92,7 +92,7 @@ public class Hero extends Entity {
 	 * @param name  the name of the equipement'zone that you want unequip
 	 */
 	public void unequip(String name) {
-		Equipement e=this.equipement.unequip(name);
+		Equipment e=this.equipment.unequip(name);
 		if(e!=null){
 			this.inventory.add(e);
 			System.out.println("Vous enlevez votre "+e.getName());
@@ -152,7 +152,7 @@ public class Hero extends Entity {
 
 	@Override
 	public int getAttack() {
-		return super.getAttack()+this.equipement.getDmgWeapon();
+		return super.getAttack()+this.equipment.getDmgWeapon();
 	}
 	
 	@Override
@@ -169,7 +169,7 @@ public class Hero extends Entity {
 	}
 	
 	public void lookSet(){
-		System.out.println(this.equipement);
+		System.out.println(this.equipment);
 	}
 
 	/**
