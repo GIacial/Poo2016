@@ -11,46 +11,47 @@ import exception.GameException_GameOver;
 
 
 public class CommandReader {
-	private Scanner s;
-	private boolean actif;
-	private Game game;
-	private String fichier;
 	private static final String CHECKPOINT="Save/checkpoint.sav";
-	private boolean checkpointCreate;
+	private boolean 	checkpointCreate;
+	private Scanner 	s;
+	private boolean 	actif;
+	private Game 		game;
+	private String 		fichier;
+
 
 	public CommandReader() {
-		this.s=new Scanner(System.in);
-		this.actif=true;
-		this.checkpointCreate=false;
+		this.s = new Scanner(System.in);
+		this.actif = true;
+		this.checkpointCreate = false;
 		
 		//chargement ou création du jeu
 		System.out.println("Donnez le nom de votre sauvegarde");
-		this.fichier="Save/".concat(this.s.next().concat(".sav"));
+		this.fichier = "Save/".concat(this.s.next().concat(".sav"));
 		this.s.nextLine();//fin la ligne
 		
-		boolean newGame=true;
+		boolean newGame = true;
 		if(new File(this.fichier).exists()){
 			System.out.println("Voulez vous continuer ?");
 			if(this.s.next().toLowerCase().equals("oui")){
 				this.loadGame(this.fichier);
-				newGame=false;
+				newGame = false;
 			}
 		}
 		if(newGame){
-			this.game=new Game();
+			this.game = new Game();
 		}
 	}
 	
 	private void loadGame(String file) {
 		try{
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-			this.game=(Game)ois.readObject();
+			this.game = (Game)ois.readObject();
 			ois.close();
 			System.out.println("Chargement effectué");
 		}
 		catch(Exception e){
 			System.out.println("Impossible de charger");
-			this.game =new Game();
+			this.game = new Game();
 			System.err.println(e);
 		}
 		
@@ -59,65 +60,57 @@ public class CommandReader {
 	private boolean saveGame(String file) {
 		boolean ok=true;
 		try{
-			ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(file));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(this.game);
 			oos.close();
 		}
 		catch(Exception e){
 			System.out.println("La sauvegarde a echoué");
 			System.err.println(e);
-			ok=false;
+			ok = false;
 		}
 		return ok;
 		
 	}
 
 	public void interpretation(){
-		String[] sCommand= this.s.nextLine().split(" ");
+		String[] sCommand = this.s.nextLine().split(" ");
 		if(sCommand.length>0 && !sCommand[0].equals("")){
 			
 			try{
-				Command t=Command.valueOf(sCommand[0].toLowerCase());//lower cas pour que Bonjour=bonjour
+				Command t = Command.valueOf(sCommand[0].toLowerCase());//lower cas pour que Bonjour=bonjour
 				
 				switch(t){
-					case look:this.look(sCommand);
+					case look : this.look(sCommand);
+						break;						
+					case quit : this.quit();
 						break;
-						
-					case quit:this.quit();
+					case go : this.go(sCommand);
 						break;
-						
-					case go:this.go(sCommand);
+					case help : this.help(sCommand);
 						break;
-						
-					case help:this.help(sCommand);
-						break;
-						
-					case take:this.take(sCommand);
+					case take : this.take(sCommand);
 						break;
 					case use : this.use(sCommand);
 						break;
-					case attack:this.attack(sCommand);
+					case attack : this.attack(sCommand);
 						break;
-					case equip:this.equip(sCommand);
+					case equip : this.equip(sCommand);
 						break;
-					case unequip:this.unequip(sCommand);
+					case unequip : this.unequip(sCommand);
 						break;
-					case discard:this.discard(sCommand);
+					case discard : this.discard(sCommand);
 						break;
-					case analyse:this.analyse(sCommand);
+					case analyse : this.analyse(sCommand);
 						break;
-					case speak: this.speak(sCommand);
+					case speak : this.speak(sCommand);
 						break;
 						
 					default:System.err.println("Pas encore fait");
 							break;
 				}
 			}
-			catch(Exception e){
-				if(!(e instanceof IllegalArgumentException)){
-					System.err.println(e);
-					throw e;
-				}
+			catch(IllegalArgumentException e){
 				System.out.println(sCommand[0] + " n'est pas une commande");
 			}
 		}
@@ -129,7 +122,7 @@ public class CommandReader {
 	}
 	
 	private void go(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.createCheckpoint();
 			game.go(sCommand[1]);
 		}
@@ -139,7 +132,7 @@ public class CommandReader {
 	}
 	
 	private void look(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			this.game.look(sCommand[1]);
 		}
 		else{
@@ -148,12 +141,12 @@ public class CommandReader {
 	}
 	
 	private void help(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			Command.description(sCommand[1]);
 		}
 		else{
-			Command listCommand[]=Command.values();
-			for(int i=0; i<listCommand.length;i++){
+			Command listCommand[] = Command.values();
+			for(int i=0 ; i<listCommand.length ; i++){
 				System.out.println(listCommand[i]);
 			}
 		}
@@ -162,12 +155,12 @@ public class CommandReader {
 	private void quit(){
 		System.out.println("Au revoir");
 		this.saveGame(this.fichier);
-		this.actif=false;
+		this.actif = false;
 		s.close();								//fin du scanner principal
 	}
 	
 	private void take(String[] sCommand){
-		if(sCommand.length>=2){
+		if(sCommand.length >= 2){
 			try {
 				this.game.take(sCommand[1]);
 			} catch (GameException_GameOver e) {
@@ -180,7 +173,7 @@ public class CommandReader {
 	}
 	
 	private void use(String[] sCommand){
-		if(sCommand.length>=3){
+		if(sCommand.length >= 3){
 			try {
 				this.game.use(sCommand[1], sCommand[2]);
 			} catch (GameException_GameOver e) {

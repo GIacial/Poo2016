@@ -14,23 +14,21 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * serialVersionUID generated when implements Serializable
 	 */
 	private static final long serialVersionUID = -105354579675980999L;
-	private Map<String,Exit> exit;
-	private List<Entity> listEntity;
-	private List<Item> listItem;
-	/**
-	 * the place's name
-	 */
-	private String name;
+	
+	private Map<String,Exit> 	exit;
+	private List<Entity> 		listEntity;
+	private List<Item> 			listItem;
+	private String 				name; 			//The place's name
 
 	/**
 	 * A builder of Place class
 	 * @param name  the name of the new Place
 	 */
 	public Place(String name) {
-		this.name=name;
-		this.exit= new HashMap<String,Exit>();
-		this.listEntity= new ArrayList<Entity>();
-		this.listItem= new ArrayList<Item>();
+		this.name = name;
+		this.exit = new HashMap<String,Exit>();
+		this.listEntity = new ArrayList<Entity>();
+		this.listItem = new ArrayList<Item>();
 	}
 
 	/**
@@ -60,7 +58,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  the place where you go when you cross the exit
 	 */
 	public Place getNextPlace(String exitName) {
-		Place next=null;
+		Place next = null;
 		if(this.exit.containsKey(exitName)){
 			next=this.exit.get(exitName).crossing();
 		}
@@ -73,11 +71,11 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return T if target is find else F
 	 */
 	public boolean getDescriptionItem(String itemName) {
-		boolean r=false;
+		boolean r = false;
 		for(Item i : this.listItem){
 			if(i.getName().equals(itemName)){
 				i.description();
-				r=true;
+				r = true;
 				break;
 			}
 		}
@@ -122,10 +120,10 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return T if target is find else F
 	 */
 	public boolean exitDescription(String exitName) {
-		boolean r=false;
+		boolean r = false;
 		if(this.exit.containsKey(exitName)){
 			this.exit.get(exitName).description();
-			r=true;
+			r = true;
 		}
 		return r;
 	}
@@ -134,7 +132,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  all name of entities in this place
 	 */
 	public List<String> getNameEntites() {
-		List<String> r= new ArrayList<String>();
+		List<String> r = new ArrayList<String>();
 		for(Entity e:this.listEntity){
 			r.add(e.getName());
 		}
@@ -146,7 +144,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param item  the item that you want put here
 	 */
 	public void addItem(Item item) {
-		if(item!=null){
+		if(item != null){
 			this.listItem.add(item);
 		}
 		else{
@@ -160,12 +158,12 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  the item removed
 	 */
 	public Item removeItem(String itemName) {
-		Item r=null;
-		Iterator<Item> i=this.listItem.iterator();
+		Item r = null;
+		Iterator<Item> i = this.listItem.iterator();
 		while(i.hasNext() && r==null){
-			Item item=i.next();
+			Item item = i.next();
 			if(item.getName().equals(itemName)){
-				r=item;
+				r = item;
 				i.remove();
 			}
 		}
@@ -176,10 +174,10 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  Return true if this place contains a monster else false
 	 */
 	public boolean haveMonster() {
-		boolean findMonster=false;
+		boolean findMonster = false;
 		for(Entity e:this.listEntity){
 			if(e instanceof Monster){
-				findMonster=true;
+				findMonster = true;
 				break;
 			}
 		}
@@ -193,18 +191,18 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @throws GameException_GameOver if the hero died
 	 */
 	public void fight(Hero hero, String target,boolean actifHero) throws GameException_GameOver {
-		boolean attackOk=false;
+		boolean attackOk = false;
 		if(actifHero){
-			Entity targetEntity=this.removeEntity(target);
-			if(targetEntity!=null){
+			Entity targetEntity = this.removeEntity(target);
+			if(targetEntity != null){
 				hero.attack(targetEntity);
-				attackOk=true;
+				attackOk = true;
 				if(targetEntity.isAlive()){
 					this.addEntity(targetEntity);
 				}
 				else{
 					if(targetEntity instanceof Monster){
-						List<Item> loot=((Monster)targetEntity).lootList();
+						List<Item> loot = ((Monster)targetEntity).lootList();
 						for(Item i:loot){
 							this.addItem(i);
 						}
@@ -219,11 +217,11 @@ public abstract class Place implements Serializable,HaveDescription {
 			}
 		}
 		
-		if((actifHero && attackOk)|| !actifHero){//si le hero n'attaque pas ou qu'il attaque une cible correct
+		if((actifHero && attackOk) || !actifHero){//si le hero n'attaque pas ou qu'il attaque une cible correct
 
 			for(Entity entity:this.listEntity){
 				if(entity instanceof Monster){
-					Monster monster=(Monster)entity;
+					Monster monster = (Monster)entity;
 
 					monster.chooseAttack(hero);
 				}
@@ -248,11 +246,11 @@ public abstract class Place implements Serializable,HaveDescription {
 	 */
 	public Entity removeEntity(String entityName) {
 		Iterator<Entity> e = this.listEntity.iterator();
-		Entity r=null;
+		Entity r = null;
 		while(e.hasNext() && r==null){
-			Entity entity=e.next();
+			Entity entity = e.next();
 			if(entity.getName().equals(entityName)){
-				r=entity;
+				r = entity;
 				e.remove();
 			}
 		}
@@ -295,13 +293,13 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @return  the item that you have take
 	 */
 	public Recoverable takeSomething(String name){
-		Recoverable i=null;
-		Item item=this.removeItem(name);
-		if(item==null){
-			Entity e=this.removeEntity(name);
-			if(e!=null){//verif entite
+		Recoverable i = null;
+		Item item = this.removeItem(name);
+		if(item == null){
+			Entity e = this.removeEntity(name);
+			if(e != null){//verif entite
 				if(e instanceof Recoverable){
-					i=((Recoverable)e).take();
+					i = ((Recoverable)e).take();
 				}
 				else{
 					this.addEntity(e);//on remets l'entity qui ne correspond pas
@@ -310,14 +308,14 @@ public abstract class Place implements Serializable,HaveDescription {
 		}
 		else{//verif item
 			if(item instanceof Recoverable){
-				i=((Recoverable)item).take();
+				i = ((Recoverable)item).take();
 			}
 			else{
 				this.addItem(item);//on remets l'item qui ne correspond pas
 				
 			}
 		}
-		if(i==null){
+		if(i == null){
 			System.out.println(name+" n'est pas rammasable");
 		}
 		
@@ -325,9 +323,9 @@ public abstract class Place implements Serializable,HaveDescription {
 	}
 	
 	public Exit getExit(String exitName){
-		Exit e=null;
+		Exit e = null;
 		if(this.exit.containsKey(exitName)){
-			e=this.exit.get(exitName);
+			e = this.exit.get(exitName);
 		}
 		return e;
 	}
