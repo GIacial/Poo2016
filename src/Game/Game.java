@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import Item.Equipement;
 import boots.*;
 import chest.*;
 import exception.GameException_GameOver;
@@ -20,16 +21,19 @@ import trouser.*;
 import useableItem.*;
 import weapon.*;
 
+/**
+ * The Class Game.
+ */
 public class Game implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8950895708116794889L;
-	private Hero hero;
-	private List<Place> map;
-	private Place currentPlace;
+	private Hero 			hero;
+	private List<Place> 	map;
+	private Place 			currentPlace;
 	
+	/**
+	 * Creation du jeu.
+	 */
 	public Game() {
 		this.hero= new Hero("Hero");
 		this.map = new ArrayList<Place>();
@@ -77,6 +81,13 @@ public class Game implements Serializable{
 		System.out.println("[La Déesse] Bienvenue Aventurier dans le monde de test");
 	}
 	
+	/**
+	 * Permet d'essayer de franchir une Exit et donc de changer de Place
+	 * Change currentPlace si crossing renvoi une Place != null
+	 * On peut franchir une Exit que si la Place actuel ne contient plus de monstre
+	 *
+	 * @param Le nom de la sortie qu'on veut franchir
+	 */
 	public void go (String exitName){
 		if(this.currentPlace.haveMonster()){
 			System.out.println("Des monstres vous bloque le chemin");
@@ -94,10 +105,18 @@ public class Game implements Serializable{
 		
 	}
 	
+	/**
+	 * Affiche la description de la Place actuelle
+	 */
 	public void look (){
 		this.currentPlace.description();
 	}
 	
+	/**
+	 * Permet de regarder un truc
+	 *
+	 * @param Le nom de ce qu'on veut regarder
+	 */
 	public void look(String target){
 		switch(target.toLowerCase()){
 		case "exit":Set<String>exitName=this.currentPlace.getNameExit();
@@ -145,6 +164,12 @@ public class Game implements Serializable{
 		
 	}
 	
+	/**
+	 * Take.
+	 *
+	 * @param target the target
+	 * @throws GameException_GameOver the game exception game over
+	 */
 	public void take(String target) throws GameException_GameOver{
 		Item i=this.currentPlace.removeItem(target);
 		boolean taked=false;
@@ -180,6 +205,13 @@ public class Game implements Serializable{
 		}
 	}
 	
+	/**
+	 * Use.
+	 *
+	 * @param objectName the object name
+	 * @param targetName the target name
+	 * @throws GameException_GameOver the game exception game over
+	 */
 	public void use (String objectName ,String targetName) throws GameException_GameOver{
 		Object target=null;
 		if(targetName.equals("me")){
@@ -205,18 +237,49 @@ public class Game implements Serializable{
 		
 	}
 	
+	/**
+	 * Use.
+	 *
+	 * @param objectName the object name
+	 * @throws GameException_GameOver the game exception game over
+	 */
+	public void use (String objectName) throws GameException_GameOver{
+		this.use(objectName,"me");
+	}
+	
+	/**
+	 * Attack.
+	 *
+	 * @param target the target
+	 * @throws GameException_GameOver the game exception game over
+	 */
 	public void attack (String target) throws GameException_GameOver{
 		this.currentPlace.fight(this.hero, target, true);
 	}
 	
+	/**
+	 * Equip.
+	 *
+	 * @param name the name
+	 */
 	public void equip(String name){
 		this.hero.equip(name);
 	}
 	
+	/**
+	 * Unequip.
+	 *
+	 * @param name the name
+	 */
 	public void unequip(String name){
 		this.hero.unequip(name);
 	}
 	
+	/**
+	 * Discard.
+	 *
+	 * @param name the name
+	 */
 	public void discard(String name){
 		Recoverable r=this.hero.throwItem(name);
 		if(r!=null){
@@ -239,12 +302,52 @@ public class Game implements Serializable{
 		}
 	}
 	
+	/**
+	 * Analyse.
+	 *
+	 * @param target the target
+	 */
 	public void analyse(String target){
-		if(!this.currentPlace.getDescriptionEntity(target, true)){
-			System.out.println("Impossible de trouver la cible");
+		switch(target.toLowerCase()){
+			case "me" : this.hero.entityDescription();
+				break;
+			default : if(!this.currentPlace.getDescriptionEntity(target, true)){
+						Item item = this.currentPlace.removeItem(target);
+						if(item != null){
+							if(item instanceof Equipement){
+								((Equipement)item).EquipementDescription();
+							}
+							else{
+								System.out.println(target+" n'est pas analysable");
+							}
+							this.currentPlace.addItem(item);
+						}
+						else{
+							Recoverable r = this.hero.throwItem(target);
+							if(r != null){
+								if(r instanceof Equipement){
+									((Equipement)r).EquipementDescription();
+								}
+								else{
+									System.out.println(target+" n'est pas analysable");
+								}
+								this.hero.takeItem(r);
+							}
+							else{
+								System.out.println("Impossible de trouver la cible");
+							}
+						}
+					  }
+				break;
 		}
+		
 	}
 	
+	/**
+	 * Speak.
+	 *
+	 * @param target the target
+	 */
 	public void speak(String target){
 		Entity e=this.currentPlace.removeEntity(target);
 		if(e!=null){

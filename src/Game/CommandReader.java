@@ -10,6 +10,11 @@ import java.util.Scanner;
 import exception.GameException_GameOver;
 
 
+
+/**
+ * Sert à lire ligne par ligne les commandes mise sur entrée standart
+ * Elle charge un Game à partir d'un fichier ou avec le constructeur par défault.
+ */
 public class CommandReader {
 	private Scanner s;
 	private boolean actif;
@@ -18,6 +23,11 @@ public class CommandReader {
 	private static final String CHECKPOINT="Save/checkpoint.sav";
 	private boolean checkpointCreate;
 
+	/**
+	 * Un constructeur de CommandReader
+	 * Elle a besoin qu'on entre sur stdin le nom de la sauvegarde
+	 * et si la sauvegarde existe si on veux la charger ou non.
+	 */
 	public CommandReader() {
 		this.s=new Scanner(System.in);
 		this.actif=true;
@@ -32,6 +42,7 @@ public class CommandReader {
 		if(new File(this.fichier).exists()){
 			System.out.println("Voulez vous continuer ?");
 			if(this.s.next().toLowerCase().equals("oui")){
+				this.s.nextLine();//fin la ligne
 				this.loadGame(this.fichier);
 				newGame=false;
 			}
@@ -41,6 +52,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet de charger le Game à partir du fichier
+	 * @param le chemin de la sauvegarde
+	 */
 	private void loadGame(String file) {
 		try{
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
@@ -56,6 +71,11 @@ public class CommandReader {
 		
 	}
 	
+	/**
+	 * 
+	 * @param le chemin de l'endroit ou l'on veux mettre la sauvegarde
+	 * @return true si la sauvegarde a réussi sinon false
+	 */
 	private boolean saveGame(String file) {
 		boolean ok=true;
 		try{
@@ -72,6 +92,9 @@ public class CommandReader {
 		
 	}
 
+	/**
+	 * Lis la prochaine commande présente sur stdin et applique l'effect sur le Game
+	 */
 	public void interpretation(){
 		String[] sCommand= this.s.nextLine().split(" ");
 		if(sCommand.length>0 && !sCommand[0].equals("")){
@@ -124,10 +147,20 @@ public class CommandReader {
 		
 	}
 
+	/**
+	 * Checks if is actif.
+	 *
+	 * @return true, if is actif
+	 */
 	public boolean isActif() {
 		return this.actif;
 	}
 	
+	/**
+	 * Permet d'essayer de changer de lieu
+	 * Creation d'un checkpoint avant d'essayer de traverser
+	 * @param La commande avec tous ses parametres
+	 */
 	private void go(String[] sCommand){
 		if(sCommand.length>=2){
 			this.createCheckpoint();
@@ -138,6 +171,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'essayer de lire la description de quelquechose
+	 * @param La commande avec tous ses parametres
+	 */
 	private void look(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.look(sCommand[1]);
@@ -147,6 +184,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'afficher toutes les commandes ou la description d'une commandes
+	 * @param La commande avec tous ses parametres
+	 */
 	private void help(String[] sCommand){
 		if(sCommand.length>=2){
 			Command.description(sCommand[1]);
@@ -159,6 +200,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet de quitter le jeu
+	 * Creation de la sauvegarde
+	 */
 	private void quit(){
 		System.out.println("Au revoir");
 		this.saveGame(this.fichier);
@@ -166,6 +211,10 @@ public class CommandReader {
 		s.close();								//fin du scanner principal
 	}
 	
+	/**
+	 * Permet d'essayer de prendre quelque chose dans le lieu courant
+	 * @param La commande avec tous ses parametres
+	 */
 	private void take(String[] sCommand){
 		if(sCommand.length>=2){
 			try {
@@ -179,19 +228,36 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'essayer d'utiliser un object de l'inventaire du hero sur quelque chose
+	 *
+	 * @param La commande avec tous ses parametres
+	 */
 	private void use(String[] sCommand){
-		if(sCommand.length>=3){
-			try {
-				this.game.use(sCommand[1], sCommand[2]);
-			} catch (GameException_GameOver e) {
+		if(sCommand.length >= 2){
+			try{
+				if(sCommand.length == 2){
+					this.game.use(sCommand[1]);
+				}
+				else{
+					this.game.use(sCommand[1], sCommand[2]);
+				}
+			}
+			catch (GameException_GameOver e) {
 				this.GameOver();
 			}
 		}
-		else{
+		else{		
 			Command.use.description();
 		}
+
+		
 	}
 	
+	/**
+	 * Permet d'essayer d'attaquer la cible
+	 * @param La commande avec tous ses parametres
+	 */
 	private void attack(String[] sCommand){
 		if(sCommand.length>=2){
 			try {
@@ -205,6 +271,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'essayer d'equiper un equipement depuis l'inventaire du hero
+	 * @param La commande avec tous ses parametres
+	 */
 	private void equip(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.equip(sCommand[1]);
@@ -214,6 +284,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet de déséquiper une zone équipable
+	 * @param La commande avec tous ses parametres
+	 */
 	private void unequip(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.unequip(sCommand[1]);
@@ -223,6 +297,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet de jeter un object de l'inventaire de l'hero dans la Place actuelle
+	 * @param La commande avec tous ses parametres
+	 */
 	private void discard(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.discard(sCommand[1]);
@@ -232,6 +310,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'afficher les stats d'une Entity
+	 * @param La commande avec tous ses parametres
+	 */
 	private void analyse(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.analyse(sCommand[1]);
@@ -241,6 +323,10 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet d'ecouter les Npc parler
+	 * @param La commande avec tous ses parametres
+	 */
 	private void speak(String[] sCommand){
 		if(sCommand.length>=2){
 			this.game.speak(sCommand[1]);
@@ -250,6 +336,9 @@ public class CommandReader {
 		}
 	}
 	
+	/**
+	 * Permet de revenir à la sauvegarde/checkpoint la plus récente
+	 */
 	private void GameOver(){
 		System.out.println("\n[La Déesse] Cherchons dans le temps, le dernier point d'ancrage");
 		if(this.checkpointCreate){
@@ -268,6 +357,9 @@ public class CommandReader {
 		}
 	}
 	
+	/*
+	 * Permet de créé un checkpoint
+	 */
 	private void createCheckpoint(){
 		this.checkpointCreate=this.checkpointCreate || this.saveGame(CommandReader.CHECKPOINT);
 	}

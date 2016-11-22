@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Item.Equipement;
-import Item.Weapon;
 import exception.GameException_GameOver;
 import interfacePackage.Recoverable;
 
@@ -58,14 +57,7 @@ public class Hero extends Entity {
 					this.inventory.add(e);
 				}
 				else{
-					System.out.println("Vous vous équipez de "+equip.getName());
-					System.out.println("Attack +"+equip.getAttackBonus());
-					System.out.println("Defence +"+equip.getDefenseBonus());
-					System.out.println("Hp +"+equip.getHealthBonus());
-					if(equip instanceof Weapon){
-						Weapon w=(Weapon)equip;
-						System.out.println("attack range:"+w.getAtkMin()+"-"+w.getAtkMax());
-					}
+					equip.EquipementDescription();
 				}
 			}
 			else{
@@ -154,7 +146,7 @@ public class Hero extends Entity {
 
 	@Override
 	public void description() {
-		this.entityDescription();
+		System.out.println("description du hero");
 		
 	}
 
@@ -223,7 +215,13 @@ public class Hero extends Entity {
 		super.entityDescription();
 	}
 
+	@Override
+	public void takeHeal(int nbHeal) {
+		super.takeHeal(nbHeal);
+		System.out.println("Vous recevez "+nbHeal+" Hp");
+	}
 
+	
 	
 	
 	

@@ -40,7 +40,7 @@ public abstract class Weapon extends Equipement {
 	@Override
 	public void EquipementDescription() {
 		super.EquipementDescription();
-		System.out.println("Atk range : "+this.atkMin+"-"+this.atkMax);
+		System.out.println("Atk : "+this.atkMin+"-"+this.atkMax);
 	}
 	
 	
