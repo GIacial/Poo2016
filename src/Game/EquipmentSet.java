@@ -8,9 +8,7 @@ import java.io.*;
 
 public class EquipmentSet implements Serializable {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
+
 	private static final long serialVersionUID = -3005502569148491723L;
 	
 	private Map<String,Equipment> 	listEquip;
@@ -75,8 +73,10 @@ public class EquipmentSet implements Serializable {
 	 * Print the stat of the equipement zone on the screen
 	 * @param zone  the equipement's zone that you want show the stat
 	 */
-	public void showStat(String zone) {
+	public boolean showStat(String zone) {
+		boolean zoneOk = false;
 		if(this.listEquip.containsKey(zone)){
+			zoneOk = true;
 			Equipment r = this.listEquip.get(zone);
 			if(r != null){
 				r.EquipementDescription();
@@ -86,6 +86,7 @@ public class EquipmentSet implements Serializable {
 				System.out.println("Vous n'avez pas de " + zone);
 			}
 		}
+		return zoneOk;
 	}
 	
 	public int getDmgWeapon(){

@@ -12,35 +12,26 @@ import interfacePackage.Recoverable;
  */
 public class Hero extends Entity {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
 	private static final long serialVersionUID = -8480399582238471911L;
 
-	private EquipmentSet equipment;
+	private EquipmentSet 	equipment;
+	private Inventory 		inventory;
+	private int 			level;
+	private int 			xp;
+
 	
-	private Inventory inventory;
-
-	/**
-	 * The current level of the entity
-	 */
-	private int level;
-
-	/**
-	 * the amount of xp that the entity have
-	 */
-	private int xp;
-
+	
+	
 	/**
 	 * A builder of Hero Class
 	 * @param name  The name of the new Hero
 	 */
 	public Hero(String name) {
 		super(name,30,5,5);	
-		this.equipment= new EquipmentSet(this);
-		this.inventory= new Inventory();
-		this.level=1;
-		this.xp=0;
+		this.equipment = new EquipmentSet(this);
+		this.inventory = new Inventory();
+		this.level = 1;
+		this.xp = 0;
 	}
 
 	/**
@@ -48,11 +39,11 @@ public class Hero extends Entity {
 	 * @param nameEquip  The name of the equipement that you want equip
 	 */
 	public void equip(String nameEquip) {
-		Recoverable e=this.inventory.remove(nameEquip);
-		if(e!=null){
+		Recoverable e = this.inventory.remove(nameEquip);
+		if(e != null){
 			if(e instanceof Equipment){
-				Equipment equip=(Equipment)e;
-				boolean ok=this.equipment.equip(equip);
+				Equipment equip = (Equipment)e;
+				boolean ok = this.equipment.equip(equip);
 				if(!ok){
 					this.inventory.add(e);
 				}
@@ -92,8 +83,8 @@ public class Hero extends Entity {
 	 * @param name  the name of the equipement'zone that you want unequip
 	 */
 	public void unequip(String name) {
-		Equipment e=this.equipment.unequip(name);
-		if(e!=null){
+		Equipment e = this.equipment.unequip(name);
+		if(e != null){
 			this.inventory.add(e);
 			System.out.println("Vous enlevez votre "+e.getName());
 			System.out.println("Attack -"+e.getAttackBonus());
@@ -118,23 +109,23 @@ public class Hero extends Entity {
 	 * @param typeItem  the item's type that you want print on the screen
 	 */
 	public void lookInventory(String typeItem) {
-		List<Recoverable> l= new ArrayList<Recoverable>();
+		List<Recoverable> l = new ArrayList<Recoverable>();
 		switch(typeItem.toLowerCase()){
 			case "equipement":l.addAll(this.inventory.getListEquipement());
 				break;
-			default:l=this.inventory.getListItem();
+			default:l = this.inventory.getListItem();
 				break;
 		}
 		if(l.isEmpty()){
 			System.out.println("Votre sac ne contient pas "+typeItem);
 		}
 		for(Recoverable i: l){
-			String name="";
+			String name = "";
 			if(i instanceof Item){
-				name=((Item)i).getName();
+				name = ((Item)i).getName();
 			}
 			else{if(i instanceof Entity ){
-				name=((Entity)i).getName();
+					name = ((Entity)i).getName();
 				}
 				else{
 					System.err.println("Impossible de recup le nom du recuperable");
@@ -152,18 +143,18 @@ public class Hero extends Entity {
 
 	@Override
 	public int getAttack() {
-		return super.getAttack()+this.equipment.getDmgWeapon();
+		return super.getAttack() + this.equipment.getDmgWeapon();
 	}
 	
 	@Override
 	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
 		System.out.println("Dommages reçus : " + Dmg);
+		
 		if(!this.isAlive()){
 			System.out.println("Vous êtes mort. Game over");
-			// Si c'est le héro on a perdu 
-
-			throw new GameException_GameOver("Vous êtes mort");
+			
+			throw new GameException_GameOver("Vous êtes mort");// Si c'est le héro on a perdu 
 		}			
 		
 	}
@@ -176,7 +167,7 @@ public class Hero extends Entity {
 	 * @return  the amount of xp that the Entity need to level up
 	 */
 	private int calcXpLevelUp() {
-		double xpNeed= 0.75*(this.level*this.level)+this.level+12;
+		double xpNeed = 0.75*(this.level*this.level)+this.level+12;
 		return (int) Math.round(xpNeed);
 	}
 
@@ -185,13 +176,14 @@ public class Hero extends Entity {
 	 */
 	private void levelUp() {
 		this.level++;
-		this.xp=0;
-		int earnHp=(this.level%3+1)*10;
-		int earnDef=(this.level+1)%3+1;
-		int earnAtk=(this.level+2)%3+1;
+		this.xp = 0;
+		int earnHp  = (this.level%3+1)*10;
+		int earnDef = (this.level+1)%3+1;
+		int earnAtk = (this.level+2)%3+1;
 		this.addHp(earnHp);
 		this.addDef(earnDef);
 		this.addAtk(earnAtk);
+		
 		System.out.println("Vous gagnez un niveau");
 		System.out.println("Hp +"+earnHp);
 		System.out.println("Defence +"+earnDef);
@@ -203,27 +195,27 @@ public class Hero extends Entity {
 	 * @param xpEarn  The amount of xp that the Entity wins
 	 */
 	public void increaseXp(int xpEarn) {
-		this.xp+=xpEarn;
-		if(this.xp>this.calcXpLevelUp()){
+		this.xp += xpEarn;
+		if(this.xp > this.calcXpLevelUp()){
 			this.levelUp();
 		}
 	}
 
 	@Override
 	public void entityDescription() {
-		System.out.println("Niveau "+this.level);
+		System.out.println("Niveau " + this.level);
 		super.entityDescription();
 	}
 
 	@Override
 	public void takeHeal(int nbHeal) {
 		super.takeHeal(nbHeal);
-		System.out.println("Vous recevez "+nbHeal+" Hp");
+		System.out.println("Vous recevez " + nbHeal + " Hp");
 	}
 
-	
-	
-	
+	public boolean analyseSet(String name){
+		return this.equipment.showStat(name);
+	}
 	
 	
 }

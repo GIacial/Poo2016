@@ -35,11 +35,11 @@ public class Game implements Serializable{
 	 * Creation du jeu.
 	 */
 	public Game() {
-		this.hero= new Hero("Hero");
-		this.map = new ArrayList<Place>();
+		this.hero = new Hero("Hero");
+		this.map  = new ArrayList<Place>();
 		
 		//creation map
-		this.currentPlace=new ClassicPlace("Début du test");//0
+		this.currentPlace = new ClassicPlace("Début du test");//0
 		this.map.add(this.currentPlace);
 		
 		this.map.add(new ClassicPlace("Salle 1"));//1
@@ -93,8 +93,8 @@ public class Game implements Serializable{
 			System.out.println("Des monstres vous bloque le chemin");
 		}
 		else{
-			Place nextPlace= this.currentPlace.getNextPlace(exitName);
-			if(nextPlace!=null){
+			Place nextPlace = this.currentPlace.getNextPlace(exitName);
+			if(nextPlace != null){
 				this.currentPlace=nextPlace;
 				System.out.println("Vous franchissez "+exitName);
 			}
@@ -119,7 +119,7 @@ public class Game implements Serializable{
 	 */
 	public void look(String target){
 		switch(target.toLowerCase()){
-		case "exit":Set<String>exitName=this.currentPlace.getNameExit();
+		case "exit":Set<String>exitName = this.currentPlace.getNameExit();
 					if(exitName.isEmpty()){
 						System.out.println("Il n'y a auncune sortie");
 					}
@@ -131,7 +131,7 @@ public class Game implements Serializable{
 			break;
 		case "object":this.currentPlace.listItem();
 			break;
-		case "entity":List<String> entityName=this.currentPlace.getNameEntites();
+		case "entity":List<String> entityName = this.currentPlace.getNameEntites();
 						if(entityName.isEmpty()){
 							System.out.println("Il n'y a aucun signe de vie");
 						}
@@ -171,8 +171,8 @@ public class Game implements Serializable{
 	 * @throws GameException_GameOver the game exception game over
 	 */
 	public void take(String target) throws GameException_GameOver{
-		Item i=this.currentPlace.removeItem(target);
-		boolean taked=false;
+		Item i = this.currentPlace.removeItem(target);
+		boolean taked = false;
 		if(i!=null){
 			if(i instanceof Recoverable){
 				this.hero.takeItem(((Recoverable) i).take());//on prend
@@ -183,11 +183,11 @@ public class Game implements Serializable{
 			}
 		}
 		else{
-			Entity e= this.currentPlace.removeEntity(target);
-			if(e!=null){
+			Entity e = this.currentPlace.removeEntity(target);
+			if(e != null){
 				if(e instanceof Recoverable){
 					this.hero.takeItem(((Recoverable) e).take());//on prend
-					taked=true;
+					taked = true;
 				}
 				else{
 					this.currentPlace.addEntity(e);//on laisee
@@ -213,15 +213,15 @@ public class Game implements Serializable{
 	 * @throws GameException_GameOver the game exception game over
 	 */
 	public void use (String objectName ,String targetName) throws GameException_GameOver{
-		Object target=null;
+		Object target = null;
 		if(targetName.equals("me")){
-			target=this.hero;
+			target = this.hero;
 		}
 		else{
-			target=this.currentPlace.getExit(targetName);
-			if(target==null){
-				target=this.currentPlace.removeEntity(targetName);
-				if(target==null){
+			target = this.currentPlace.getExit(targetName);
+			if(target == null){
+				target = this.currentPlace.removeEntity(targetName);
+				if(target == null){
 					System.out.println(targetName+" n'a pas été trouvé");
 				}
 				else{
@@ -230,7 +230,7 @@ public class Game implements Serializable{
 			}
 		}
 		
-		if(target!=null){
+		if(target != null){
 			this.hero.useItem(objectName, target);
 			this.currentPlace.fight(this.hero, null, false);//les monstre t'attaque
 		}
@@ -281,8 +281,8 @@ public class Game implements Serializable{
 	 * @param name the name
 	 */
 	public void discard(String name){
-		Recoverable r=this.hero.throwItem(name);
-		if(r!=null){
+		Recoverable r = this.hero.throwItem(name);
+		if(r != null){
 			if(r instanceof Item){
 				this.currentPlace.addItem((Item)r);
 				System.out.println("Vous posez "+name);
@@ -334,7 +334,9 @@ public class Game implements Serializable{
 								this.hero.takeItem(r);
 							}
 							else{
-								System.out.println("Impossible de trouver la cible");
+								if(!this.hero.analyseSet(target)){
+									System.out.println("Impossible de trouver la cible");
+								}
 							}
 						}
 					  }
@@ -349,8 +351,8 @@ public class Game implements Serializable{
 	 * @param target the target
 	 */
 	public void speak(String target){
-		Entity e=this.currentPlace.removeEntity(target);
-		if(e!=null){
+		Entity e = this.currentPlace.removeEntity(target);
+		if(e != null){
 			if(e instanceof Npc){
 				((Npc)e).speak();
 			}
