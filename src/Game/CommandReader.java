@@ -24,6 +24,7 @@ public class CommandReader {
 	private boolean 	actif;
 	private Game 		game;
 	private String 		fichier;
+	private String[]    lastCommand;
 
 
 	
@@ -36,6 +37,7 @@ public class CommandReader {
 		this.s = new Scanner(System.in);
 		this.actif = true;
 		this.checkpointCreate = false;
+		this.lastCommand = null;
 		
 		//chargement ou création du jeu
 		System.out.println("Donnez le nom de votre sauvegarde");
@@ -102,44 +104,7 @@ public class CommandReader {
 	public void interpretation(){
 		String[] sCommand = this.s.nextLine().split(" ");
 		if(sCommand.length > 0 && !sCommand[0].equals("")){
-			
-			try{
-				Command t = Command.valueOf(sCommand[0].toLowerCase());
-				//lower cas pour que Bonjour=bonjour
-				
-				switch(t){
-					case look :	this.look(sCommand);
-						break;						
-					case quit :	this.quit();
-						break;
-					case go :	this.go(sCommand);
-						break;
-					case help :	this.help(sCommand);
-						break;
-					case take :	this.take(sCommand);
-						break;
-					case use : 	this.use(sCommand);
-						break;
-					case attack :	this.attack(sCommand);
-						break;
-					case equip :	this.equip(sCommand);
-						break;
-					case unequip :	this.unequip(sCommand);
-						break;
-					case discard :	this.discard(sCommand);
-						break;
-					case analyse :	this.analyse(sCommand);
-						break;
-					case speak :	this.speak(sCommand);
-						break;
-						
-					default : System.err.println("Pas encore fait");
-							break;
-				}
-			}
-			catch(IllegalArgumentException e){
-				System.out.println(sCommand[0] + " n'est pas une commande");
-			}
+					this.detectCommand(sCommand);
 		}
 		
 	}
@@ -154,6 +119,56 @@ public class CommandReader {
 	}
 	
 	/**
+	 * Permet de lancer l'action correspondant a la commande
+	 * @param La commande avec tous ses parametres
+	 */
+	private void detectCommand(String[] sCommand){
+		try{
+			Command t = Command.valueOf(sCommand[0].toLowerCase());
+			//lower cas pour que Bonjour=bonjour
+			
+			switch(t){
+				case look :	this.look(sCommand);
+					break;						
+				case quit :	this.quit();
+					break;
+				case go :	this.go(sCommand);
+					break;
+				case help :	this.help(sCommand);
+					break;
+				case take :	this.take(sCommand);
+					break;
+				case use : 	this.use(sCommand);
+					break;
+				case attack :	this.attack(sCommand);
+					break;
+				case equip :	this.equip(sCommand);
+					break;
+				case unequip :	this.unequip(sCommand);
+					break;
+				case discard :	this.discard(sCommand);
+					break;
+				case analyse :	this.analyse(sCommand);
+					break;
+				case speak :	this.speak(sCommand);
+					break;
+				case last : 	if(lastCommand!=null){
+									this.detectCommand(lastCommand);
+								}
+								else{
+									System.out.println("Il n'y a aucune commande precedente");
+								}
+					break;
+				default : System.err.println("Pas encore fait");
+						break;
+			}
+		}
+		catch(IllegalArgumentException e){
+			System.out.println(sCommand[0] + " n'est pas une commande");
+		}
+	}
+	
+	/**
 	 * Permet d'essayer de changer de lieu
 	 * Creation d'un checkpoint avant d'essayer de traverser
 	 * @param La commande avec tous ses parametres
@@ -162,6 +177,7 @@ public class CommandReader {
 		if(sCommand.length >= 2){
 			this.createCheckpoint();
 			game.go(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.go.description();
@@ -179,6 +195,7 @@ public class CommandReader {
 		else{
 			this.game.look();
 		}
+		this.lastCommand = sCommand;
 	}
 	
 	/**
@@ -195,6 +212,7 @@ public class CommandReader {
 				System.out.println(listCommand[i]);
 			}
 		}
+		this.lastCommand = sCommand;
 	}
 	
 	/**
@@ -219,6 +237,7 @@ public class CommandReader {
 			} catch (GameException_GameOver e) {
 				this.GameOver();
 			}
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.take.description();
@@ -245,6 +264,7 @@ public class CommandReader {
 
 				this.GameOver();
 			}
+			this.lastCommand = sCommand;
 		}
 		else{		
 			Command.use.description();
@@ -264,6 +284,7 @@ public class CommandReader {
 			} catch (GameException_GameOver e) {
 				this.GameOver();
 			}
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.attack.description();
@@ -277,6 +298,7 @@ public class CommandReader {
 	private void equip(String[] sCommand){
 		if(sCommand.length >= 2){
 			this.game.equip(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.equip.description();
@@ -290,6 +312,7 @@ public class CommandReader {
 	private void unequip(String[] sCommand){
 		if(sCommand.length >= 2){
 			this.game.unequip(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.unequip.description();
@@ -303,6 +326,7 @@ public class CommandReader {
 	private void discard(String[] sCommand){
 		if(sCommand.length >= 2){
 			this.game.discard(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.discard.description();
@@ -316,6 +340,7 @@ public class CommandReader {
 	private void analyse(String[] sCommand){
 		if(sCommand.length >= 2){
 			this.game.analyse(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.analyse.description();
@@ -329,6 +354,7 @@ public class CommandReader {
 	private void speak(String[] sCommand){
 		if(sCommand.length >= 2){
 			this.game.speak(sCommand[1]);
+			this.lastCommand = sCommand;
 		}
 		else{
 			Command.speak.description();

@@ -4,7 +4,7 @@ import interfacePackage.HaveDescription;
 
 public enum Command implements HaveDescription{
 	
-	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip,speak;
+	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip,speak,last;
 
 	
 	
@@ -55,6 +55,9 @@ public enum Command implements HaveDescription{
 			break;
 		case speak : 	System.out.println("[Help]: speak target");
 		 			 	System.out.println("[Help]: parle au NPC");
+		 	break;
+		case last : 	System.out.println("[Help]: last");
+		 				System.out.println("[Help]: Execute la derniere commande correctement formé");
 		 	break;
 		default : 	System.err.println("[Help]:Command non trouvé ");
 			break;
