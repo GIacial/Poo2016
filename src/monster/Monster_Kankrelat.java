@@ -8,18 +8,13 @@ import useableItem.Item_Potion;
 
 public class Monster_Kankrelat extends Monster {
 
-	@Override
-	public List<Item> lootList() {
-		List<Item> loot = super.lootList();
-		if(Math.random() < 0.2){
-			loot.add(new Item_Potion());
-			System.out.println(this.getName()+" laisse une Potion");
-		}
-		return loot;
-	}
+
 
 	private static final long serialVersionUID = -5474551312292110115L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Monster_Kankrelat() {
 		super("Kankrelat", 25, 3, 4);
 	}
@@ -33,6 +28,16 @@ public class Monster_Kankrelat extends Monster {
 	@Override
 	public int lootXp() {
 		return 5;
+	}
+	
+	@Override
+	public List<Item> lootList() {
+		List<Item> loot = super.lootList();
+		if(Math.random() < 0.2){
+			loot.add(new Item_Potion());
+			System.out.println(this.getName()+" laisse une Potion");
+		}
+		return loot;
 	}
 
 }

@@ -121,6 +121,11 @@ public abstract class Entity implements Serializable,HaveDescription {
 		return this.name  ;
 	}
 	
+	/**
+	 * Permet d'ajouter la valeur bonus à la vieMax
+	 * Mettre une valeur négatif diminue la vie
+	 * @param bonus la valeur à ajouter 
+	 */
 	public void addHp(int bonus){
 		this.healMax += bonus;
 		if(this.heal > this.healMax){
@@ -128,11 +133,21 @@ public abstract class Entity implements Serializable,HaveDescription {
 		}
 	}
 	
+	/**
+	 * Permet d'ajouter la valeur bonus à l' attaque
+	 * Mettre une valeur négatif diminue l' attaque
+	 * @param bonus la valeur à ajouter 
+	 */
 	public void addAtk(int bonus){
 		this.attack += bonus;
 
 	}
 	
+	/**
+	 * Permet d'ajouter la valeur bonus à la defense
+	 * Mettre une valeur négatif diminue la defense
+	 * @param bonus la valeur à ajouter 
+	 */
 	public void addDef(int bonus){
 		this.defense += bonus;
 	}

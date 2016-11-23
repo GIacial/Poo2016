@@ -7,6 +7,9 @@ public class Item_Key extends UseableItem {
 
 	private static final long serialVersionUID = -6435067717372497868L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Item_Key() {
 		super("Clé");
 	}

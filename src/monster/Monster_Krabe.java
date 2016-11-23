@@ -10,7 +10,9 @@ public class Monster_Krabe extends Monster {
 
 	private static final long serialVersionUID = 5653403462339012651L;
 
-
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Monster_Krabe() {
 		super("Krabe", 80, 8, 10);
 	}

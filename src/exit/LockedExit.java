@@ -5,13 +5,22 @@ import Game.Place;
 import Item.UseableItem;
 import useableItem.Item_Key;
 
-
+/**
+ * 
+ * Uns sortie garder par un verrou
+ *
+ */
 public class LockedExit extends Exit {
 
 	private static final long serialVersionUID = 1902235641184575453L;
 	
 	private boolean 	isLocked;
 	
+	/**
+	 * Un constructeur de porte fermé.
+	 * Le verrou est fermé par défault
+	 * @param nextPlace le lieu où l'on arrive en traversant la sortie
+	 */
 	public LockedExit(Place nextPlace) {
 		super(nextPlace);
 		this.isLocked = true ;
@@ -26,6 +35,11 @@ public class LockedExit extends Exit {
 		}
 	}
 	
+	/**
+	 * Permet d'ouvrir la porte
+	 * @param i L'item qui deverouille la porte
+	 * @return T si operation à réussi sinon F
+	 */
 	public boolean open(UseableItem i){
 		boolean use = false;
 		if(i instanceof Item_Key){

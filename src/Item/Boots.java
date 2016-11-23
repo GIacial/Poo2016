@@ -9,7 +9,13 @@ public abstract class Boots extends Equipment {
 
 	
 	
-	
+	/**
+	 * Un constructeur de Boots
+	 * @param name Le nom des bottes
+	 * @param defB la defense donné par les bottes
+	 * @param atkB l'attaque donné par les bottes
+	 * @param healB la vie donné par les bottes
+	 */
 	public Boots(String name, int defB, int atkB, int healB) {
 		super(name, defB, atkB, healB);
 	}

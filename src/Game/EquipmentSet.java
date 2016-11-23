@@ -5,7 +5,10 @@ import Item.*;
 
 import java.io.*;
 
-
+/**
+ * Permet de gérer les équipement d'un Hero
+ *
+ */
 public class EquipmentSet implements Serializable {
 
 
@@ -14,6 +17,11 @@ public class EquipmentSet implements Serializable {
 	private Map<String,Equipment> 	listEquip;
 	private Hero 					hero;
 	
+	
+	/**
+	 * Un constructeur de EquipementSet
+	 * @param hero Le hero qui va être équipé des équipement
+	 */
 	public EquipmentSet(Hero hero){
 		this.listEquip = new HashMap<String,Equipment>();
 		this.listEquip.put("Weapon", null);
@@ -89,6 +97,10 @@ public class EquipmentSet implements Serializable {
 		return zoneOk;
 	}
 	
+	/**
+	 * Renvoie une valeur entre le MinAtk  et le MaxAtk de l'arme
+	 * @return les dommages de l'arme
+	 */
 	public int getDmgWeapon(){
 		int dmg = 0;
 		Weapon w = (Weapon)this.listEquip.get("Weapon");
@@ -99,6 +111,10 @@ public class EquipmentSet implements Serializable {
 		return dmg;
 	}
 	
+	/**
+	 * 
+	 * @return le nombre d'équipement actuellement équiper
+	 */
 	public int getNbEquipement(){
 		int nb = 0;
 		for(String type : this.listEquip.keySet()){

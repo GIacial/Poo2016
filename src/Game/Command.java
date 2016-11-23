@@ -7,7 +7,7 @@ public enum Command implements HaveDescription{
 	go,help,look,take,quit,use,attack,discard,analyse,equip,unequip,speak,last;
 
 	
-	
+
 	@Override
 	public void description() {
 		switch(this){
@@ -65,6 +65,12 @@ public enum Command implements HaveDescription{
 		
 	}
 	
+	/**
+	 * 
+	 * Transforme la string en commande si possible et affiche la description de la commande obtenu
+	 * @param command :Le nom de la commande
+	 */
+
 	public static void description(String command){
 		try{
 			Command c = Command.valueOf(command);

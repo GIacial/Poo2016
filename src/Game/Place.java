@@ -10,9 +10,7 @@ import java.io.*;
 
 public abstract class Place implements Serializable,HaveDescription {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
+
 	private static final long serialVersionUID = -105354579675980999L;
 	
 	private Map<String,Exit> 	exit;
@@ -82,6 +80,12 @@ public abstract class Place implements Serializable,HaveDescription {
 		return r;
 	}
 	
+	/**
+	 * Affiche la description ou les stats d'un Entity de ce lieu
+	 * @param entityName Le nom de l'entity
+	 * @param analyse T si on veut les stat ,F si on veux la description
+	 * @return T si l'entity a été trouvé sinon F
+	 */
 	public boolean getDescriptionEntity(String entityName,boolean analyse){
 		boolean r = false;
 		for(Entity e : this.listEntity){
@@ -257,6 +261,10 @@ public abstract class Place implements Serializable,HaveDescription {
 		return r;
 	}
 	
+	/**
+	 * 
+	 * @return Le nom de ce lieu
+	 */
 	public String getName(){
 		return this.name;
 	}
@@ -275,15 +283,26 @@ public abstract class Place implements Serializable,HaveDescription {
 
 	}
 	
-	
+	/**
+	 * 
+	 * @return Le nombre d'item contenu dans ce lieu
+	 */
 	public int getNbItem(){
 		return this.listItem.size();
 	}
 	
+	/**
+	 * 
+	 * @return Le nombre d'entity contenu dans ce lieu
+	 */
 	public int getNbEntity(){
 		return this.listEntity.size();
 	}
 	
+	/**
+	 * 
+	 * @return Le nombre de sortie contenu dans ce lieu
+	 */
 	public int getNbExit(){
 		return this.exit.size();
 	}
@@ -322,6 +341,11 @@ public abstract class Place implements Serializable,HaveDescription {
 		return i;
 	}
 	
+	/**
+	 * Permet de récupéré une sortie par son nom
+	 * @param exitName Le nom de la sortie
+	 * @return La sortie (null si le nom est incorret)
+	 */
 	public Exit getExit(String exitName){
 		Exit e = null;
 		if(this.exit.containsKey(exitName)){

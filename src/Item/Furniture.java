@@ -11,7 +11,10 @@ public abstract class Furniture extends Item {
 
 	
 	
-	
+	/**
+	 * Un object decoratif
+	 * @param itemName le nom de l'object
+	 */
 	public Furniture(String itemName) {
 		super(itemName);
 	}

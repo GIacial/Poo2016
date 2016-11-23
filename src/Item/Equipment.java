@@ -14,8 +14,11 @@ public abstract class Equipment extends RecoverableItem {
 	
 	
 	/**
-	 * A builder of Equipement class
-	 * @param name  The name of the Equipement
+	 * Un constructeur d'Equipement
+	 * @param name  Le nom de l'équipement
+	 * @param defB  La defense donné par l'equipement
+	 * @param atkB  L'attaque donné par l'equipement
+	 * @param healB La vie donné par l'equipement
 	 */
 	public Equipment(String name, int defB, int atkB, int healB) {
 		super(name);
@@ -34,20 +37,39 @@ public abstract class Equipment extends RecoverableItem {
 		
 	}
 
+	/**
+	 * 
+	 * @return La defense donné par cette équipement
+	 */
 	public int getDefenseBonus() {
 		return this.defenseBonus;
 	}
-
+	
+	/**
+	 * 
+	 * @return L'attaque donné par cette équipement
+	 */
 	public int getAttackBonus() {
 		return this.attackBonus;
 	}
 
+	/**
+	 * 
+	 * @return La vie donné par cette équipement
+	 */
 	public int getHealthBonus() {
 		return this.healthBonus;
 	}
 	
+	/**
+	 * 
+	 * @return Le nom du type de l'équipement
+	 */
 	public abstract String getTypeName();
 	
+	/**
+	 * Affiche les stats de l'équipement
+	 */
 	public void EquipementDescription(){
 		System.out.println(this.getTypeName() + " : " + this.getName());
 		System.out.println("Atk : " + this.attackBonus);

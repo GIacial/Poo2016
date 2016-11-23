@@ -10,11 +10,11 @@ import Game.*;
 public class ClassicPlace extends Place {
 	
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6407385226430510446L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public ClassicPlace(String name) {
 		super(name);
 	}

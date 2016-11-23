@@ -35,8 +35,8 @@ public class Hero extends Entity {
 	}
 
 	/**
-	 * Equip the equipement called as nameEquip
-	 * @param nameEquip  The name of the equipement that you want equip
+	 * Equip the equipment called as nameEquip
+	 * @param nameEquip  The name of the equipment that you want equip
 	 */
 	public void equip(String nameEquip) {
 		Recoverable e = this.inventory.remove(nameEquip);
@@ -159,6 +159,9 @@ public class Hero extends Entity {
 		
 	}
 	
+	/**
+	 * Permet d'afficher tout se qui est equipé au hero
+	 */
 	public void lookSet(){
 		System.out.println(this.equipment);
 	}
@@ -172,7 +175,7 @@ public class Hero extends Entity {
 	}
 
 	/**
-	 * Increase the level of the Entity Increase the stat of the Entity to
+	 * Increase the level of the Entity. Increase the stat of the Entity to
 	 */
 	private void levelUp() {
 		this.level++;
@@ -213,6 +216,11 @@ public class Hero extends Entity {
 		System.out.println("Vous recevez " + nbHeal + " Hp");
 	}
 
+	/**
+	 * Affiche les stat d'un equipement du hero
+	 * @param name Le nom de la zone equipable analysé
+	 * @return T si analyse a réussi sinon F
+	 */
 	public boolean analyseSet(String name){
 		return this.equipment.showStat(name);
 	}

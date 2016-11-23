@@ -6,6 +6,9 @@ public class Weapon_BasicSword extends Weapon{
 
 	private static final long serialVersionUID = 3628478379042329397L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Weapon_BasicSword() {
 		super("Epée_classique", 1, 1, 1, 2, 5);
 	}

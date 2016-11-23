@@ -10,7 +10,13 @@ public abstract class Trouser extends Equipment {
 	
 	
 	
-	
+	/**
+	 * Un constructeur de Trouser
+	 * @param name le nom du pantalon
+	 * @param defB
+	 * @param atkB
+	 * @param healB
+	 */
 	public Trouser(String name, int defB, int atkB, int healB) {
 		super(name, defB, atkB, healB);
 	}

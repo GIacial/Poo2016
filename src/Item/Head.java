@@ -10,7 +10,13 @@ public abstract class Head extends Equipment {
 	
 	
 	
-	
+	/**
+	 * Un constructeur de Head
+	 * @param name Le nom du casque
+	 * @param defB La defense donné par le casque
+	 * @param atkB L'attaque donné par le casque
+	 * @param healB La vie donné par le casque
+	 */
 	public Head(String name, int defB, int atkB, int healB) {
 		super(name, defB, atkB, healB);
 	}

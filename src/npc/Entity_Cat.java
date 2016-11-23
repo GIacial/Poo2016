@@ -4,11 +4,12 @@ import interfacePackage.Recoverable;
 
 public class Entity_Cat extends Npc implements Recoverable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -6925215999645074550L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Entity_Cat() {
 		super("chat", 5, 2, 0);
 	}

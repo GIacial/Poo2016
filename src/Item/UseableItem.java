@@ -9,7 +9,10 @@ public abstract class UseableItem  extends RecoverableItem{
 
 	
 	
-	
+	/**
+	 * Un constructeur d'item utilisable
+	 * @param itemName Le nom de l'item
+	 */
 	public UseableItem(String itemName) {
 		super(itemName);
 	}

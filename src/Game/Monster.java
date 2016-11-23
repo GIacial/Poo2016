@@ -10,9 +10,7 @@ import exception.GameException_GameOver;
  */
 public abstract class Monster extends Entity {
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
+
 	private static final long serialVersionUID = 1709613719917260899L;
 
 	/**

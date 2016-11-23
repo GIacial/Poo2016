@@ -10,7 +10,10 @@ public  abstract class RecoverableItem extends Item implements Recoverable {
 	
 	
 	
-
+	/**
+	 * Un item recuperable
+	 * @param itemName Le nom de l'item
+	 */
 	public RecoverableItem(String itemName) {
 		super(itemName);
 	}

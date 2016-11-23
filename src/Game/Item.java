@@ -7,9 +7,8 @@ import interfacePackage.HaveDescription;
  * A Item
  */
 public abstract class Item implements Serializable,HaveDescription{
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
+
+	
 	private static final long serialVersionUID = 4846537447662735481L;
 	private String 		name; //The name of the item
 
@@ -21,6 +20,10 @@ public abstract class Item implements Serializable,HaveDescription{
 		this.name = itemName;
 	}
 	
+	/**
+	 * 
+	 * @return le nom de l'item
+	 */
 	public String getName(){
 		return this.name;
 	}

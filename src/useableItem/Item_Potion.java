@@ -5,11 +5,12 @@ import Item.UseableItem;
 
 public class Item_Potion extends UseableItem {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5505654106820976445L;
 
+	/**
+	 * Un constructeur de la classe
+	 */
 	public Item_Potion() {
 		super("Potion");
 	}

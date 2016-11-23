@@ -60,7 +60,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet de charger le Game à partir du fichier
-	 * @param le chemin de la sauvegarde
+	 * @param file :le chemin de la sauvegarde
 	 */
 	private void loadGame(String file) {
 		try{
@@ -79,7 +79,7 @@ public class CommandReader {
 	
 	/**
 	 * 
-	 * @param le chemin de l'endroit ou l'on veux mettre la sauvegarde
+	 * @param file :le chemin de l'endroit ou l'on veux mettre la sauvegarde
 	 * @return true si la sauvegarde a réussi sinon false
 	 */
 	private boolean saveGame(String file) {
@@ -120,7 +120,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet de lancer l'action correspondant a la commande
-	 * @param La commande avec tous ses parametres
+	 * @param sCommand :La commande avec tous ses parametres
 	 */
 	private void detectCommand(String[] sCommand){
 		try{
@@ -171,7 +171,7 @@ public class CommandReader {
 	/**
 	 * Permet d'essayer de changer de lieu
 	 * Creation d'un checkpoint avant d'essayer de traverser
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void go(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -186,7 +186,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'essayer de lire la description de quelquechose
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void look(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -200,7 +200,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'afficher toutes les commandes ou la description d'une commandes
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void help(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -228,7 +228,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'essayer de prendre quelque chose dans le lieu courant
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void take(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -247,7 +247,7 @@ public class CommandReader {
 	/**
 	 * Permet d'essayer d'utiliser un object de l'inventaire du hero sur quelque chose
 	 *
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void use(String[] sCommand){
 
@@ -275,7 +275,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'essayer d'attaquer la cible
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void attack(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -293,7 +293,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'essayer d'equiper un equipement depuis l'inventaire du hero
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void equip(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -307,7 +307,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet de déséquiper une zone équipable
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void unequip(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -321,7 +321,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet de jeter un object de l'inventaire de l'hero dans la Place actuelle
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void discard(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -334,8 +334,9 @@ public class CommandReader {
 	}
 	
 	/**
-	 * Permet d'afficher les stats d'une Entity
-	 * @param La commande avec tous ses parametres
+	 * Permet d'afficher les stats d'une Entity ou d'un equipement de la Place actuel
+	 * Permet auusi d'afficher les stat d'un equipement de l'inventaire  ou equipé
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void analyse(String[] sCommand){
 		if(sCommand.length >= 2){
@@ -349,7 +350,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'ecouter les Npc parler
-	 * @param La commande avec tous ses parametres
+	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void speak(String[] sCommand){
 		if(sCommand.length >= 2){

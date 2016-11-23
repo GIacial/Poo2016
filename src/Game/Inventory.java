@@ -10,9 +10,7 @@ import java.io.*;
 
 public class Inventory implements Serializable{
 
-	/**
-	 * serialVersionUID generated when implements Serializable
-	 */
+
 	private static final long serialVersionUID = -3815028807156314828L;
 	private List<Recoverable> 		itemList;
 	
@@ -41,7 +39,7 @@ public class Inventory implements Serializable{
 	public Recoverable remove(String itemName) {
 		Iterator<Recoverable> i = this.itemList.iterator();
 		Recoverable r = null;
-		while(i.hasNext() && r==null){
+		while(i.hasNext() && r == null){
 			Recoverable item = i.next();
 			String name = "";
 			
@@ -72,7 +70,7 @@ public class Inventory implements Serializable{
 	 */
 	public void use(String itemName,Object target) {
 		Recoverable item = this.remove(itemName);
-		if(item!=null){
+		if(item != null){
 			if(item instanceof UseableItem){
 				if(!((UseableItem)item).use(target)){
 					this.add(item);

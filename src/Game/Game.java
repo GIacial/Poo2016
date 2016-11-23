@@ -82,11 +82,11 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Permet d'essayer de franchir une Exit et donc de changer de Place
-	 * Change currentPlace si crossing renvoi une Place != null
-	 * On peut franchir une Exit que si la Place actuel ne contient plus de monstre
+	 * Permet d'essayer de franchir une Exit et donc de changer de Place.
+	 * Change currentPlace si crossing renvoi une Place != null.
+	 * On peut franchir une Exit que si la Place actuel ne contient plus de monstre.
 	 *
-	 * @param Le nom de la sortie qu'on veut franchir
+	 * @param exitName Le nom de la sortie qu'on veut franchir
 	 */
 	public void go (String exitName){
 		if(this.currentPlace.haveMonster()){
@@ -113,9 +113,9 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Permet de regarder un truc
+	 * Permet de regarder la cible
 	 *
-	 * @param Le nom de ce qu'on veut regarder
+	 * @param target Le nom de ce qu'on veut regarder
 	 */
 	public void look(String target){
 		switch(target.toLowerCase()){
@@ -165,10 +165,10 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Take.
+	 * Permet de recuperer un Recoverable dans le place actuelle
 	 *
-	 * @param target the target
-	 * @throws GameException_GameOver the game exception game over
+	 * @param target le nom de ce que l'on veut prendre
+	 * @throws GameException_GameOver signale si le hero a subir une défaite
 	 */
 	public void take(String target) throws GameException_GameOver{
 		Item i = this.currentPlace.removeItem(target);
@@ -206,11 +206,11 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Use.
+	 * Permet d'utiliser un UseableItem sur quelquechose
 	 *
-	 * @param objectName the object name
-	 * @param targetName the target name
-	 * @throws GameException_GameOver the game exception game over
+	 * @param objectName Le nom de ce qu'on veut utiliser
+	 * @param targetName Le nom de la cible
+	 * @throws GameException_GameOver signale si le hero a subir une défaite
 	 */
 	public void use (String objectName ,String targetName) throws GameException_GameOver{
 		Object target = null;
@@ -238,47 +238,47 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Use.
+	 * Permet d'utiliser un utilisable sur le hero
 	 *
-	 * @param objectName the object name
-	 * @throws GameException_GameOver the game exception game over
+	 * @param objectName Le nom de l'utilisable
+	 * @throws GameException_GameOver signale si le hero a subir une défaite
 	 */
 	public void use (String objectName) throws GameException_GameOver{
 		this.use(objectName,"me");
 	}
 	
 	/**
-	 * Attack.
+	 * Permet d'attaquer une Entity avec le hero
 	 *
-	 * @param target the target
-	 * @throws GameException_GameOver the game exception game over
+	 * @param target Le nom de l'entity prise pour cible
+	 * @throws GameException_GameOver signale si le hero a subir une défaite
 	 */
 	public void attack (String target) throws GameException_GameOver{
 		this.currentPlace.fight(this.hero, target, true);
 	}
 	
 	/**
-	 * Equip.
+	 * Permet d'équiper l'équipement
 	 *
-	 * @param name the name
+	 * @param name le nom de l'équipement 
 	 */
 	public void equip(String name){
 		this.hero.equip(name);
 	}
 	
 	/**
-	 * Unequip.
+	 * Permet de déséquiper la zone designé
 	 *
-	 * @param name the name
+	 * @param name Le nom de la zone d'équipement
 	 */
 	public void unequip(String name){
 		this.hero.unequip(name);
 	}
 	
 	/**
-	 * Discard.
+	 * Permet de jeter un Recoverable de l'inventaire du hero dans la place actuelle
 	 *
-	 * @param name the name
+	 * @param name le nom du Recoverable
 	 */
 	public void discard(String name){
 		Recoverable r = this.hero.throwItem(name);
@@ -303,9 +303,10 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Analyse.
+	 * Analyse les stat de la cible.
+	 * La cible peut de trouver dans le lieu actuelle ou sur le hero
 	 *
-	 * @param target the target
+	 * @param target le nom de la cible
 	 */
 	public void analyse(String target){
 		switch(target.toLowerCase()){
@@ -346,9 +347,9 @@ public class Game implements Serializable{
 	}
 	
 	/**
-	 * Speak.
+	 * Permet d'écouter se qu'un Npc veut dire
 	 *
-	 * @param target the target
+	 * @param target le nom du npc
 	 */
 	public void speak(String target){
 		Entity e = this.currentPlace.removeEntity(target);

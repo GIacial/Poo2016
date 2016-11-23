@@ -5,12 +5,16 @@ import exception.GameException_GameOver;
 
 public abstract class Npc extends Entity {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 203217179023916535L;
 
-
+	/**
+	 * Un constructeur de la classe
+	 * @param name Le nom du npc
+	 * @param maxHeal La vie max du NPC
+	 * @param attack l'attaque du npc
+	 * @param defense la defense du npc
+	 */
 	public Npc(String name, int maxHeal, int attack, int defense) {
 		super(name, maxHeal, attack, defense);
 	}
