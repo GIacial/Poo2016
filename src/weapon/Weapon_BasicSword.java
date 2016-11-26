@@ -10,7 +10,7 @@ public class Weapon_BasicSword extends Weapon{
 	 * Un constructeur de la classe
 	 */
 	public Weapon_BasicSword() {
-		super("Epée_classique", 1, 1, 1, 2, 5);
+		super("Epee_classique", 1, 1, 1, 2, 5);
 	}
 
 	@Override

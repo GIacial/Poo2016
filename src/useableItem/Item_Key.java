@@ -11,7 +11,7 @@ public class Item_Key extends UseableItem {
 	 * Un constructeur de la classe
 	 */
 	public Item_Key() {
-		super("Clé");
+		super("Cle");
 	}
 
 	@Override

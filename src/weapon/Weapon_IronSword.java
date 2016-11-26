@@ -10,7 +10,7 @@ public class Weapon_IronSword extends Weapon {
 	 * Un constructeur de la classe
 	 */
 	public Weapon_IronSword() {
-		super("Epée_en_fer", 0, 3, 0, 2, 8);
+		super("Epee_en_fer", 0, 3, 0, 2, 8);
 	}
 
 	@Override

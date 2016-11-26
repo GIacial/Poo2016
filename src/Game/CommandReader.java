@@ -387,7 +387,7 @@ public class CommandReader {
 	 * Permet de créé un checkpoint
 	 */
 	private void createCheckpoint(){
-		this.checkpointCreate=this.checkpointCreate || this.saveGame(CommandReader.CHECKPOINT);
+		this.checkpointCreate= this.saveGame(CommandReader.CHECKPOINT) ||this.checkpointCreate;//dans ce sens sinin la save ne se fait pas
 	}
 	
 
