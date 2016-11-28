@@ -151,6 +151,17 @@ public abstract class Entity implements Serializable,HaveDescription {
 	public void addDef(int bonus){
 		this.defense += bonus;
 	}
+
+	/**
+	 * 
+	 * @return Le nombre de point de vie qu'il reste
+	 */
+	public int getHeal() {
+		return this.heal;
+	}
+
+
+	
 	
 	
 	

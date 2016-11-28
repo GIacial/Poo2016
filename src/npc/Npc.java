@@ -1,6 +1,7 @@
 package npc;
 
 import Game.Entity;
+import Game.Item;
 import exception.GameException_GameOver;
 
 public abstract class Npc extends Entity {
@@ -36,7 +37,9 @@ public abstract class Npc extends Entity {
 		System.out.println(this.getName() + " recoit " + nbHeal + " Hp");
 	}
 	
-	public abstract void speak();
+	public  Item speak(){
+		return null;
+	}
 
 
 }

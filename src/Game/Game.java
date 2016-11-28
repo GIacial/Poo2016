@@ -197,7 +197,7 @@ public class Game implements Serializable{
 			
 		}
 		if(taked){
-			System.out.println("Vous avez rammasé "+target);
+			System.out.println("Vous avez ramassé "+target);
 			this.currentPlace.fight(this.hero, null, false);//les monstre attaque
 		}
 		else{
@@ -355,7 +355,10 @@ public class Game implements Serializable{
 		Entity e = this.currentPlace.removeEntity(target);
 		if(e != null){
 			if(e instanceof Npc){
-				((Npc)e).speak();
+				Item i = ((Npc)e).speak();
+				if(i != null){
+					this.currentPlace.addItem(i);
+				}
 			}
 			else{
 				System.out.println(target+" n'a pas l'air amicale");

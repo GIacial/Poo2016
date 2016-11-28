@@ -1,5 +1,6 @@
 package npc;
 
+import Game.Item;
 import interfacePackage.Recoverable;
 
 public class Entity_Cat extends Npc implements Recoverable {
@@ -26,8 +27,9 @@ public class Entity_Cat extends Npc implements Recoverable {
 	}
 
 	@Override
-	public void speak() {
+	public Item speak() {
 		System.out.println("[" + this.getName() + "] " + "Miaou!!");
+		return super.speak();
 		
 	}
 

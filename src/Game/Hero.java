@@ -150,6 +150,7 @@ public class Hero extends Entity {
 	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
 		System.out.println("Dommages reçus : " + Dmg);
+		System.out.println("Il vous reste "+this.getHeal()+" HP" );
 		
 		if(!this.isAlive()){
 			System.out.println("Vous êtes mort. Game over");
