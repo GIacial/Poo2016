@@ -9,6 +9,7 @@ import Item.Equipment;
 import exception.GameException_GameOver;
 import exit.*;
 import interfacePackage.Recoverable;
+import monster.*;
 import npc.*;
 import place.*;
 import useableItem.*;
@@ -178,6 +179,7 @@ public class Game implements Serializable{
 		
 		//les object des salle spéciale
 		this.map.get(4).addItem(new Item_Key());
+		this.map.get(4).addEntity(new Monster_Alien());
 		this.map.get(14).addEntity(new QEntity_Cat());
 		this.map.get(18).addEntity(new Npc_Donatello());
 		this.map.get(16).addEntity(new Npc_Leonardo());

@@ -1,6 +1,10 @@
 package place;
 
 import Game.Place;
+import chest.Chest_LeatherChest;
+import furniture.Furniture_Fridge;
+import monster.*;
+import npc.Entity_Cat;
 
 public class DeadEnd_Sewer extends Place {
 
@@ -10,6 +14,23 @@ public class DeadEnd_Sewer extends Place {
 	public DeadEnd_Sewer() {
 		super("égouts impasse");
 		//les item
+		if(Math.random() < 0.4){
+			this.addItem(new Furniture_Fridge());
+		}
+		if(Math.random() < 0.1){
+			this.addEntity(new Entity_Cat());
+		}
+		if(Math.random() < 0.2){
+			this.addEntity(new Monster_Alien());
+		}
+		else{
+			if(Math.random() < 0.8){
+				this.addEntity(new Monster_Sbire());
+			}
+		}
+		if(Math.random() < 0.4){
+			this.addItem(new Chest_LeatherChest());
+		}
 	}
 
 	@Override

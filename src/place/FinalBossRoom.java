@@ -1,6 +1,8 @@
 package place;
 
 import Game.Place;
+import monster.Monster_Schredder;
+import useableItem.Item_BigPotion;
 
 public class FinalBossRoom extends Place {
 
@@ -9,6 +11,10 @@ public class FinalBossRoom extends Place {
 
 	public FinalBossRoom() {
 		super("Salle du boss final");
+		this.addEntity(new Monster_Schredder());
+		for (int i=0 ; i<2 ;i++){
+			this.addItem(new Item_BigPotion());
+		}
 	}
 
 	@Override

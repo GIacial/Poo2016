@@ -4,6 +4,7 @@ import java.util.List;
 
 import Game.Item;
 import Game.Monster;
+import chest.Chest_LeatherChest;
 import trouser.Trouser_LeatherTrouser;
 import useableItem.Item_Potion;
 
@@ -38,7 +39,11 @@ public class Monster_Alien extends Monster {
 		}
 		if(Math.random() < 0.2){
 			loot.add(new Trouser_LeatherTrouser());
-			System.out.println(this.getName()+" laisse un pantalon en cuire");
+			System.out.println(this.getName()+" laisse un pantalon en cuir");
+		}
+		if(Math.random() < 0.25){
+			loot.add(new Chest_LeatherChest());
+			System.out.println(this.getName()+" laisse un plastron en cuir");
 		}
 		return loot;
 	}

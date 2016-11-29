@@ -4,7 +4,7 @@ import java.util.List;
 
 import Game.Item;
 import Game.Monster;
-import useableItem.Item_Key;
+import useableItem.Item_Potion;
 import weapon.Weapon_BasicSword;
 
 public class Monster_Bandit extends Monster {
@@ -35,12 +35,14 @@ public class Monster_Bandit extends Monster {
 	@Override
 	public List<Item> lootList() {
 		List<Item> loot = super.lootList();
-		if(Math.random() < 0.7){
+		if(Math.random() < 0.5){
 			loot.add(new Weapon_BasicSword());
 			System.out.println(this.getName() + " laisse une épée basic");
 		}
-		loot.add(new Item_Key());
-		System.out.println(this.getName() + " laisse tomber une clé");
+		if(Math.random() < 0.6){
+			loot.add(new Item_Potion());
+			System.out.println(this.getName() + " laisse une potion");
+		}
 		return loot;
 	}
 
