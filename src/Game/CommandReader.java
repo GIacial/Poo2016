@@ -110,7 +110,7 @@ public class CommandReader {
 	}
 
 	/**
-	 * Checks if is actif.
+	 * Regarde si une commande est active 
 	 *
 	 * @return true, if is actif
 	 */
@@ -170,7 +170,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'essayer de changer de lieu
-	 * Creation d'un checkpoint avant d'essayer de traverser
+	 * Creation d'un checkpoint avant d'essayer de prendre une sortie
 	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void go(String[] sCommand){
@@ -185,7 +185,7 @@ public class CommandReader {
 	}
 	
 	/**
-	 * Permet d'essayer de lire la description de quelquechose
+	 * Permet d'essayer de lire la description de quelque chose
 	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void look(String[] sCommand){
@@ -199,7 +199,7 @@ public class CommandReader {
 	}
 	
 	/**
-	 * Permet d'afficher toutes les commandes ou la description d'une commandes
+	 * Permet d'afficher toutes les commandes ou la description d'une commande
 	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void help(String[] sCommand){
@@ -320,7 +320,7 @@ public class CommandReader {
 	}
 	
 	/**
-	 * Permet de jeter un object de l'inventaire de l'hero dans la Place actuelle
+	 * Permet de jeter un object de l'inventaire de l'hero dans la pièce
 	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void discard(String[] sCommand){
@@ -335,7 +335,7 @@ public class CommandReader {
 	
 	/**
 	 * Permet d'afficher les stats d'une Entity ou d'un equipement de la Place actuel
-	 * Permet auusi d'afficher les stat d'un equipement de l'inventaire  ou equipé
+	 * Permet aussi d'afficher les stat d'un equipement de l'inventaire  ou equipé
 	 * @param  sCommand :La commande avec tous ses parametres
 	 */
 	private void analyse(String[] sCommand){
@@ -383,7 +383,8 @@ public class CommandReader {
 		}
 	}
 	
-	/*
+	
+	/**
 	 * Permet de créé un checkpoint
 	 */
 	private void createCheckpoint(){

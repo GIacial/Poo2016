@@ -133,7 +133,7 @@ public class Game implements Serializable{
 			break;
 		case "entity":List<String> entityName = this.currentPlace.getNameEntites();
 						if(entityName.isEmpty()){
-							System.out.println("Il n'y a aucun signe de vie");
+							System.out.println("La pièce semble plutôt calme");
 						}
 						else{
 							for(String name : entityName){
