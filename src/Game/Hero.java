@@ -200,8 +200,10 @@ public class Hero extends Entity {
 	 */
 	public void increaseXp(int xpEarn) {
 		this.xp += xpEarn;
+		System.out.println("Vous gagnez " + xpEarn + " morceaux de pizza");
 		if(this.xp > this.calcXpLevelUp()){
 			this.levelUp();
+			System.out.println("Cowabunga ! Mon apprentissage à été bénéfique, j'ai gagné un level !");
 		}
 	}
 

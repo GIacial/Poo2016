@@ -12,7 +12,7 @@ public class Entity_Cat extends Npc implements Recoverable {
 	 * Un constructeur de la classe
 	 */
 	public Entity_Cat() {
-		super("chat", 5, 2, 0);
+		super("Chat", 5, 2, 0);
 	}
 
 	@Override

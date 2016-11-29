@@ -4,40 +4,42 @@ import java.util.List;
 
 import Game.Item;
 import Game.Monster;
+import trouser.Trouser_LeatherTrouser;
 import useableItem.Item_Potion;
 
-public class Monster_Kankrelat extends Monster {
+public class Monster_Alien extends Monster {
 
-
-
-	private static final long serialVersionUID = -5474551312292110115L;
+	private static final long serialVersionUID = -1412214908212994526L;
 
 	/**
 	 * Un constructeur de la classe
 	 */
-	public Monster_Kankrelat() {
-		super("Kankrelat", 25, 3, 4);
+	public Monster_Alien() {
+		super("Alien", 50, 7, 5);
 	}
 
 	@Override
 	public void description() {
-		System.out.println("On dirait une sorte de pou sur pattes");
+		System.out.println("Un alien gluant !");
 
 	}
 
 	@Override
 	public int lootXp() {
-		return 5;
+		return 10;
 	}
 	
 	@Override
 	public List<Item> lootList() {
 		List<Item> loot = super.lootList();
-		if(Math.random() < 0.2){
+		if(Math.random() < 0.3){
 			loot.add(new Item_Potion());
 			System.out.println(this.getName()+" laisse une Potion");
 		}
+		if(Math.random() < 0.2){
+			loot.add(new Trouser_LeatherTrouser());
+			System.out.println(this.getName()+" laisse un pantalon en cuire");
+		}
 		return loot;
 	}
-
 }
