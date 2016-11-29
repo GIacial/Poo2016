@@ -40,9 +40,11 @@ public class CommandReader {
 		this.lastCommand = null;
 		
 		//chargement ou création du jeu
-		System.out.println("Donnez le nom de votre sauvegarde");
+		/*System.out.println("Donnez le nom de votre sauvegarde");
 		this.fichier = "Save/".concat(this.s.next().concat(".sav"));
 		this.s.nextLine();	//fin la ligne
+		*/
+		this.fichier="Save/save.sav";
 		
 		boolean newGame = true;
 		if(new File(this.fichier).exists()){

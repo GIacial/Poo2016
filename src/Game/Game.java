@@ -6,20 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import Item.Equipment;
-import boots.*;
-import chest.*;
 import exception.GameException_GameOver;
 import exit.*;
-import furniture.*;
-import glove.*;
-import head.*;
 import interfacePackage.Recoverable;
-import monster.*;
 import npc.*;
 import place.*;
-import trouser.*;
 import useableItem.*;
-import weapon.*;
 
 /**
  * The Class Game.
@@ -39,46 +31,155 @@ public class Game implements Serializable{
 		this.map  = new ArrayList<Place>();
 		
 		//creation map
-		this.currentPlace = new ClassicPlace("Début du test");//0
-		this.map.add(this.currentPlace);
-		
-		this.map.add(new ClassicPlace("Salle 1"));//1
-		this.currentPlace.setLink("Porte", new ClassicExit(this.map.get(1)));
-		this.map.get(1).setLink("Porte", new ClassicExit(this.currentPlace));
-		
-		
-		this.map.add(new ClassicPlace("Boss"));//2
-		this.map.get(1).setLink("Sortie", new LockedExit(this.map.get(2)));
-		
-		this.map.add(new ClassicPlace("Salle 2"));//3
-		this.map.get(1).setLink("Couloir", new ClassicExit(this.map.get(3)));
-		this.map.get(3).setLink("Couloir", new ClassicExit(this.map.get(1)));
-		
-		//parti à enlever car sera fait dans les constructeur des lieux
-		this.map.get(1).addEntity(new Monster_Kankrelat());
-		this.map.get(1).addItem(new Trouser_LeatherTrouser());
-		this.map.get(1).addItem(new Glove_LeatherGlove());
-		this.map.get(1).addItem(new Head_LeatherHead());
-		
-		this.map.get(0).addEntity(new Entity_Cat());
-		this.map.get(0).addItem(new Weapon_BasicSword());
-		this.map.get(0).addItem(new Furniture_Fridge());
-		this.map.get(0).addItem(new Boots_LeatherBoots());
-		this.map.get(0).addItem(new Item_Potion());
-		
-		this.map.get(2).addEntity(new Entity_Cat());
-		this.map.get(2).addEntity(new Monster_Krabe());
-		this.map.get(2).addItem(new Item_Potion());
-		
-
-		this.map.get(3).addItem(new Weapon_IronSword());
-		this.map.get(3).addItem(new Chest_LeatherChest());
-		this.map.get(3).addItem(new Item_Key());
-		this.map.get(3).addItem(new Item_Potion());
-		this.map.get(3).addEntity(new Monster_Kankrelat());
+		this.creationMap();
 		
 		//texte de bienvenue
 		System.out.println("[La Déesse] Bienvenue Aventurier dans le monde de test");
+	}
+	
+	/**
+	 * Permet de créé la map
+	 */
+	private void creationMap(){
+		//les lieux
+			//ville
+		this.currentPlace= new DeadEnd_Street();//0
+		this.map.add(this.currentPlace);
+		
+		for(int i=1 ; i<=3 ; i++){
+			this.map.add(new Street("La rue se poursuit aprés le virage"));
+		}
+		
+		for(int i=4 ; i<=5 ; i++){
+			this.map.add(new DeadEnd_Street());
+		}
+		
+		this.map.add(new CrossRoad_Street());
+		
+		for(int i=7 ; i<=12 ; i++ ){
+			this.map.add(new Street("La rue continue plus loin"));
+		}
+		
+		for(int i=13 ; i<= 21 ; i++){
+			this.map.add(new DeadEnd_Sewer());
+		}
+		
+		for(int i=22 ; i<= 28 ; i++){
+			this.map.add(new CrossRoad_Sewer());
+		}
+		
+		for (int i= 29 ; i <= 38 ; i++){
+			this.map.add(new Sewer("L'égout continue plus loin"));
+		}
+		
+		for(int i= 39 ; i<=41 ; i++){
+			this.map.add(new Sewer("L'égout continue aprés le virage"));
+		}
+		
+		this.map.add(new FinalBossRoom());
+		this.map.add(new CatWorld());
+		this.map.add(new Sewer_Cell());
+		
+		//creation des sortie
+			//ville
+		this.map.get(0).setLink("Haut", new ClassicExit(this.map.get(1)));
+		this.map.get(1).setLink("Bas", new ClassicExit(this.map.get(0)));
+		this.map.get(1).setLink("Droite", new ClassicExit(this.map.get(7)));
+		this.map.get(7).setLink("Gauche", new ClassicExit(this.map.get(1)));
+		this.map.get(7).setLink("Droite", new ClassicExit(this.map.get(6)));
+		this.map.get(6).setLink("Gauche", new ClassicExit(this.map.get(7)));
+		this.map.get(6).setLink("Haut", new ClassicExit(this.map.get(8)));
+		this.map.get(6).setLink("Bas", new ClassicExit(this.map.get(2)));
+		this.map.get(8).setLink("Bas", new ClassicExit(this.map.get(6)));
+		this.map.get(8).setLink("Haut", new ClassicExit(this.map.get(9)));
+		this.map.get(9).setLink("Haut", new ClassicExit(this.map.get(3)));
+		this.map.get(9).setLink("Bas", new ClassicExit(this.map.get(8)));
+		this.map.get(3).setLink("Gauche", new ClassicExit(this.map.get(4)));
+		this.map.get(3).setLink("Bas", new ClassicExit(this.map.get(9)));
+		this.map.get(4).setLink("Droite", new ClassicExit(this.map.get(3)));
+		this.map.get(2).setLink("Haut", new ClassicExit(this.map.get(6)));
+		this.map.get(2).setLink("Droite", new ClassicExit(this.map.get(10)));
+		this.map.get(10).setLink("Droite", new ClassicExit(this.map.get(11)));
+		this.map.get(10).setLink("Gauche", new ClassicExit(this.map.get(2)));
+		this.map.get(11).setLink("Gauche", new ClassicExit(this.map.get(10)));
+		this.map.get(11).setLink("Droite", new ClassicExit(this.map.get(12)));
+		this.map.get(12).setLink("Gauche", new ClassicExit(this.map.get(11)));
+		this.map.get(12).setLink("Droite", new ClassicExit(this.map.get(5)));
+		this.map.get(5).setLink("Gauche", new ClassicExit(this.map.get(12)));
+		
+		this.map.get(5).setLink("Egouts", new LockedExit(this.map.get(13)));
+		this.map.get(13).setLink("Rue", new ClassicExit(this.map.get(5)));
+		
+		this.map.get(13).setLink("Haut", new ClassicExit(this.map.get(22)));
+		this.map.get(22).setLink("Bas", new ClassicExit(this.map.get(13)));
+		this.map.get(22).setLink("Droite", new ClassicExit(this.map.get(32)));
+		this.map.get(22).setLink("Gauche", new ClassicExit(this.map.get(31)));
+		this.map.get(22).setLink("Haut", new ClassicExit(this.map.get(38)));
+		this.map.get(31).setLink("Gauche", new ClassicExit(this.map.get(23)));
+		this.map.get(31).setLink("Droite", new ClassicExit(this.map.get(22)));
+		this.map.get(23).setLink("Gauche", new ClassicExit(this.map.get(29)));
+		this.map.get(23).setLink("Droite", new ClassicExit(this.map.get(31)));
+		this.map.get(23).setLink("Haut", new ClassicExit(this.map.get(30)));
+		this.map.get(29).setLink("Gauche", new ClassicExit(this.map.get(14)));
+		this.map.get(29).setLink("Droite", new ClassicExit(this.map.get(23)));
+		this.map.get(14).setLink("Droite", new ClassicExit(this.map.get(29)));
+		this.map.get(30).setLink("Bas", new ClassicExit(this.map.get(23)));
+		this.map.get(30).setLink("Haut", new ClassicExit(this.map.get(24)));
+		this.map.get(24).setLink("Bas", new ClassicExit(this.map.get(30)));
+		this.map.get(24).setLink("Droite", new ClassicExit(this.map.get(15)));
+		this.map.get(24).setLink("Haut", new ClassicExit(this.map.get(16)));
+		this.map.get(16).setLink("Bas", new ClassicExit(this.map.get(24)));
+		this.map.get(15).setLink("Gauche", new ClassicExit(this.map.get(24)));
+		this.map.get(38).setLink("Bas", new ClassicExit(this.map.get(22)));
+		this.map.get(38).setLink("Haut", new ClassicExit(this.map.get(25)));
+		this.map.get(25).setLink("Bas", new ClassicExit(this.map.get(38)));
+		this.map.get(25).setLink("Gauche", new ClassicExit(this.map.get(39)));
+		this.map.get(25).setLink("Droite", new ClassicExit(this.map.get(18)));
+		this.map.get(18).setLink("Gauche", new ClassicExit(this.map.get(25)));
+		this.map.get(39).setLink("Droite", new ClassicExit(this.map.get(25)));
+		this.map.get(39).setLink("Haut", new ClassicExit(this.map.get(19)));
+		this.map.get(19).setLink("Bas", new ClassicExit(this.map.get(39)));
+		
+		this.map.get(19).setLink("Porte", new CatExit(this.map.get(43)));
+		this.map.get(43).setLink("Porte", new ClassicExit(this.map.get(19)));
+		
+		this.map.get(32).setLink("Gauche", new ClassicExit(this.map.get(22)));
+		this.map.get(32).setLink("Droite", new ClassicExit(this.map.get(26)));
+		this.map.get(26).setLink("Gauche", new ClassicExit(this.map.get(32)));
+		this.map.get(26).setLink("Droite", new ClassicExit(this.map.get(27)));
+		this.map.get(26).setLink("Bas", new ClassicExit(this.map.get(37)));
+		this.map.get(37).setLink("Haut", new ClassicExit(this.map.get(26)));
+		this.map.get(37).setLink("Bas", new ClassicExit(this.map.get(41)));
+		this.map.get(41).setLink("Haut", new ClassicExit(this.map.get(37)));
+		this.map.get(41).setLink("Droite", new ClassicExit(this.map.get(17)));
+		this.map.get(17).setLink("Gauche", new ClassicExit(this.map.get(41)));
+		this.map.get(27).setLink("Gauche", new ClassicExit(this.map.get(26)));
+		this.map.get(27).setLink("Droite", new ClassicExit(this.map.get(20)));
+		this.map.get(27).setLink("Haut", new ClassicExit(this.map.get(33)));
+		this.map.get(20).setLink("Gauche", new ClassicExit(this.map.get(27)));
+		this.map.get(33).setLink("Bas", new ClassicExit(this.map.get(27)));
+		this.map.get(33).setLink("Haut", new ClassicExit(this.map.get(40)));
+		this.map.get(40).setLink("Bas", new ClassicExit(this.map.get(33)));
+		this.map.get(40).setLink("Droite", new ClassicExit(this.map.get(34)));
+		this.map.get(34).setLink("Gauche", new ClassicExit(this.map.get(40)));
+		this.map.get(34).setLink("Droite", new ClassicExit(this.map.get(28)));
+		this.map.get(28).setLink("Gauche", new ClassicExit(this.map.get(34)));
+		this.map.get(28).setLink("Haut", new ClassicExit(this.map.get(36)));
+		this.map.get(28).setLink("Bas", new ClassicExit(this.map.get(35)));
+		this.map.get(35).setLink("Haut", new ClassicExit(this.map.get(28)));
+		this.map.get(35).setLink("Bas", new ClassicExit(this.map.get(21)));
+		this.map.get(21).setLink("Haut", new ClassicExit(this.map.get(35)));
+		this.map.get(36).setLink("Bas", new ClassicExit(this.map.get(28)));
+		
+		this.map.get(36).setLink("Porte", new ClassicExit(this.map.get(42)));
+		this.map.get(42).setLink("Porte", new ClassicExit(this.map.get(36)));
+		this.map.get(42).setLink("Prison", new ClassicExit(this.map.get(44)));
+		
+		
+		//les object des salle spéciale
+		this.map.get(4).addItem(new Item_Key());
+		this.map.get(14).addEntity(new QEntity_Cat());
+		
 	}
 	
 	/**
@@ -97,6 +198,7 @@ public class Game implements Serializable{
 			if(nextPlace != null){
 				this.currentPlace=nextPlace;
 				System.out.println("Vous franchissez "+exitName);
+				System.out.println("Vous êtes maintenant dans "+this.currentPlace.getName());
 			}
 			else{
 				System.out.println("Impossible de franchir "+exitName);
