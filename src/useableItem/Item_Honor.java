@@ -10,7 +10,7 @@ public class Item_Honor extends RecoverableItem {
 	 * Un constructeur de la classe
 	 */
 	public Item_Honor() {
-		super("Cle");
+		super("Honneur_de_Schredder");
 	}
 
 	@Override

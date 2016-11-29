@@ -171,7 +171,7 @@ public class Game implements Serializable{
 		this.map.get(21).setLink("Haut", new ClassicExit(this.map.get(35)));
 		this.map.get(36).setLink("Bas", new ClassicExit(this.map.get(28)));
 		
-		this.map.get(36).setLink("Porte", new ClassicExit(this.map.get(42)));
+		this.map.get(36).setLink("Porte", new FinalDoor(this.map.get(42)));
 		this.map.get(42).setLink("Porte", new ClassicExit(this.map.get(36)));
 		this.map.get(42).setLink("Prison", new ClassicExit(this.map.get(44)));
 		
@@ -179,6 +179,11 @@ public class Game implements Serializable{
 		//les object des salle spéciale
 		this.map.get(4).addItem(new Item_Key());
 		this.map.get(14).addEntity(new QEntity_Cat());
+		this.map.get(18).addEntity(new Npc_Donatello());
+		this.map.get(16).addEntity(new Npc_Leonardo());
+		this.map.get(17).addEntity(new Npc_Michelangelo());
+		this.map.get(21).addEntity(new Npc_Raphael());
+		
 		
 	}
 	

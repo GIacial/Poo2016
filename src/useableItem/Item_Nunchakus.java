@@ -2,7 +2,6 @@ package useableItem;
 
 import Item.UseableItem;
 import exit.FinalDoor;
-import exit.LockedExit;
 
 public class Item_Nunchakus extends UseableItem {
 
