@@ -10,7 +10,7 @@ public class FinalBossRoom extends Place {
 	private static final long serialVersionUID = -9206927899811765324L;
 
 	public FinalBossRoom() {
-		super("Salle du boss final");
+		super("Salle de Schredder");
 		this.addEntity(new Monster_Schredder());
 		for (int i=0 ; i<2 ;i++){
 			this.addItem(new Item_BigPotion());

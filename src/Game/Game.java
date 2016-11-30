@@ -12,7 +12,6 @@ import interfacePackage.Recoverable;
 import monster.*;
 import npc.*;
 import place.*;
-import useableItem.*;
 
 /**
  * The Class Game.
@@ -35,7 +34,8 @@ public class Game implements Serializable{
 		this.creationMap();
 		
 		//texte de bienvenue
-		System.out.println("[La Déesse] Bienvenue Aventurier dans le monde de test");
+		System.out.println("Bip...Bip...");
+		System.out.println("[Les Tortues] Vite va au nord de la ville tué un Alien avant qu'il fasse plus de victime");
 	}
 	
 	/**
@@ -178,9 +178,8 @@ public class Game implements Serializable{
 		
 		
 		//les object des salle spéciale
-		this.map.get(4).addItem(new Item_Key());
-		this.map.get(4).addEntity(new Monster_Alien());
-		this.map.get(14).addEntity(new QEntity_Cat());
+		this.map.get(4).addEntity(new QMonster_Alien());
+		this.map.get((int)(Math.random()*41)).addEntity(new QEntity_Cat());	//on place le chat dans les 41 premiere salle
 		this.map.get(18).addEntity(new Npc_Donatello());
 		this.map.get(16).addEntity(new Npc_Leonardo());
 		this.map.get(17).addEntity(new Npc_Michelangelo());
