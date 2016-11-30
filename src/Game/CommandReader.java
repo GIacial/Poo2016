@@ -105,6 +105,9 @@ public class CommandReader {
 	 */
 	public void interpretation(){
 		String[] sCommand = this.s.nextLine().split(" ");
+		for (int i = 0; i < sCommand.length; i++) {
+			sCommand[i]=sCommand[i].toLowerCase();
+		}
 		if(sCommand.length > 0 && !sCommand[0].equals("")){//pour gerer les retour à la ligne abusif
 					this.detectCommand(sCommand);
 		}

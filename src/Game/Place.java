@@ -35,6 +35,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	 * @param nextPlace  the place where you're going when you're existing the place
 	 */
 	public void setLink(String name, Exit exit) {
+		name= name.toLowerCase();
 		if(this.exit.containsKey(name) || this.exit.containsValue(exit) || exit == null){
 			System.err.println(name + " ou " + exit + " est deja affecté ou exit vaut null");
 		}
@@ -71,7 +72,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	public boolean getDescriptionItem(String itemName) {
 		boolean r = false;
 		for(Item i : this.listItem){
-			if(i.getName().equals(itemName)){
+			if(i.getName().equalsIgnoreCase(itemName)){
 				i.description();
 				r = true;
 				break;
@@ -89,7 +90,7 @@ public abstract class Place implements Serializable,HaveDescription {
 	public boolean getDescriptionEntity(String entityName,boolean analyse){
 		boolean r = false;
 		for(Entity e : this.listEntity){
-			if(e.getName().equals(entityName)){
+			if(e.getName().equalsIgnoreCase(entityName)){
 				r = true;
 				if(analyse){
 					e.entityDescription();
@@ -166,7 +167,7 @@ public abstract class Place implements Serializable,HaveDescription {
 		Iterator<Item> i = this.listItem.iterator();
 		while(i.hasNext() && r == null){
 			Item item = i.next();
-			if(item.getName().equals(itemName)){
+			if(item.getName().equalsIgnoreCase(itemName)){
 				r = item;
 				i.remove();
 			}
@@ -253,7 +254,7 @@ public abstract class Place implements Serializable,HaveDescription {
 		Entity r = null;
 		while(e.hasNext() && r == null){
 			Entity entity = e.next();
-			if(entity.getName().equals(entityName)){
+			if(entity.getName().equalsIgnoreCase(entityName)){
 				r = entity;
 				e.remove();
 			}

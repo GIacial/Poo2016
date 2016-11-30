@@ -6,6 +6,7 @@ package Item;
 public abstract class Trouser extends Equipment {
 
 	private static final long serialVersionUID = -8431178796822971257L;
+	public static final String TypeName = "trouser";
 
 	
 	
@@ -23,6 +24,6 @@ public abstract class Trouser extends Equipment {
 	
 	@Override
 	public String getTypeName() {
-		return "Trouser";
+		return Trouser.TypeName;
 	}
 }

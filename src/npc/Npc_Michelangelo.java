@@ -27,7 +27,7 @@ public class Npc_Michelangelo extends ImmortalNPC{
 		}else{
 			System.out.println(" Prends ça tu pourrais en avoir besoin !");
 			i = new Item_Nunchakus();
-			System.out.println(this.getName()+" te tends un nuchaku");
+			System.out.println(this.getName()+" te tends un nunchakus");
 			this.donne = true;
 		}
 		return i;

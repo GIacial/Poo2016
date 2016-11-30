@@ -3,6 +3,7 @@ package Item;
 public abstract class Weapon extends Equipment {
 
 	private static final long serialVersionUID = -3325955821692423257L;
+	public static final String TypeName = "weapon";
 	
 	
 	private int 	atkMax;
@@ -49,7 +50,7 @@ public abstract class Weapon extends Equipment {
 	
 	@Override
 	public String getTypeName() {
-		return "Weapon";
+		return Weapon.TypeName;
 	}
 
 

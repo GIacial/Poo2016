@@ -19,6 +19,7 @@ public class QEntity_Cat extends Entity_Cat {
 		if(!this.donnerCle){
 			i=new Item_CatKey();
 			System.out.println("Une belle clé est entre ses pattes ");
+			this.donnerCle=true;
 		}
 		return i;
 	}

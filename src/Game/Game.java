@@ -179,7 +179,7 @@ public class Game implements Serializable{
 		
 		//les object des salle spéciale
 		this.map.get(4).addEntity(new QMonster_Alien());
-		this.map.get((int)(Math.random()*41)).addEntity(new QEntity_Cat());	//on place le chat dans les 41 premiere salle
+		this.map.get((int)(Math.random()*41)).addEntity(new QEntity_Cat());	//on place le chat dans les 40 premiere salle
 		this.map.get(18).addEntity(new Npc_Donatello());
 		this.map.get(16).addEntity(new Npc_Leonardo());
 		this.map.get(17).addEntity(new Npc_Michelangelo());
@@ -322,7 +322,7 @@ public class Game implements Serializable{
 	 */
 	public void use (String objectName ,String targetName) throws GameException_GameOver{
 		Object target = null;
-		if(targetName.equals("me")){
+		if(targetName.equalsIgnoreCase("me")){
 			target = this.hero;
 		}
 		else{

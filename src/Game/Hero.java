@@ -1,6 +1,7 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import Item.Equipment;
@@ -119,6 +120,8 @@ public class Hero extends Entity {
 		if(l.isEmpty()){
 			System.out.println("Votre sac ne contient pas "+typeItem);
 		}
+		
+		HashMap<String,Integer> listInventory = new HashMap<String,Integer>();
 		for(Recoverable i: l){
 			String name = "";
 			if(i instanceof Item){
@@ -131,7 +134,16 @@ public class Hero extends Entity {
 					System.err.println("Impossible de recup le nom du recuperable");
 				}
 			}
-			System.out.println(name);
+			if(listInventory.containsKey(name)){
+				listInventory.put(name, new Integer(listInventory.get(name).intValue()+1));
+			}
+			else{
+				listInventory.put(name, new Integer(1));
+			}
+		}
+		//affichage
+		for(String names : listInventory.keySet()){
+			System.out.println(names+" x"+listInventory.get(names));
 		}
 	}
 

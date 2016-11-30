@@ -54,7 +54,7 @@ public class Inventory implements Serializable{
 				}
 			}
 			
-			if(name.equals(itemName)){
+			if(name.equalsIgnoreCase(itemName)){
 				r = item;
 				i.remove();
 			}

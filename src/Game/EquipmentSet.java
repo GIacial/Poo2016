@@ -24,12 +24,12 @@ public class EquipmentSet implements Serializable {
 	 */
 	public EquipmentSet(Hero hero){
 		this.listEquip = new HashMap<String,Equipment>();
-		this.listEquip.put("Weapon", null);
-		this.listEquip.put("Boots", null);
-		this.listEquip.put("Chest", null);
-		this.listEquip.put("Glove", null);
-		this.listEquip.put("Head", null);
-		this.listEquip.put("Trouser", null);
+		this.listEquip.put(Weapon.TypeName, null);
+		this.listEquip.put(Boots.TypeName, null);
+		this.listEquip.put(Chest.TypeName, null);
+		this.listEquip.put(Glove.TypeName, null);
+		this.listEquip.put(Head.TypeName, null);
+		this.listEquip.put(Trouser.TypeName, null);
 		this.hero = hero;
 	}
 
@@ -103,7 +103,7 @@ public class EquipmentSet implements Serializable {
 	 */
 	public int getDmgWeapon(){
 		int dmg = 0;
-		Weapon w = (Weapon)this.listEquip.get("Weapon");
+		Weapon w = (Weapon)this.listEquip.get(Weapon.TypeName);
 		if(w != null){
 			dmg = (int) (Math.random() * (w.getAtkMax()-w.getAtkMin()));
 			dmg += w.getAtkMin();
