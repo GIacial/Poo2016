@@ -16,6 +16,7 @@ public class Item_Sais extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Ceci est un Sais , elle possède une forme étrange à son bout");
 
 	}

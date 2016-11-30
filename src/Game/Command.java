@@ -22,7 +22,7 @@ public enum Command implements HaveDescription{
 				  	System.out.println("[Help]: exit pour regarder toutes les sortie");
 					System.out.println("[Help]: object pour tous les item");
 					System.out.println("[Help]: entity pour tous ce qui est en vie");
-					System.out.println("[Help]: me pour voir vos stat");
+					System.out.println("[Help]: me pour voir votre description");
 					System.out.println("[Help]: equipement pour voir les equipement dans votre inventaire");
 					System.out.println("[Help]: set pour les equipement equipé");
 					System.out.println("[Help]: inventory pour votre inventaire");
@@ -43,8 +43,9 @@ public enum Command implements HaveDescription{
 		case discard : 	System.out.println("[Help]: discard object");
 						System.out.println("[Help]: permet de jeter un object ");
 			break;
-		case analyse : 	System.out.println("[Help]: analyse entity ");
-					 	System.out.println("[Help]: permet d'afficher l'etat de l'entité");
+		case analyse : 	System.out.println("[Help]: analyse target ");
+					 	System.out.println("[Help]: permet d'afficher les stat de la cible");
+					 	System.out.println("[Help]: me permet de voir vos stat");
 			break;
 		case equip : 	System.out.println("[Help]: equip equipement");
 				   		System.out.println("[Help]: equipe l'equipement");

@@ -16,6 +16,7 @@ public class Item_CatKey extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Une clé en forme de patte de chat");
 
 	}

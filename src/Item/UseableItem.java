@@ -16,8 +16,19 @@ public abstract class UseableItem  extends RecoverableItem{
 	public UseableItem(String itemName) {
 		super(itemName);
 	}
+	
+	
 
 	
+	@Override
+	public void description() {
+		System.out.println(this.getName()+ " a l'air utilisable");
+		
+	}
+
+
+
+
 	/**
 	 * A method which use an item
 	 * @return  T if the object was used, else F

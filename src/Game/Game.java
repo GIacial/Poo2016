@@ -184,6 +184,7 @@ public class Game implements Serializable{
 		this.map.get(16).addEntity(new Npc_Leonardo());
 		this.map.get(17).addEntity(new Npc_Michelangelo());
 		this.map.get(21).addEntity(new Npc_Raphael());
+		this.map.get(44).addEntity(new Npc_Spliffer());
 		
 		
 	}
@@ -438,7 +439,13 @@ public class Game implements Serializable{
 									((Equipment)r).EquipementDescription();
 								}
 								else{
-									System.out.println(target+" n'est pas analysable");
+									if(r instanceof Entity){
+										((Entity)r).entityDescription();
+									}
+									else{
+										System.out.println(target+" n'est pas analysable");
+									}
+									
 								}
 								this.hero.takeItem(r);
 							}

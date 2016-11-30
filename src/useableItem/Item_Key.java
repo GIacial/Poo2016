@@ -16,6 +16,7 @@ public class Item_Key extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Ceci est une clé , elle sert surement à ouvrir quelque-chose");
 
 	}

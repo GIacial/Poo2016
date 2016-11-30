@@ -16,6 +16,7 @@ public class Item_Katana extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Ceci est un katana , elle possède une forme étrange à son bout");
 
 	}

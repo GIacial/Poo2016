@@ -14,6 +14,7 @@ public class Item_BigPotion extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Ca n'a pas l'air bon mais c'est efficace");
 
 	}

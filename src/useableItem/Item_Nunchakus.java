@@ -16,6 +16,7 @@ public class Item_Nunchakus extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Ceci est un Nunchakus , elle possède une forme étrange à son bout");
 
 	}

@@ -17,6 +17,7 @@ public class Item_Potion extends UseableItem {
 
 	@Override
 	public void description() {
+		super.description();
 		System.out.println("Une fiole contenant un liquide rose pâle");
 
 	}
