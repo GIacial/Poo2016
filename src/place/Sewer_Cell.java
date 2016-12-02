@@ -13,7 +13,7 @@ public class Sewer_Cell extends Place{
 
 	@Override
 	public void description() {
-		System.out.println("Spliffers est attaché au mur");
+		System.out.println("Spliffer est attaché au mur");
 		super.description();
 	}
 

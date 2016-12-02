@@ -10,7 +10,7 @@ public abstract class Item implements Serializable,HaveDescription{
 
 	
 	private static final long serialVersionUID = 4846537447662735481L;
-	private String 		name; //The name of the item
+	private String 		name; 		//The name of the item
 
 	/**
 	 * A builder of Item class

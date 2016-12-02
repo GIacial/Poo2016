@@ -51,7 +51,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	}
 
 	/**
-	 * Inflict the Dmg damage to a alive entity
+	 * Inflict the Dmg damage to an alive entity
 	 * @param Dmg  The amount of damage inflict to the entity
 	 * @throws GameException_GameOver 
 	 */
@@ -72,7 +72,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	}
 
 	/**
-	 * @param def  The amount of defense of the target
+	 * @param def  The target's defense amount
 	 * @return  the amount of damage that the entity will do if the target have a defense value equals to def
 	 */
 	private int calcDmg(int def) {
@@ -80,8 +80,9 @@ public abstract class Entity implements Serializable,HaveDescription {
 		int a = 50;
 		double protection = protCap * (1 - Math.exp(-(double)def/a));
 		double dmg = (1 - protection) * this.getAttack();
-		return (int)Math.round(dmg);//arrondis au 0.5 au dessus 
+		return (int)Math.round(dmg);							//arrondis au 0.5 au dessus 
 	}
+	
 	/**
 	 * 
 	 * @return the damage without target's defense
@@ -107,7 +108,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 	}
 
 	/**
-	 * Print the stat of the Entity on the standard exit
+	 * Print entity's stat on the standard exit
 	 */
 	public void entityDescription() {
 		System.out.println("Vie : " + this.heal + "/"+this.healMax);
@@ -154,7 +155,7 @@ public abstract class Entity implements Serializable,HaveDescription {
 
 	/**
 	 * 
-	 * @return Le nombre de point de vie qu'il reste
+	 * @return Le nombre de points de vie qu'il reste
 	 */
 	public int getHeal() {
 		return this.heal;

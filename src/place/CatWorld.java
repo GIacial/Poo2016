@@ -25,17 +25,17 @@ public class CatWorld extends Place {
 		super.addEntity(entity);
 		if (entity instanceof QEntity_Cat){
 			if(!this.questComplete){
-				this.questComplete=true;
+				this.questComplete = true;
 				this.addItem(new Weapon_CatSword());
 				System.out.println("[chats] Mierci");
-				System.out.println("Une magnifique épée était cacher à l'endroit où se tenait les chats.");
+				System.out.println("Une magnifique épée était cachée à l'endroit où se tenaient les chats.");
 			}
 		}
 	}
 
 	@Override
 	public void description() {
-		System.out.println("Un monde idéal pour les chat");
+		System.out.println("Un monde idéal pour les chats");
 		super.description();
 	}
 	

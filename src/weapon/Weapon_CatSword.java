@@ -13,7 +13,7 @@ public class Weapon_CatSword extends Weapon {
 
 	@Override
 	public void description() {
-		System.out.println("Une épée avec des chats gravé sur la lame");
+		System.out.println("Une épée avec des chats gravés sur la lame");
 		
 	}
 

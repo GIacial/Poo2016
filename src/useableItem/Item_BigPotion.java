@@ -26,10 +26,10 @@ public class Item_BigPotion extends UseableItem {
 			Entity e = (Entity)target;
 			e.takeHeal(150);
 			use = true;
-			System.out.println("La potion soigne "+e.getName());
+			System.out.println("La potion soigne " + e.getName());
 		}
 		else{
-			System.out.println("Impossible d'utiliser le Remede sur cette cible");
+			System.out.println("Impossible d'utiliser le remède sur cette cible");
 		}
 		return use;
 	}

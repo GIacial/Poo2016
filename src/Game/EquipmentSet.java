@@ -6,7 +6,7 @@ import Item.*;
 import java.io.*;
 
 /**
- * Permet de gérer les équipement d'un Hero
+ * Permet de gérer les équipements d'un Hero
  *
  */
 public class EquipmentSet implements Serializable {

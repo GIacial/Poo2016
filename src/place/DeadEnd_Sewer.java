@@ -35,7 +35,7 @@ public class DeadEnd_Sewer extends Place {
 
 	@Override
 	public void description() {
-		System.out.println("Ce Couloir d'égouts fini en cul de sac");
+		System.out.println("Ce couloir d'égout fini en cul de sac");
 		super.description();
 	}
 	

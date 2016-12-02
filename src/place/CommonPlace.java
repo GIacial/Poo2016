@@ -9,7 +9,7 @@ public abstract class CommonPlace extends Place {
 
 	public CommonPlace(String name,String description) {
 		super(name);
-		this.description=description;
+		this.description = description;
 	}
 
 	@Override

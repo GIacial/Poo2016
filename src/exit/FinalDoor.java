@@ -22,8 +22,8 @@ public class FinalDoor extends LockedExit_A {
 	public FinalDoor(Place nextPlace) {
 		super(nextPlace);
 		this.verrou= new boolean[this.nbKey];
-		for (int i=0 ; i<4 ; i++){
-			this.verrou[i]=false;
+		for (int i = 0 ; i<4 ; i++){
+			this.verrou[i] = false;
 		}
 	}
 	@Override
@@ -37,22 +37,22 @@ public class FinalDoor extends LockedExit_A {
 		boolean use=false;
 		if(i instanceof Item_Bo && !this.verrou[0]){
 			use = true;
-			this.verrou[0]=true;
+			this.verrou[0] = true;
 		}
 		else{
 			if(i instanceof Item_Katana && !this.verrou[1]){
 				use = true;
-				this.verrou[1]=true;
+				this.verrou[1] = true;
 			}
 			else{
 				if(i instanceof Item_Nunchakus && !this.verrou[2]){
 					use = true;
-					this.verrou[2]=true;
+					this.verrou[2] = true;
 				}
 				else{
 					if(i instanceof Item_Sais && !this.verrou[3]){
 						use = true;
-						this.verrou[3]=true;
+						this.verrou[3] = true;
 					}
 				}
 			}
@@ -66,9 +66,9 @@ public class FinalDoor extends LockedExit_A {
 
 
 	private void unlocked(){
-		boolean ok =true;
+		boolean ok = true;
 		for (boolean b : this.verrou){
-			ok= ok && b;
+			ok = ok && b;
 		}
 		if(ok){
 			super.open(null);

@@ -12,8 +12,8 @@ import exception.GameException_GameOver;
 
 
 /**
- * Sert à lire ligne par ligne les commandes mise sur entrée standart
- * Elle charge un Game à partir d'un fichier ou avec le constructeur par défault.
+ * Sert à lire ligne par ligne les commandes mises sur entrée standard
+ * Elle charge un Game à partir d'un fichier ou avec le constructeur par défaut.
  */
 public class CommandReader {
 	
@@ -31,7 +31,7 @@ public class CommandReader {
 	/**
 	 * Un constructeur de CommandReader
 	 * Elle a besoin qu'on entre sur stdin le nom de la sauvegarde
-	 * et si la sauvegarde existe si on veux la charger ou non.
+	 * et si la sauvegarde existe si on veut la charger ou non.
 	 */
 	public CommandReader() {
 		this.s = new Scanner(System.in);
@@ -49,8 +49,8 @@ public class CommandReader {
 		boolean newGame = true;
 		if(new File(this.fichier).exists()){
 			System.out.println("Voulez vous continuer ?");
-			if(this.s.next().toLowerCase().equals("oui")){
-				this.s.nextLine();//fin la ligne
+			if(this.s.next().equalsIgnoreCase("oui")){
+				this.s.nextLine();								//fin la ligne
 				this.loadGame(this.fichier);
 				newGame = false;
 			}
@@ -81,7 +81,7 @@ public class CommandReader {
 	
 	/**
 	 * 
-	 * @param file :le chemin de l'endroit ou l'on veux mettre la sauvegarde
+	 * @param file :le chemin de l'endroit ou l'on veut mettre la sauvegarde
 	 * @return true si la sauvegarde a réussi sinon false
 	 */
 	private boolean saveGame(String file) {
@@ -105,17 +105,17 @@ public class CommandReader {
 	 */
 	public void interpretation(){
 		String[] sCommand = this.s.nextLine().split(" ");
-		for (int i = 0; i < sCommand.length; i++) {
+		for (int i = 0 ; i < sCommand.length ; i++) {
 			sCommand[i]=sCommand[i].toLowerCase();
 		}
-		if(sCommand.length > 0 && !sCommand[0].equals("")){//pour gerer les retour à la ligne abusif
+		if(sCommand.length > 0 && !sCommand[0].equals("")){			//pour gerer les retour à la ligne abusif
 					this.detectCommand(sCommand);
 		}
 		
 	}
 
 	/**
-	 * Regarde si une commande est active 
+	 * Scanner actif ou non
 	 *
 	 * @return true, if is actif
 	 */
@@ -131,7 +131,6 @@ public class CommandReader {
 		try{
 			Command t = Command.valueOf(sCommand[0].toLowerCase());
 			//lower cas pour que Bonjour=bonjour
-			
 			switch(t){
 				case look :	this.look(sCommand);
 					break;						
@@ -157,7 +156,7 @@ public class CommandReader {
 					break;
 				case speak :	this.speak(sCommand);
 					break;
-				case last : 	if(lastCommand!=null){
+				case last : 	if(lastCommand != null){
 									this.detectCommand(lastCommand);
 								}
 								else{
@@ -209,11 +208,17 @@ public class CommandReader {
 	 */
 	private void help(String[] sCommand){
 		if(sCommand.length >= 2){
-			Command.description(sCommand[1]);
+			try{
+				Command c = Command.valueOf(sCommand[1]);
+				c.description();
+			}
+			catch(Exception e){
+				System.out.println(sCommand[1]+" n'est pas une commande");
+			}
 		}
 		else{
 			Command listCommand[] = Command.values();
-			for(int i=0 ; i<listCommand.length ; i++){
+			for(int i = 0 ; i<listCommand.length ; i++){
 				System.out.println(listCommand[i]);
 			}
 		}
@@ -393,7 +398,7 @@ public class CommandReader {
 	 * Permet de créé un checkpoint
 	 */
 	private void createCheckpoint(){
-		this.checkpointCreate= this.saveGame(CommandReader.CHECKPOINT) ||this.checkpointCreate;//dans ce sens sinin la save ne se fait pas
+		this.checkpointCreate = this.saveGame(CommandReader.CHECKPOINT) ||this.checkpointCreate;//dans ce sens sinin la save ne se fait pas
 	}
 	
 

@@ -12,13 +12,13 @@ public class Item_Potion extends UseableItem {
 	 * Un constructeur de la classe
 	 */
 	public Item_Potion() {
-		super("Potion");
+		super("Soda");
 	}
 
 	@Override
 	public void description() {
 		super.description();
-		System.out.println("Une fiole contenant un liquide rose pâle");
+		System.out.println("Une cannette de soda");
 
 	}
 
@@ -29,10 +29,10 @@ public class Item_Potion extends UseableItem {
 			Entity e = (Entity)target;
 			e.takeHeal(50);
 			use = true;
-			System.out.println("La potion soigne "+e.getName());
+			System.out.println("Le " + this.getName() + " soigne "+e.getName());
 		}
 		else{
-			System.out.println("Impossible d'utiliser la Potion sur cette cible");
+			System.out.println("Impossible d'utiliser le soda sur cette cible");
 		}
 		return use;
 	}

@@ -37,7 +37,7 @@ private boolean 	isLocked;
 	 * @return T si operation à réussi sinon F
 	 */
 	public  boolean open(UseableItem i){
-		this.isLocked=false;
+		this.isLocked = false;
 		return false;
 	}
 

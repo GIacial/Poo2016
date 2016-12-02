@@ -19,7 +19,7 @@ public class FinalBossRoom extends Place {
 
 	@Override
 	public void description() {
-		System.out.println("Il vous attendez");
+		System.out.println("Il vous attendait");
 		super.description();
 	}
 	

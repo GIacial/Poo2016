@@ -33,17 +33,17 @@ public class Sewer extends CommonPlace {
 		}
 		if(Math.random() < 0.4){
 			switch((int)(Math.random()*6)){
-				case 0:this.addItem(new Chest_LeatherChest());
+				case 0 : this.addItem(new Chest_LeatherChest());
 					break;
-				case 1:this.addItem(new Glove_LeatherGlove());
+				case 1 : this.addItem(new Glove_LeatherGlove());
 					break;	
-				case 2:this.addItem(new Boots_LeatherBoots());
+				case 2 : this.addItem(new Boots_LeatherBoots());
 					break;
-				case 3:this.addItem(new Head_LeatherHead());
+				case 3 : this.addItem(new Head_LeatherHead());
 					break;
-				case 4:this.addItem(new Trouser_LeatherTrouser());
+				case 4 : this.addItem(new Trouser_LeatherTrouser());
 					break;	
-				default:this.addItem(new Weapon_IronSword());
+				default : this.addItem(new Weapon_IronSword());
 					break;
 			}
 		}

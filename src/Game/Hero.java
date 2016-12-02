@@ -53,12 +53,12 @@ public class Hero extends Entity {
 				}
 			}
 			else{
-				System.out.println(nameEquip+" n'est pas un equipement");
+				System.out.println(nameEquip + " n'est pas un equipement");
 				this.inventory.add(e);
 			}
 		}
 		else{
-			System.out.println("Vous ne possedez pas "+nameEquip);
+			System.out.println("Vous ne possedez pas " + nameEquip);
 		}
 	}
 
@@ -87,13 +87,13 @@ public class Hero extends Entity {
 		Equipment e = this.equipment.unequip(name);
 		if(e != null){
 			this.inventory.add(e);
-			System.out.println("Vous enlevez votre "+e.getName());
-			System.out.println("Attack -"+e.getAttackBonus());
-			System.out.println("Defence -"+e.getDefenseBonus());
-			System.out.println("Hp -"+e.getHealthBonus());
+			System.out.println("Vous enlevez votre " + e.getName());
+			System.out.println("Attack -" + e.getAttackBonus());
+			System.out.println("Defence -" + e.getDefenseBonus());
+			System.out.println("Hp -" + e.getHealthBonus());
 		}
 		else{
-			System.out.println("Vous n'avez pas de "+name+" équipé");
+			System.out.println("Vous n'avez pas de " + name + " équipé");
 		}
 	}
 
@@ -101,7 +101,7 @@ public class Hero extends Entity {
 	 * Use a item from your inventory
 	 * @param nameItem  the name of the item that you want use
 	 */
-	public void useItem(String nameItem,Object target) {
+	public void useItem(String nameItem, Object target) {
 		this.inventory.use(nameItem, target);
 	}
 
@@ -112,17 +112,17 @@ public class Hero extends Entity {
 	public void lookInventory(String typeItem) {
 		List<Recoverable> l = new ArrayList<Recoverable>();
 		switch(typeItem.toLowerCase()){
-			case "equipement":l.addAll(this.inventory.getListEquipement());
+			case "equipement" : l.addAll(this.inventory.getListEquipement());
 				break;
-			default:l = this.inventory.getListItem();
+			default : l = this.inventory.getListItem();
 				break;
 		}
 		if(l.isEmpty()){
-			System.out.println("Votre sac ne contient pas "+typeItem);
+			System.out.println("Votre sac ne contient pas " + typeItem);
 		}
 		
 		HashMap<String,Integer> listInventory = new HashMap<String,Integer>();
-		for(Recoverable i: l){
+		for(Recoverable i : l){
 			String name = "";
 			if(i instanceof Item){
 				name = ((Item)i).getName();
@@ -131,7 +131,7 @@ public class Hero extends Entity {
 					name = ((Entity)i).getName();
 				}
 				else{
-					System.err.println("Impossible de recup le nom du recuperable");
+					System.err.println("Impossible de recupérer le nom du recuperable");
 				}
 			}
 			if(listInventory.containsKey(name)){
@@ -143,13 +143,13 @@ public class Hero extends Entity {
 		}
 		//affichage
 		for(String names : listInventory.keySet()){
-			System.out.println(names+" x"+listInventory.get(names));
+			System.out.println(names + " x" + listInventory.get(names));
 		}
 	}
 
 	@Override
 	public void description() {
-		System.out.println("description du hero");
+		System.out.println("Vous vous nommez April. Vous êtes une alliée et une grande admiratrice des tortues.");
 		
 	}
 
@@ -162,7 +162,7 @@ public class Hero extends Entity {
 	public void takeDmg(int Dmg) throws GameException_GameOver {
 		super.takeDmg(Dmg);
 		System.out.println("Dommages reçus : " + Dmg);
-		System.out.println("Il vous reste "+this.getHeal()+" HP" );
+		System.out.println("Il vous reste " + this.getHeal() + " HP" );
 		
 		if(!this.isAlive()){
 			System.out.println("Vous êtes mort. Game over");
@@ -173,7 +173,7 @@ public class Hero extends Entity {
 	}
 	
 	/**
-	 * Permet d'afficher tout se qui est equipé au hero
+	 * Permet d'afficher tout ce qui est equipé au hero
 	 */
 	public void lookSet(){
 		System.out.println(this.equipment);
@@ -183,7 +183,7 @@ public class Hero extends Entity {
 	 * @return  the amount of xp that the Entity need to level up
 	 */
 	private int calcXpLevelUp() {
-		double xpNeed = 0.75*(this.level*this.level)+this.level+12;
+		double xpNeed = 0.75*(this.level*this.level) + this.level + 12;
 		return (int) Math.round(xpNeed);
 	}
 

@@ -15,20 +15,20 @@ public enum Command implements HaveDescription{
 					System.out.println("[Help]: Permet d'essayer de franchir la sortie");
 			break;
 		case help : System.out.println("[Help]: help [command]");
-					System.out.println("[Help]: Affiche de un texte d'aide");
+					System.out.println("[Help]: affichage d'un texte d'aide");
 			break;
 		case look : System.out.println("[Help]: look [target]");
 				  	System.out.println("[Help]: permet de regarder quelquechose");
-				  	System.out.println("[Help]: exit pour regarder toutes les sortie");
+				  	System.out.println("[Help]: exit pour regarder toutes les sorties");
 					System.out.println("[Help]: object pour tous les item");
 					System.out.println("[Help]: entity pour tous ce qui est en vie");
 					System.out.println("[Help]: me pour voir votre description");
-					System.out.println("[Help]: equipement pour voir les equipement dans votre inventaire");
-					System.out.println("[Help]: set pour les equipement equipé");
+					System.out.println("[Help]: equipement pour voir les equipements dans votre inventaire");
+					System.out.println("[Help]: set pour les equipements equipés");
 					System.out.println("[Help]: inventory pour votre inventaire");
 			break;
 		case take : System.out.println("[Help]: take target");
-				  	System.out.println("[Help]: permet de rammaser quelquechose");
+				  	System.out.println("[Help]: permet de ramasser quelquechose");
 			break;
 		case quit : System.out.println("[Help]: quit");
 				  	System.out.println("[Help]: permet de quitter le jeu");
@@ -44,8 +44,8 @@ public enum Command implements HaveDescription{
 						System.out.println("[Help]: permet de jeter un object ");
 			break;
 		case analyse : 	System.out.println("[Help]: analyse target ");
-					 	System.out.println("[Help]: permet d'afficher les stat de la cible");
-					 	System.out.println("[Help]: me permet de voir vos stat");
+					 	System.out.println("[Help]: permet d'afficher les statistiques de la cible");
+					 	System.out.println("[Help]: me permet de voir vos statistiques");
 			break;
 		case equip : 	System.out.println("[Help]: equip equipement");
 				   		System.out.println("[Help]: equipe l'equipement");
@@ -58,27 +58,12 @@ public enum Command implements HaveDescription{
 		 			 	System.out.println("[Help]: parle au NPC");
 		 	break;
 		case last : 	System.out.println("[Help]: last");
-		 				System.out.println("[Help]: Execute la derniere commande correctement formé");
+		 				System.out.println("[Help]: Execute la derniere commande correctement saisit");
 		 	break;
-		default : 	System.err.println("[Help]:Command non trouvé ");
+		default : 	System.err.println("[Help]:Commande non trouvée ");
 			break;
 		}
 		
 	}
 	
-	/**
-	 * 
-	 * Transforme la string en commande si possible et affiche la description de la commande obtenu
-	 * @param command :Le nom de la commande
-	 */
-
-	public static void description(String command){
-		try{
-			Command c = Command.valueOf(command);
-			c.description();
-		}
-		catch(Exception e){
-			System.out.println(command+" n'est pas une commande");
-		}
-	}
 }

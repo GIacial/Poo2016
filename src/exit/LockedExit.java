@@ -40,7 +40,4 @@ public class LockedExit extends LockedExit_A {
 		return use;
 	}
 
-	
-	
-
 }
