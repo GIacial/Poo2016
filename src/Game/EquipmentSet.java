@@ -34,8 +34,8 @@ public class EquipmentSet implements Serializable {
 	}
 
 	/**
-	 * Equip the equipement
-	 * @param equip  The equipement that you want equip equip only if pas d'ancien equipement
+	 * Equipe l'équipement seulement si il n'y a pas déjà d'équipement à cet emplacement
+	 * @param equip  l'équipement
 	 */
 	public boolean equip(Equipment equip) {
 		boolean ok = false;
@@ -78,7 +78,7 @@ public class EquipmentSet implements Serializable {
 	}
 
 	/**
-	 * Print the stat of the equipement zone on the screen
+	 * Print equipment's stat that there is in the zone on the screen
 	 * @param zone  the equipement's zone that you want show the stat
 	 */
 	public boolean showStat(String zone) {
@@ -113,7 +113,7 @@ public class EquipmentSet implements Serializable {
 	
 	/**
 	 * 
-	 * @return le nombre d'équipement actuellement équiper
+	 * @return le nombre d'équipement actuellement équipé
 	 */
 	public int getNbEquipement(){
 		int nb = 0;

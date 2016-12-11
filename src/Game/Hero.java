@@ -193,17 +193,17 @@ public class Hero extends Entity {
 	private void levelUp() {
 		this.level++;
 		this.xp = 0;
-		int earnHp  = (this.level%3+1)*10;
-		int earnDef = (this.level+1)%3+1;
-		int earnAtk = (this.level+2)%3+1;
+		int earnHp  = (this.level %3 + 1) * 10;
+		int earnDef = (this.level + 1) %3 + 1;
+		int earnAtk = (this.level + 2) %3 + 1;
 		this.addHp(earnHp);
 		this.addDef(earnDef);
 		this.addAtk(earnAtk);
 		
 		System.out.println("Vous gagnez un niveau");
-		System.out.println("Hp +"+earnHp);
-		System.out.println("Defence +"+earnDef);
-		System.out.println("Atk +"+earnAtk);
+		System.out.println("Hp +" + earnHp);
+		System.out.println("Defence +" + earnDef);
+		System.out.println("Atk +" + earnAtk);
 	}
 
 	/**

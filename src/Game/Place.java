@@ -208,7 +208,7 @@ public abstract class Place implements Serializable,HaveDescription {
 				else{
 					if(targetEntity instanceof Monster){
 						List<Item> loot = ((Monster)targetEntity).lootList();
-						for(Item i:loot){
+						for(Item i : loot){
 							this.addItem(i);
 						}
 						hero.increaseXp(((Monster)targetEntity).lootXp());
